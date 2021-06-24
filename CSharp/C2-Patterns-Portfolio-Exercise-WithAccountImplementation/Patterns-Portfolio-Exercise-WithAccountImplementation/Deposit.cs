@@ -1,22 +1,18 @@
 ﻿namespace Patterns_Portfolio_Exercise_WithAccountImplementation
 {
-    class Deposit: AccountTransaction
+    internal class Deposit: AccountTransaction
     {
-    	private double m_value;
+        private readonly double m_value;
 
-	    public static Deposit registerForOn(double value, ReceptiveAccount account) {
-		    Deposit deposit = new Deposit(value);
-		    account.register(deposit);
+        public static Deposit registerForOn(double value, ReceptiveAccount account) {
+            var deposit = new Deposit(value);
+            account.register(deposit);
 
-		    return deposit;
-	    }
+            return deposit;
+        }
 
-	    public Deposit (double value) {
-		    m_value = value;
-    	}
+        public Deposit(double value) => m_value = value;
 
-	    public double value(){
-    		return m_value;
-	    }
+        public double value() => m_value;
     }
 }

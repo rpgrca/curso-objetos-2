@@ -1,6 +1,6 @@
 ﻿namespace Patterns_Portfolio_Exercise_WithAccountImplementation
 {
-    interface AccountTransaction
+    internal interface AccountTransaction
     {
         double value();
     }

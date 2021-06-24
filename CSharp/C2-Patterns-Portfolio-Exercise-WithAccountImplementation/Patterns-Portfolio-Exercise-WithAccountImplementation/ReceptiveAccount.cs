@@ -3,28 +3,23 @@ using System.Linq;
 
 namespace Patterns_Portfolio_Exercise_WithAccountImplementation
 {
-    class ReceptiveAccount: SummarizingAccount
+    internal class ReceptiveAccount: SummarizingAccount
     {
-    	private List<AccountTransaction> m_transactions = new List<AccountTransaction>();
+        private readonly List<AccountTransaction> _transactions = new();
 
-	    public double balance() {
-            return m_transactions.Sum( transaction => transaction.value() );
-	    }
+        public double balance() =>
+            _transactions.Sum(transaction => transaction.value());
 
-	    public void register(AccountTransaction transaction) {
-		    m_transactions.Add(transaction);
-	    }
+        public void register(AccountTransaction transaction) =>
+            _transactions.Add(transaction);
 
-	    public bool registers(AccountTransaction transaction) {
-		    return m_transactions.Contains(transaction);
-	    }
+        public bool registers(AccountTransaction transaction) =>
+            _transactions.Contains(transaction);
 
-	    public bool manages(SummarizingAccount account) {
-		    return this == account;
-	    }
+        public bool manages(SummarizingAccount account) =>
+            this == account;
 
-	    public List<AccountTransaction> transactions() {
-		    return new List<AccountTransaction>(m_transactions);
-	    }
+        public List<AccountTransaction> transactions() =>
+            new(_transactions);
     }
 }

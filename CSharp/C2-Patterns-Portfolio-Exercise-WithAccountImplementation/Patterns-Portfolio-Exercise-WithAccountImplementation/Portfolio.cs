@@ -6,11 +6,11 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
 {
     internal class Portfolio: SummarizingAccount
     {
-    	public static string ACCOUNT_NOT_MANAGED = "No se maneja esta cuenta";
-	    public static string ACCOUNT_ALREADY_MANAGED = "La cuenta ya estÃ¡ manejada por otro portfolio";
-		private List<SummarizingAccount> _accounts;
+        public static string ACCOUNT_NOT_MANAGED = "No se maneja esta cuenta";
+        public static string ACCOUNT_ALREADY_MANAGED = "La cuenta ya estÃ¡ manejada por otro portfolio";
+        private List<SummarizingAccount> _accounts;
 
-	    public static Portfolio createWith(SummarizingAccount anAccount1, SummarizingAccount anAccount2) =>
+        public static Portfolio createWith(SummarizingAccount anAccount1, SummarizingAccount anAccount2) =>
             (anAccount1 != anAccount2 && !anAccount1.manages(anAccount2))
                 ? new Portfolio
                   {
@@ -19,7 +19,7 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
                 : throw new Exception(ACCOUNT_ALREADY_MANAGED);
 
         public static Portfolio createWith(List<SummarizingAccount> summarizingAccounts) =>
-	    	throw new Exception();
+            throw new Exception();
 
         public double balance() =>
             _accounts.Sum(p => p.balance());
