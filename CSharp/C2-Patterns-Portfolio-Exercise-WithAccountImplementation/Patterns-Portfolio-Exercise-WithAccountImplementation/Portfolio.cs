@@ -33,7 +33,7 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
                 : throw new Exception(ACCOUNT_NOT_MANAGED);
 
         public bool manages(SummarizingAccount account) =>
-            _accounts.Any(p => p == account || p.manages(account));
+            this == account || _accounts.Any(p => p.manages(account));
 
         public List<AccountTransaction> transactions() =>
             _accounts.Aggregate(new List<AccountTransaction>(), (a, r) =>
