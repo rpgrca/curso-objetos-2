@@ -10,7 +10,8 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
 	    public static string ACCOUNT_ALREADY_MANAGED = "La cuenta ya estÃ¡ manejada por otro portfolio";
 		private readonly List<SummarizingAccount> _accounts;
 
-        public Portfolio() => _accounts = new List<SummarizingAccount>();
+        public Portfolio() =>
+            _accounts = new List<SummarizingAccount>();
 
 	    public static Portfolio createWith(SummarizingAccount anAccount1, SummarizingAccount anAccount2) {
             var portfolio = new Portfolio();
@@ -24,18 +25,19 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
 	    	throw new Exception();
 	    }
 
-        public double balance() => _accounts.Sum(p => p.balance());
+        public double balance() =>
+            _accounts.Sum(p => p.balance());
 
-        public bool registers(AccountTransaction transaction) => _accounts.Any(p => p.registers(transaction));
+        public bool registers(AccountTransaction transaction) =>
+            _accounts.Any(p => p.registers(transaction));
 
-        public List<AccountTransaction> transactionsOf(SummarizingAccount account) {
-	    	throw new Exception();
-	    }
+        public List<AccountTransaction> transactionsOf(SummarizingAccount account) =>
+            throw new Exception();
 
-        public bool manages(SummarizingAccount account) => _accounts.Any(p => p.manages(account));
+        public bool manages(SummarizingAccount account) =>
+            _accounts.Any(p => p == account || p.manages(account));
 
-        public List<AccountTransaction> transactions() {
-		    throw new Exception();
-    	}
+        public List<AccountTransaction> transactions() =>
+            throw new Exception();
     }
 }
