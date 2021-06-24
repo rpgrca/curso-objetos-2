@@ -4,31 +4,22 @@ using System.Linq;
 
 namespace Patterns_Portfolio_Exercise_WithAccountImplementation
 {
-    class Portfolio: SummarizingAccount
+    internal class Portfolio: SummarizingAccount
     {
     	public static string ACCOUNT_NOT_MANAGED = "No se maneja esta cuenta";
 	    public static string ACCOUNT_ALREADY_MANAGED = "La cuenta ya estÃ¡ manejada por otro portfolio";
-		private readonly List<SummarizingAccount> _accounts;
+		private List<SummarizingAccount> _accounts;
 
-        public Portfolio() =>
-            _accounts = new List<SummarizingAccount>();
+	    public static Portfolio createWith(SummarizingAccount anAccount1, SummarizingAccount anAccount2) =>
+            (anAccount1 != anAccount2 && !anAccount1.manages(anAccount2))
+                ? new Portfolio
+                  {
+                    _accounts = new() { anAccount1, anAccount2 }
+                  }
+                : throw new Exception(ACCOUNT_ALREADY_MANAGED);
 
-	    public static Portfolio createWith(SummarizingAccount anAccount1, SummarizingAccount anAccount2) {
-            if (anAccount1 == anAccount2 || anAccount1.manages(anAccount2))
-            {
-                throw new Exception(ACCOUNT_ALREADY_MANAGED);
-            }
-
-            var portfolio = new Portfolio();
-
-            portfolio._accounts.Add(anAccount1);
-            portfolio._accounts.Add(anAccount2);
-            return portfolio;
-	    }
-
-    	public static Portfolio createWith(List<SummarizingAccount> summarizingAccounts) {
+        public static Portfolio createWith(List<SummarizingAccount> summarizingAccounts) =>
 	    	throw new Exception();
-	    }
 
         public double balance() =>
             _accounts.Sum(p => p.balance());
@@ -36,15 +27,10 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
         public bool registers(AccountTransaction transaction) =>
             _accounts.Any(p => p.registers(transaction));
 
-        public List<AccountTransaction> transactionsOf(SummarizingAccount account)
-        {
-            if (! manages(account))
-            {
-                throw new Exception(ACCOUNT_NOT_MANAGED);
-            }
-
-            return new(account.transactions());
-        }
+        public List<AccountTransaction> transactionsOf(SummarizingAccount account) =>
+            manages(account)
+                ? new(account.transactions())
+                : throw new Exception(ACCOUNT_NOT_MANAGED);
 
         public bool manages(SummarizingAccount account) =>
             _accounts.Any(p => p == account || p.manages(account));
