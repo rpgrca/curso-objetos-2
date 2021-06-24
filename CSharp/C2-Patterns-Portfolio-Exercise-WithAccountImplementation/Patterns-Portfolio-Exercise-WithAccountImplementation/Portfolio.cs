@@ -14,7 +14,7 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
             _accounts = new List<SummarizingAccount>();
 
 	    public static Portfolio createWith(SummarizingAccount anAccount1, SummarizingAccount anAccount2) {
-            if (anAccount1 == anAccount2)
+            if (anAccount1 == anAccount2 || anAccount1.manages(anAccount2))
             {
                 throw new Exception(ACCOUNT_ALREADY_MANAGED);
             }
