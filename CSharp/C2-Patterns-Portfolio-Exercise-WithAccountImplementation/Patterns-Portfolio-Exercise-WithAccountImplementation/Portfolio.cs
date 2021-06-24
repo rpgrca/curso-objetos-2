@@ -32,7 +32,7 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
             _accounts.Any(p => p.registers(transaction));
 
         public List<AccountTransaction> transactionsOf(SummarizingAccount account) =>
-            throw new Exception();
+            new(account.transactions());
 
         public bool manages(SummarizingAccount account) =>
             _accounts.Any(p => p == account || p.manages(account));
