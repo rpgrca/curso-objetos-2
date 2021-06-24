@@ -26,11 +26,9 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
 
         public double balance() => _accounts.Sum(p => p.balance());
 
-        public bool registers(AccountTransaction transaction) {
-    		throw new Exception();
-    	}
+        public bool registers(AccountTransaction transaction) => _accounts.Any(p => p.registers(transaction));
 
-    	public List<AccountTransaction> transactionsOf(SummarizingAccount account) {
+        public List<AccountTransaction> transactionsOf(SummarizingAccount account) {
 	    	throw new Exception();
 	    }
 
