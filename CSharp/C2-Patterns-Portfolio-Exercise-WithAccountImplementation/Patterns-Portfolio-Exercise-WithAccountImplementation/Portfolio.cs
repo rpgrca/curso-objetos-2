@@ -32,11 +32,9 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
 	    	throw new Exception();
 	    }
 
-    	public bool manages(SummarizingAccount account) {
-		    throw new Exception();
-	    }
+        public bool manages(SummarizingAccount account) => _accounts.Any(p => p.manages(account));
 
-	    public List<AccountTransaction> transactions() {
+        public List<AccountTransaction> transactions() {
 		    throw new Exception();
     	}
     }
