@@ -31,8 +31,15 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
         public bool registers(AccountTransaction transaction) =>
             _accounts.Any(p => p.registers(transaction));
 
-        public List<AccountTransaction> transactionsOf(SummarizingAccount account) =>
-            new(account.transactions());
+        public List<AccountTransaction> transactionsOf(SummarizingAccount account)
+        {
+            if (! manages(account))
+            {
+                throw new Exception(Portfolio.ACCOUNT_NOT_MANAGED);
+            }
+
+            return new(account.transactions());
+        }
 
         public bool manages(SummarizingAccount account) =>
             _accounts.Any(p => p == account || p.manages(account));
