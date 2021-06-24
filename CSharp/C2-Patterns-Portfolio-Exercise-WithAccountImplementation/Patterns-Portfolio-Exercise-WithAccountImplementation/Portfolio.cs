@@ -38,6 +38,10 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
             _accounts.Any(p => p == account || p.manages(account));
 
         public List<AccountTransaction> transactions() =>
-            throw new Exception();
+            _accounts.Aggregate(new List<AccountTransaction>(), (a, r) =>
+                {
+                    a.AddRange(r.transactions());
+                    return a;
+                }).ToList();
     }
 }
