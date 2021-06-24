@@ -4,7 +4,8 @@
     {
         private readonly double m_value;
 
-        public static Deposit registerForOn(double value, ReceptiveAccount account) {
+        public static Deposit registerForOn(double value, ReceptiveAccount account)
+        {
             var deposit = new Deposit(value);
             account.register(deposit);
 
