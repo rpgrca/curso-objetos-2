@@ -5,8 +5,8 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
 {
     class Portfolio: SummarizingAccount
     {
-    	public static String ACCOUNT_NOT_MANAGED = "No se maneja esta cuenta";
-	    public static String ACCOUNT_ALREADY_MANAGED = "La cuenta ya estÃ¡ manejada por otro portfolio";
+    	public static string ACCOUNT_NOT_MANAGED = "No se maneja esta cuenta";
+	    public static string ACCOUNT_ALREADY_MANAGED = "La cuenta ya estÃ¡ manejada por otro portfolio";
 
 	    public static Portfolio createWith(SummarizingAccount anAccount1, SummarizingAccount anAccount2) {
     		throw new Exception();
