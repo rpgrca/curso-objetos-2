@@ -14,6 +14,11 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
             _accounts = new List<SummarizingAccount>();
 
 	    public static Portfolio createWith(SummarizingAccount anAccount1, SummarizingAccount anAccount2) {
+            if (anAccount1 == anAccount2)
+            {
+                throw new Exception(ACCOUNT_ALREADY_MANAGED);
+            }
+
             var portfolio = new Portfolio();
 
             portfolio._accounts.Add(anAccount1);
@@ -35,7 +40,7 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation
         {
             if (! manages(account))
             {
-                throw new Exception(Portfolio.ACCOUNT_NOT_MANAGED);
+                throw new Exception(ACCOUNT_NOT_MANAGED);
             }
 
             return new(account.transactions());
