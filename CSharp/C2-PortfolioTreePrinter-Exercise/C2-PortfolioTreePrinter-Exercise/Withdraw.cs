@@ -21,5 +21,7 @@
         public string Humanize() => $"Extracción por {value():F1}";
 
         public double applyTransferTo(double balance) => balance;
+
+        public double applyInvestmentTo(double balance) => balance;
     }
 }

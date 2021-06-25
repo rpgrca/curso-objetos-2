@@ -3,8 +3,9 @@
     internal interface AccountTransaction
     {
         double value();
-        double applyTo(double balance);
         string Humanize();
+        double applyTo(double balance);
         double applyTransferTo(double balance);
+        double applyInvestmentTo(double balance);
     }
 }

@@ -20,5 +20,7 @@ namespace C2_PortfolioTreePrinter_Exercise
         public double value() => _transfer.value();
 
         public double applyTransferTo(double balance) => applyTo(balance);
+
+        public double applyInvestmentTo(double balance) => balance;
     }
 }
