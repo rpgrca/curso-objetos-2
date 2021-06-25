@@ -8,7 +8,7 @@ namespace C2_PortfolioTreePrinter_Exercise
     class Deposit : AccountTransaction
     {
 
-        private double m_value;
+        private readonly double _value;
 
         public static Deposit registerForOn(double value, ReceptiveAccount account)
         {
@@ -21,16 +21,18 @@ namespace C2_PortfolioTreePrinter_Exercise
 
         public Deposit(double value)
         {
-            m_value = value;
+            _value = value;
 
         }
 
         public double value()
         {
-
-            return m_value;
+            return _value;
         }
 
-
+        public double applyTo(double balance)
+        {
+            return balance + _value;
+        }
     }
 }

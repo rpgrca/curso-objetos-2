@@ -15,5 +15,10 @@
         public Withdraw(double value) => _value = value;
 
         public double value() => _value;
+
+        public double applyTo(double balance)
+        {
+            return balance - _value;
+        }
     }
 }

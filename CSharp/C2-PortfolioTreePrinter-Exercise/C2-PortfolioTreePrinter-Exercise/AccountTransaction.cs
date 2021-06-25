@@ -5,8 +5,9 @@ using System.Text;
 
 namespace C2_PortfolioTreePrinter_Exercise
 {
-    interface AccountTransaction
+    internal interface AccountTransaction
     {
         double value();
+        double applyTo(double balance);
     }
 }

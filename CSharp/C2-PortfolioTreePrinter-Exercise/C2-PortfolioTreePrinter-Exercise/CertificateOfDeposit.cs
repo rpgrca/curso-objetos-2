@@ -5,7 +5,7 @@ using System.Text;
 
 namespace C2_PortfolioTreePrinter_Exercise
 {
-    class CertificateOfDeposit : AccountTransaction
+    internal class CertificateOfDeposit : AccountTransaction
     {
 
         public CertificateOfDeposit(double value, int numberOfDays, double tna)
@@ -40,5 +40,9 @@ namespace C2_PortfolioTreePrinter_Exercise
             throw new Exception();
         }
 
+        public double applyTo(double balance)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
