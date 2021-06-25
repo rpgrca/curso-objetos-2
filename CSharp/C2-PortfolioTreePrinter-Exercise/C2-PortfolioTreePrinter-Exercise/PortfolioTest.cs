@@ -266,7 +266,7 @@ namespace C2_PortfolioTreePrinter_Exercise
             Withdraw.registerForOn(50, fromAccount);
             Transfer.registerFor(100, fromAccount, toAccount);
 
-            List<string> lines = accountSummaryLines(fromAccount);
+            var lines = accountSummaryLines(fromAccount);
 
             Assert.Equal(3, lines.Count);
             Assert.Equal("Depósito por 100.0", lines.ElementAt(0));
@@ -276,7 +276,11 @@ namespace C2_PortfolioTreePrinter_Exercise
 
         private List<string> accountSummaryLines(ReceptiveAccount fromAccount)
         {
-            throw new Exception("Implement");
+            return fromAccount.transactions().Aggregate(new List<string>(),
+                (agg, trn) => {
+                    agg.Add(trn.Humanize());
+                    return agg;
+                });
         }
 
         [Fact]

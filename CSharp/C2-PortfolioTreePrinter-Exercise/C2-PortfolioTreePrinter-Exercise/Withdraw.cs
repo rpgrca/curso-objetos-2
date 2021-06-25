@@ -16,9 +16,8 @@
 
         public double value() => _value;
 
-        public double applyTo(double balance)
-        {
-            return balance - _value;
-        }
+        public double applyTo(double balance) => balance - _value;
+
+        public string Humanize() => $"Extracción por {value():F1}";
     }
 }

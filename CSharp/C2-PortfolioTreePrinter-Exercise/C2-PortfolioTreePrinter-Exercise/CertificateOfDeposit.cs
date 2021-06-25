@@ -44,5 +44,10 @@ namespace C2_PortfolioTreePrinter_Exercise
         {
             throw new NotImplementedException();
         }
+
+        public string Humanize()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -4,5 +4,6 @@
     {
         double value();
         double applyTo(double balance);
+        string Humanize();
     }
 }

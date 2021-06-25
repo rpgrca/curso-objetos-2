@@ -19,5 +19,7 @@
         public double value() => _value;
 
         public double applyTo(double balance) => balance + _value;
+
+        public string Humanize() => $"Depósito por {value():F1}";
     }
 }
