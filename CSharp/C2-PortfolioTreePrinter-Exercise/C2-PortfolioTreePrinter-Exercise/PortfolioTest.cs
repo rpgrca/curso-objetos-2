@@ -5,7 +5,7 @@ using Xunit;
 
 namespace C2_PortfolioTreePrinter_Exercise
 {
-    public class PortfolioTest
+    public partial class PortfolioTest
     {
         [Fact]
         public void test01ReceptiveAccountHaveZeroAsBalanceWhenCreated()
@@ -266,21 +266,13 @@ namespace C2_PortfolioTreePrinter_Exercise
             Withdraw.registerForOn(50, fromAccount);
             Transfer.registerFor(100, fromAccount, toAccount);
 
-            var lines = accountSummaryLines(fromAccount);
+            var lines = new Summary(fromAccount).Lines();
 
-            Assert.Equal(3, lines.Count);
-            Assert.Equal("Depósito por 100.0", lines.ElementAt(0));
-            Assert.Equal("Extracción por 50.0", lines.ElementAt(1));
-            Assert.Equal("Transferencia por -100.0", lines.ElementAt(2));
-        }
-
-        private List<string> accountSummaryLines(ReceptiveAccount fromAccount)
-        {
-            return fromAccount.transactions().Aggregate(new List<string>(),
-                (agg, trn) => {
-                    agg.Add(trn.Humanize());
-                    return agg;
-                });
+            Assert.Collection(lines,
+                p1 => Assert.Equal("Depósito por 100.0", p1),
+                p2 => Assert.Equal("Extracción por 50.0", p2),
+                p3 => Assert.Equal("Transferencia por -100.0", p3)
+            );
         }
 
         [Fact]
@@ -294,21 +286,9 @@ namespace C2_PortfolioTreePrinter_Exercise
             Transfer.registerFor(100, fromAccount, toAccount);
             Transfer.registerFor(250, toAccount, fromAccount);
 
-            Assert.Equal(150.0, accountTransferNet(fromAccount));
+            Assert.Equal(150.0, new TransferNet(fromAccount).Total());
 
-            Assert.Equal(-150.0, accountTransferNet(toAccount));
-        }
-
-        private double accountTransferNet(ReceptiveAccount account)
-        {
-            var transferNet = 0.0;
-
-            foreach (var transaction in account.transactions())
-            {
-                transferNet = transaction.applyTransferTo(transferNet);
-            }
-
-            return transferNet;
+            Assert.Equal(-150.0, new TransferNet(toAccount).Total());
         }
 
         [Fact]
@@ -322,20 +302,8 @@ namespace C2_PortfolioTreePrinter_Exercise
             Transfer.registerFor(100, account, toAccount);
             CertificateOfDeposit.registerFor(100, 30, 0.1, account);
 
-            Assert.Equal(100.0, investmentNet(account));
+            Assert.Equal(100.0, new InvestmentNet(account).Total());
             Assert.Equal(750.0, account.balance());
-        }
-
-        private double investmentNet(ReceptiveAccount account)
-        {
-            var investmentNet = 0.0;
-
-            foreach (var transaction in account.transactions())
-            {
-                investmentNet = transaction.applyInvestmentTo(investmentNet);
-            }
-
-            return investmentNet;
         }
 
         [Fact]
@@ -350,19 +318,7 @@ namespace C2_PortfolioTreePrinter_Exercise
                 100.0 * (0.1 / 360) * 30 +
                 100.0 * (0.15 / 360) * 60;
 
-            Assert.Equal(m_investmentEarnings, investmentEarnings(account));
-        }
-
-        private double investmentEarnings(ReceptiveAccount account)
-        {
-            var investmentEarnings = 0.0;
-
-            foreach (var transaction in account.transactions())
-            {
-                investmentEarnings = transaction.applyInvestmentEarningsTo(investmentEarnings);
-            }
-
-            return investmentEarnings;
+            Assert.Equal(m_investmentEarnings, new InvestmentEarnings(account).Total());
         }
 
         [Fact]
@@ -376,13 +332,14 @@ namespace C2_PortfolioTreePrinter_Exercise
             Transfer.registerFor(100, fromAccount, toAccount);
             CertificateOfDeposit.registerFor(1000, 30, 0.1, fromAccount);
 
-            var lines = accountSummaryLines(fromAccount);
+            var lines = new Summary(fromAccount).Lines();
 
-            Assert.Equal(4, lines.Count);
-            Assert.Equal("Depósito por 100.0", lines.ElementAt(0));
-            Assert.Equal("Extracción por 50.0", lines.ElementAt(1));
-            Assert.Equal("Transferencia por -100.0", lines.ElementAt(2));
-            Assert.Equal("Plazo fijo por 1000.0 durante 30 días a una tna de 0.1", lines.ElementAt(3));
+            Assert.Collection(lines,
+                p1 => Assert.Equal("Depósito por 100.0", p1),
+                p2 => Assert.Equal("Extracción por 50.0", p2),
+                p3 => Assert.Equal("Transferencia por -100.0", p3),
+                p4 => Assert.Equal("Plazo fijo por 1000.0 durante 30 días a una tna de 0.1", p4)
+            );
         }
 
         [Fact]
@@ -397,8 +354,8 @@ namespace C2_PortfolioTreePrinter_Exercise
             Transfer.registerFor(250, toAccount, fromAccount);
             CertificateOfDeposit.registerFor(1000, 30, 0.1, fromAccount);
 
-            Assert.Equal(150.0, accountTransferNet(fromAccount));
-            Assert.Equal(-150.0, accountTransferNet(toAccount));
+            Assert.Equal(150.0, new TransferNet(fromAccount).Total());
+            Assert.Equal(-150.0, new TransferNet(toAccount).Total());
         }
 
         [Fact]
