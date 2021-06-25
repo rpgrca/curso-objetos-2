@@ -25,5 +25,7 @@
         public double applyTransferTo(double balance) => balance;
 
         public double applyInvestmentTo(double balance) => balance;
+
+        public double applyInvestmentEarningsTo(double balance) => balance;
     }
 }

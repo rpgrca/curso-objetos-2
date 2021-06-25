@@ -355,7 +355,14 @@ namespace C2_PortfolioTreePrinter_Exercise
 
         private double investmentEarnings(ReceptiveAccount account)
         {
-            throw new Exception("Implement");
+            var investmentEarnings = 0.0;
+
+            foreach (var transaction in account.transactions())
+            {
+                investmentEarnings = transaction.applyInvestmentEarningsTo(investmentEarnings);
+            }
+
+            return investmentEarnings;
         }
 
         [Fact]

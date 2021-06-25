@@ -7,5 +7,6 @@
         double applyTo(double balance);
         double applyTransferTo(double balance);
         double applyInvestmentTo(double balance);
+        double applyInvestmentEarningsTo(double investmentEarnings);
     }
 }

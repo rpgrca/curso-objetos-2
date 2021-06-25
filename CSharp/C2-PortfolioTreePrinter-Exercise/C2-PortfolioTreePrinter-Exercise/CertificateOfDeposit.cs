@@ -29,10 +29,7 @@ namespace C2_PortfolioTreePrinter_Exercise
             return certificateOfDeposit;
         }
 
-        public double earnings()
-        {
-            throw new Exception();
-        }
+        public double earnings() => _value * (_tna / 360) * _numberOfDays;
 
         public int numberOfDays() => _numberOfDays;
 
@@ -51,5 +48,7 @@ namespace C2_PortfolioTreePrinter_Exercise
         }
 
         public double applyInvestmentTo(double balance) => balance + _value;
+
+        public double applyInvestmentEarningsTo(double balance) => balance + earnings();
     }
 }
