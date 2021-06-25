@@ -39,10 +39,7 @@ namespace C2_PortfolioTreePrinter_Exercise
 
         public string Humanize() => $"Plazo fijo por {value():F1} durante {numberOfDays()} días a una tna de {tna():F1}";
 
-        public double applyTransferTo(double balance)
-        {
-            throw new NotImplementedException();
-        }
+        public double applyTransferTo(double balance) => balance;
 
         public double applyInvestmentTo(double balance) => balance + value();
 
