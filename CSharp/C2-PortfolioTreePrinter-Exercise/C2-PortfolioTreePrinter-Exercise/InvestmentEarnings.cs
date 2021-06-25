@@ -1,24 +1,21 @@
 namespace C2_PortfolioTreePrinter_Exercise
 {
-    public partial class PortfolioTest
+    internal class InvestmentEarnings
     {
-        internal class InvestmentEarnings
+        private readonly ReceptiveAccount _account;
+
+        public InvestmentEarnings(ReceptiveAccount account) => _account = account;
+
+        public double Total()
         {
-            private readonly ReceptiveAccount _account;
+            var investmentEarnings = 0.0;
 
-            public InvestmentEarnings(ReceptiveAccount account) => _account = account;
-
-            public double Total()
+            foreach (var transaction in _account.transactions())
             {
-                var investmentEarnings = 0.0;
-
-                foreach (var transaction in _account.transactions())
-                {
-                    investmentEarnings = transaction.applyInvestmentEarningsTo(investmentEarnings);
-                }
-
-                return investmentEarnings;
+                investmentEarnings = transaction.applyInvestmentEarningsTo(investmentEarnings);
             }
+
+            return investmentEarnings;
         }
     }
 }
