@@ -301,7 +301,14 @@ namespace C2_PortfolioTreePrinter_Exercise
 
         private double accountTransferNet(ReceptiveAccount account)
         {
-            throw new Exception("Implement");
+            var transferNet = 0.0;
+
+            foreach (var transaction in account.transactions())
+            {
+                transferNet = transaction.applyTransferTo(transferNet);
+            }
+
+            return transferNet;
         }
 
         [Fact]

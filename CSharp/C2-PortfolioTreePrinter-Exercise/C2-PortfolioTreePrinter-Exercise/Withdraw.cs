@@ -19,5 +19,7 @@
         public double applyTo(double balance) => balance - _value;
 
         public string Humanize() => $"Extracción por {value():F1}";
+
+        public double applyTransferTo(double balance) => balance;
     }
 }

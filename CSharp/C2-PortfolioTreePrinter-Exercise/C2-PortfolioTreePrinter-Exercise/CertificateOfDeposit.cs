@@ -7,7 +7,6 @@ namespace C2_PortfolioTreePrinter_Exercise
 {
     internal class CertificateOfDeposit : AccountTransaction
     {
-
         public CertificateOfDeposit(double value, int numberOfDays, double tna)
         {
             throw new Exception();
@@ -46,6 +45,11 @@ namespace C2_PortfolioTreePrinter_Exercise
         }
 
         public string Humanize()
+        {
+            throw new NotImplementedException();
+        }
+
+        public double applyTransferTo(double balance)
         {
             throw new NotImplementedException();
         }

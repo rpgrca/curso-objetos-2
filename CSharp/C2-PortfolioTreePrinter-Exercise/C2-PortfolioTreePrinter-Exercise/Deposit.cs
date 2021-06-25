@@ -1,6 +1,6 @@
 ﻿namespace C2_PortfolioTreePrinter_Exercise
 {
-    class Deposit : AccountTransaction
+    internal class Deposit : AccountTransaction
     {
 
         private readonly double _value;
@@ -21,5 +21,7 @@
         public double applyTo(double balance) => balance + _value;
 
         public string Humanize() => $"Depósito por {value():F1}";
+
+        public double applyTransferTo(double balance) => balance;
     }
 }
