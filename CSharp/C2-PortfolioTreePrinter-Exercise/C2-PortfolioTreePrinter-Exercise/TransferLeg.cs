@@ -5,53 +5,36 @@
         Transfer transfer();
     }
 
-    internal class DepositLeg : TransferLeg
+    internal class DepositLeg : Deposit, TransferLeg
     {
         private readonly Transfer _transfer;
 
-        public DepositLeg(Transfer transfer)
+        public DepositLeg(Transfer transfer, ReceptiveAccount toAccount)
+            : base(transfer.value())
         {
             _transfer = transfer;
+            toAccount.register(this);
         }
 
-        public double applyTo(double balance)
-        {
-            return balance + _transfer.value();
-        }
-
-        public Transfer transfer()
-        {
-            return _transfer;
-        }
-
-        public double value()
-        {
-            throw new System.NotImplementedException();
-        }
+        public Transfer transfer() => _transfer;
     }
 
     internal class WithdrawLeg : TransferLeg
     {
         private readonly Transfer _transfer;
+        private readonly Withdraw _withdraw;
 
-        public WithdrawLeg(Transfer transfer)
+        public WithdrawLeg(Transfer transfer, ReceptiveAccount fromAccount)
         {
             _transfer = transfer;
+            _withdraw = new Withdraw(transfer.value());
+            fromAccount.register(this);
         }
 
-        public double applyTo(double balance)
-        {
-            return balance - _transfer.value();
-        }
+        public double applyTo(double balance) => _withdraw.applyTo(balance);
 
-        public Transfer transfer()
-        {
-            return _transfer;
-        }
+        public Transfer transfer() => _transfer;
 
-        public double value()
-        {
-            throw new System.NotImplementedException();
-        }
+        public double value() => _transfer.value();
     }
 }
