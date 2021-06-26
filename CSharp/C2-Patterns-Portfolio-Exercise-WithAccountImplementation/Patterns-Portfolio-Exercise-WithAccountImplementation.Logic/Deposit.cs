@@ -1,6 +1,6 @@
-﻿namespace Patterns_Portfolio_Exercise_WithAccountImplementation
+﻿namespace Patterns_Portfolio_Exercise_WithAccountImplementation.Logic
 {
-    internal class Deposit: AccountTransaction
+    public class Deposit: AccountTransaction
     {
         private readonly double m_value;
 

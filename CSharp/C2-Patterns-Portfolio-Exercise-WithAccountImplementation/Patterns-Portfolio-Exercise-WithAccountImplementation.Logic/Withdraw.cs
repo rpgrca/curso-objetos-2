@@ -1,6 +1,6 @@
-﻿namespace Patterns_Portfolio_Exercise_WithAccountImplementation
+﻿namespace Patterns_Portfolio_Exercise_WithAccountImplementation.Logic
 {
-    internal class Withdraw : AccountTransaction
+    public class Withdraw : AccountTransaction
     {
         private readonly double _value;
 

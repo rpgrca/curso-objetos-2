@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Patterns_Portfolio_Exercise_WithAccountImplementation
+namespace Patterns_Portfolio_Exercise_WithAccountImplementation.Logic
 {
-    internal interface SummarizingAccount
+    public interface SummarizingAccount
     {
         double balance();
         bool registers(AccountTransaction transaction);

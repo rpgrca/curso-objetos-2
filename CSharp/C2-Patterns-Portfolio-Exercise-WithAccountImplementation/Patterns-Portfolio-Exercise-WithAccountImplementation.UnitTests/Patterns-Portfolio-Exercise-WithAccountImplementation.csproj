@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-	<RootNamespace>Patterns_Portfolio_Exercise_WithAccountImplementation</RootNamespace>
-	<AssemblyName>Patterns-Portfolio-Exercise-WithAccountImplementation</AssemblyName>
+	  <RootNamespace>Patterns_Portfolio_Exercise_WithAccountImplementation.UnitTests</RootNamespace>
+	  <AssemblyName>Patterns-Portfolio-Exercise-WithAccountImplementation.UnitTests</AssemblyName>
 
-	<IsPackable>false</IsPackable>
-	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <IsPackable>false</IsPackable>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +20,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Patterns-Portfolio-Exercise-WithAccountImplementation.Logic\Patterns-Portfolio-Exercise-WithAccountImplementation.Logic.csproj" />
   </ItemGroup>
 
 </Project>

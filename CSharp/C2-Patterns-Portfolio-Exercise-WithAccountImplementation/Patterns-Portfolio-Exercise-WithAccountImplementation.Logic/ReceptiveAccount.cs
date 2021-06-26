@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Patterns_Portfolio_Exercise_WithAccountImplementation
+namespace Patterns_Portfolio_Exercise_WithAccountImplementation.Logic
 {
-    internal class ReceptiveAccount: SummarizingAccount
+    public class ReceptiveAccount: SummarizingAccount
     {
         private readonly List<AccountTransaction> _transactions = new();
 

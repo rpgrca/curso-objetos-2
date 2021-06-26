@@ -1,7 +1,8 @@
 ﻿using System;
 using Xunit;
+using Patterns_Portfolio_Exercise_WithAccountImplementation.Logic;
 
-namespace Patterns_Portfolio_Exercise_WithAccountImplementation
+namespace Patterns_Portfolio_Exercise_WithAccountImplementation.UnitTests
 {
     public class PortfolioTest
     {

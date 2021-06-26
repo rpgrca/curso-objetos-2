@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Patterns_Portfolio_Exercise_WithAccountImplementation.Logic</RootNamespace>
+	  <AssemblyName>Patterns-Portfolio-Exercise-WithAccountImplementation.Logic</AssemblyName>
+
+  </PropertyGroup>
+
+</Project>

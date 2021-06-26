@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Patterns_Portfolio_Exercise_WithAccountImplementation
+namespace Patterns_Portfolio_Exercise_WithAccountImplementation.Logic
 {
-    internal class Portfolio: SummarizingAccount
+    public class Portfolio: SummarizingAccount
     {
         public static string ACCOUNT_NOT_MANAGED = "No se maneja esta cuenta";
         public static string ACCOUNT_ALREADY_MANAGED = "La cuenta ya estÃ¡ manejada por otro portfolio";
