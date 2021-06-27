@@ -33,7 +33,7 @@ namespace C2_PortfolioTreePrinter_Exercise
 
         public double tna() => _tna;
 
-        public double applyTo(double balance) => balance + earnings();
+        public double applyTo(double balance) => balance - _value;
 
         public string Humanize() => $"Plazo fijo por {value():F1} durante {numberOfDays()} días a una tna de {tna():F1}";
 
