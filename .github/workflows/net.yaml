@@ -21,7 +21,7 @@ jobs:
 
     - name: Restore packages
       run: |
-           for s in `find . -type f -name "*.sln" -print`; do
+           for s in `find ./CSharp -type f -name "*.sln" -print`; do
                dotnet restore $s
            done
 
@@ -30,14 +30,14 @@ jobs:
 
     - name: Build solutions
       run: |
-           for s in `find . -type f -name "*.sln" -print`; do
+           for s in `find ./CSharp -type f -name "*.sln" -print`; do
                dotnet build --configuration Debug --no-restore $s
            done
 
     - name: Testing solutions
       run: |
            for s in Patterns-Portfolio-Exercise-WithAccountImplementation; do
-               coverlet C2-$s/$s.UnitTests/bin/Debug/net5.0/$s.UnitTests.dll --target "dotnet" --targetargs "test C2-$s/$s.UnitTests/$s.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output $s.coverage.xml
+               coverlet CSharp/C2-$s/$s.UnitTests/bin/Debug/net5.0/$s.UnitTests.dll --target "dotnet" --targetargs "test CSharp/C2-$s/$s.UnitTests/$s.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output $s.coverage.xml
            done
 
     - name: Upload coverage to CodeCov
