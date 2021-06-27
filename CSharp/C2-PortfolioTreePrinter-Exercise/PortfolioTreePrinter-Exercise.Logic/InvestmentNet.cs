@@ -1,21 +1,23 @@
 namespace PortfolioTreePrinter_Exercise.Logic
 {
-    public class InvestmentNet
+    public class InvestmentNet : Classificator
     {
         private readonly ReceptiveAccount _account;
+        private double _investmentNet = 0.0;
 
         public InvestmentNet(ReceptiveAccount account) => _account = account;
 
-        public double Total()
+        public double Compute()
         {
-            var investmentNet = 0.0;
-
             foreach (var transaction in _account.transactions())
             {
-                investmentNet = transaction.applyInvestmentTo(investmentNet);
+                _investmentNet = transaction.applyTo(this, _investmentNet);
             }
 
-            return investmentNet;
+            return _investmentNet;
         }
+
+        public override double applyTo(CertificateOfDeposit certificateOfDeposit, double balance) =>
+            balance + certificateOfDeposit.value();
     }
 }

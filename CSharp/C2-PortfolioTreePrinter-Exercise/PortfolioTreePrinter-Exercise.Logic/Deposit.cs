@@ -1,14 +1,15 @@
-﻿namespace PortfolioTreePrinter_Exercise.Logic
+using System.Diagnostics;
+
+namespace PortfolioTreePrinter_Exercise.Logic
 {
+    [DebuggerDisplay("Depósito por {value()}")]
     public class Deposit : AccountTransaction
     {
-
         private readonly double _value;
 
         public static Deposit registerForOn(double value, ReceptiveAccount account)
         {
             var deposit = new Deposit(value);
-
             account.register(deposit);
 
             return deposit;
@@ -22,10 +23,7 @@
 
         public string Humanize() => $"Depósito por {value():F1}";
 
-        public double applyTransferTo(double balance) => balance;
-
-        public double applyInvestmentTo(double balance) => balance;
-
-        public double applyInvestmentEarningsTo(double balance) => balance;
+        public double applyTo(Classificator classificator, double balance) =>
+            classificator.applyTo(this, balance);
     }
 }

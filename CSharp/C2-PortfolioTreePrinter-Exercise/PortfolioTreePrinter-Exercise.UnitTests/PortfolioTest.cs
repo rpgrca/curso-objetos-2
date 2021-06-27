@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 using PortfolioTreePrinter_Exercise.Logic;
 
@@ -287,9 +285,8 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Transfer.registerFor(100, fromAccount, toAccount);
             Transfer.registerFor(250, toAccount, fromAccount);
 
-            Assert.Equal(150.0, new TransferNet(fromAccount).Total());
-
-            Assert.Equal(-150.0, new TransferNet(toAccount).Total());
+            Assert.Equal(150.0, new TransferNet(fromAccount).Compute());
+            Assert.Equal(-150.0, new TransferNet(toAccount).Compute());
         }
 
         [Fact]
@@ -303,7 +300,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Transfer.registerFor(100, account, toAccount);
             CertificateOfDeposit.registerFor(100, 30, 0.1, account);
 
-            Assert.Equal(100.0, new InvestmentNet(account).Total());
+            Assert.Equal(100.0, new InvestmentNet(account).Compute());
             Assert.Equal(750.0, account.balance());
         }
 
@@ -315,11 +312,11 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             CertificateOfDeposit.registerFor(100, 30, 0.1, account);
             CertificateOfDeposit.registerFor(100, 60, 0.15, account);
 
-            double m_investmentEarnings =
+            var m_investmentEarnings =
                 100.0 * (0.1 / 360) * 30 +
                 100.0 * (0.15 / 360) * 60;
 
-            Assert.Equal(m_investmentEarnings, new InvestmentEarnings(account).Total());
+            Assert.Equal(m_investmentEarnings, new InvestmentEarnings(account).Compute());
         }
 
         [Fact]
@@ -355,8 +352,8 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Transfer.registerFor(250, toAccount, fromAccount);
             CertificateOfDeposit.registerFor(1000, 30, 0.1, fromAccount);
 
-            Assert.Equal(150.0, new TransferNet(fromAccount).Total());
-            Assert.Equal(-150.0, new TransferNet(toAccount).Total());
+            Assert.Equal(150.0, new TransferNet(fromAccount).Compute());
+            Assert.Equal(-150.0, new TransferNet(toAccount).Compute());
         }
 
 // Still unfinished in class

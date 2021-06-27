@@ -1,5 +1,8 @@
+using System.Diagnostics;
+
 namespace PortfolioTreePrinter_Exercise.Logic
 {
+    [DebuggerDisplay("Transferencia por -{value()}")]
     public class WithdrawLeg : TransferLeg
     {
         private readonly Transfer _transfer;
@@ -18,10 +21,7 @@ namespace PortfolioTreePrinter_Exercise.Logic
 
         public double value() => _transfer.value();
 
-        public double applyTransferTo(double balance) => applyTo(balance);
-
-        public double applyInvestmentTo(double balance) => balance;
-
-        public double applyInvestmentEarningsTo(double balance) => balance;
+        public double applyTo(Classificator classificator, double balance) =>
+            classificator.applyTo(this, balance);
     }
 }
