@@ -29,8 +29,9 @@ jobs:
       run: dotnet tool install --global coverlet.console
 
     - name: Build solutions
+      working-directory: CSharp
       run: |
-           for s in `find ./curso-objetos-2/CSharp -type f -name "*.sln" -print`; do
+           for s in `find . -type f -name "*.sln" -print`; do
                dotnet build --configuration Debug --no-restore $s
            done
 
