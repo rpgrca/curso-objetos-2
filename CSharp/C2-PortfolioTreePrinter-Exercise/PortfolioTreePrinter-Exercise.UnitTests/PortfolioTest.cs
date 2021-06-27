@@ -4,14 +4,14 @@ using PortfolioTreePrinter_Exercise.Logic;
 
 namespace PortfolioTreePrinter_Exercise.UnitTests
 {
-    public partial class PortfolioTest
+    public class PortfolioTest
     {
         [Fact]
         public void test01ReceptiveAccountHaveZeroAsBalanceWhenCreated()
         {
             var account = new ReceptiveAccount();
 
-            Assert.Equal(0.0, account.balance());
+            Assert.Equal(0.0, account.balance);
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             var account = new ReceptiveAccount();
             Deposit.registerForOn(100, account);
 
-            Assert.Equal(100.0, account.balance());
+            Assert.Equal(100.0, account.balance);
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Deposit.registerForOn(100, account);
             var withdraw = Withdraw.registerForOn(50, account);
 
-            Assert.Equal(50.0, account.balance());
+            Assert.Equal(50.0, account.balance);
             Assert.Equal(50.0, withdraw.value());
         }
 
@@ -44,7 +44,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Deposit.registerForOn(100, account1);
             Deposit.registerForOn(200, account2);
 
-            Assert.Equal(300.0, complexPortfolio.balance());
+            Assert.Equal(300.0, complexPortfolio.balance);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Deposit.registerForOn(100, account1);
             Deposit.registerForOn(200, account2);
             Deposit.registerForOn(300, account3);
-            Assert.Equal(600.0, composedPortfolio.balance());
+            Assert.Equal(600.0, composedPortfolio.balance);
         }
 
         [Fact]
@@ -250,8 +250,8 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
 
             Transfer.registerFor(100, fromAccount, toAccount);
 
-            Assert.Equal(-100.0, fromAccount.balance());
-            Assert.Equal(100.0, toAccount.balance());
+            Assert.Equal(-100.0, fromAccount.balance);
+            Assert.Equal(100.0, toAccount.balance);
         }
 
         [Fact]
@@ -300,7 +300,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             CertificateOfDeposit.registerFor(100, 30, 0.1, account);
 
             Assert.Equal(100.0, new InvestmentNet(account).Compute());
-            Assert.Equal(750.0, account.balance());
+            Assert.Equal(750.0, account.balance);
         }
 
         [Fact]
@@ -355,7 +355,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Assert.Equal(-150.0, new TransferNet(toAccount).Compute());
         }
 
-// Still unfinished in class
+// Still unfinished in classes
 #if false
         [Fact]
         public void test26PortfolioTreePrinter()
@@ -367,7 +367,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
 
 
-            var accountNames = new Dictionary<SummarizingAccount, String>();
+            var accountNames = new Dictionary<SummarizingAccount, string>();
             accountNames.Add(composedPortfolio, "composedPortfolio");
             accountNames.Add(complexPortfolio, "complexPortfolio");
             accountNames.Add(account1, "account1");
@@ -385,7 +385,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
         }
 
         private List<string> portofolioTreeOf(Portfolio composedPortfolio,
-                Dictionary<SummarizingAccount, String> accountNames)
+                Dictionary<SummarizingAccount, string> accountNames)
         {
             throw new Exception("Implement");
         }
@@ -418,7 +418,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
         }
 
         private List<string> reversePortofolioTreeOf(Portfolio composedPortfolio,
-                Dictionary<SummarizingAccount, String> accountNames)
+                Dictionary<SummarizingAccount, string> accountNames)
         {
             throw new Exception("Implement");
         }

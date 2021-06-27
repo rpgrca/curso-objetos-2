@@ -3,7 +3,7 @@ namespace PortfolioTreePrinter_Exercise.Logic
     public class Classificator
     {
         private readonly ReceptiveAccount _account;
-        private double _total = 0.0;
+        private double _total;
 
         public Classificator(ReceptiveAccount account) => _account = account;
 

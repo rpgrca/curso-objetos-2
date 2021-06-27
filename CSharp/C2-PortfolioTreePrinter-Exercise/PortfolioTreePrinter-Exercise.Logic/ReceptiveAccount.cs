@@ -6,16 +6,19 @@ namespace PortfolioTreePrinter_Exercise.Logic
     {
         private readonly IList<AccountTransaction> m_transactions = new List<AccountTransaction>();
 
-        public double balance()
+        public double balance
         {
-            var balance = 0.0;
-
-            foreach (var transaction in m_transactions)
+            get
             {
-                balance = transaction.applyTo(balance);
-            }
+                var balance = 0.0;
 
-            return balance;
+                foreach (var transaction in m_transactions)
+                {
+                    balance = transaction.applyTo(balance);
+                }
+
+                return balance;
+            }
         }
 
         public void register(AccountTransaction transaction) =>

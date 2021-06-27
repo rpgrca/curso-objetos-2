@@ -35,8 +35,10 @@ namespace PortfolioTreePrinter_Exercise.Logic
 
         public double applyTo(double balance) => balance - _value;
 
-        public string Humanize() => $"Plazo fijo por {value():F1} durante {numberOfDays()} días a una tna de {tna():F1}";
+        public string Humanize() =>
+            $"Plazo fijo por {value():F1} durante {numberOfDays()} días a una tna de {tna():F1}";
 
-        public double applyTo(Classificator classificator, double balance) => classificator.applyTo(this, balance);
+        public double applyTo(Classificator classificator, double balance) =>
+            classificator.applyTo(this, balance);
     }
 }
