@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics;
 
 namespace C2_PortfolioTreePrinter_Exercise
 {
+    [DebuggerDisplay("Plazo fijo por {value()} durante {numberOfDays()} días a una tna de {tna()}")]
     internal class CertificateOfDeposit : AccountTransaction
     {
         private readonly double _value;
@@ -35,14 +33,10 @@ namespace C2_PortfolioTreePrinter_Exercise
 
         public double tna() => _tna;
 
-        public double applyTo(double balance) => balance - _value;
+        public double applyTo(double balance) => balance + earnings();
 
         public string Humanize() => $"Plazo fijo por {value():F1} durante {numberOfDays()} días a una tna de {tna():F1}";
 
-        public double applyTransferTo(double balance) => balance;
-
-        public double applyInvestmentTo(double balance) => balance + value();
-
-        public double applyInvestmentEarningsTo(double balance) => balance + earnings();
+        public double applyTo(Classificator classificator, double balance) => classificator.applyTo(this, balance);
     }
 }

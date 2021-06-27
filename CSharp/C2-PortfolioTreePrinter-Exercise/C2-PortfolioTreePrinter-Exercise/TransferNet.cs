@@ -1,21 +1,26 @@
 namespace C2_PortfolioTreePrinter_Exercise
 {
-    internal class TransferNet
+    internal class TransferNet : Classificator
     {
         private readonly ReceptiveAccount _account;
+        private double _transferNet = 0.0;
 
         public TransferNet(ReceptiveAccount account) => _account = account;
 
-        public double Total()
+        public double Compute()
         {
-            var transferNet = 0.0;
-
             foreach (var transaction in _account.transactions())
             {
-                transferNet = transaction.applyTransferTo(transferNet);
+                _transferNet = transaction.applyTo(this, _transferNet);
             }
 
-            return transferNet;
+            return _transferNet;
         }
+
+        public override double applyTo(DepositLeg depositLeg, double balance) =>
+            depositLeg.applyTo(balance);
+
+        public override double applyTo(WithdrawLeg withdrawLeg, double balance) =>
+            withdrawLeg.applyTo(balance);
     }
 }

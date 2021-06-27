@@ -1,5 +1,8 @@
-﻿namespace C2_PortfolioTreePrinter_Exercise
+﻿using System.Diagnostics;
+
+namespace C2_PortfolioTreePrinter_Exercise
 {
+    [DebuggerDisplay("Extracción por {value()}")]
     internal class Withdraw : AccountTransaction
     {
         private readonly double _value;
@@ -20,10 +23,7 @@
 
         public string Humanize() => $"Extracción por {value():F1}";
 
-        public double applyTransferTo(double balance) => balance;
-
-        public double applyInvestmentTo(double balance) => balance;
-
-        public double applyInvestmentEarningsTo(double balance) => balance;
+        public double applyTo(Classificator classificator, double balance) =>
+            classificator.applyTo(this, balance);
     }
 }

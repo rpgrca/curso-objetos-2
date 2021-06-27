@@ -1,21 +1,23 @@
 namespace C2_PortfolioTreePrinter_Exercise
 {
-    internal class InvestmentEarnings
+    internal class InvestmentEarnings : Classificator
     {
         private readonly ReceptiveAccount _account;
+        private double _investmentEarnings = 0.0;
 
         public InvestmentEarnings(ReceptiveAccount account) => _account = account;
 
-        public double Total()
+        public double Compute()
         {
-            var investmentEarnings = 0.0;
-
             foreach (var transaction in _account.transactions())
             {
-                investmentEarnings = transaction.applyInvestmentEarningsTo(investmentEarnings);
+                _investmentEarnings = transaction.applyTo(this, _investmentEarnings);
             }
 
-            return investmentEarnings;
+            return _investmentEarnings;
         }
+
+        public override double applyTo(CertificateOfDeposit certificateOfDeposit, double balance) =>
+            balance + certificateOfDeposit.earnings();
     }
 }
