@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace C2_PortfolioTreePrinter_Exercise.Logic
+namespace PortfolioTreePrinter_Exercise.Logic
 {
     public interface SummarizingAccount
     {

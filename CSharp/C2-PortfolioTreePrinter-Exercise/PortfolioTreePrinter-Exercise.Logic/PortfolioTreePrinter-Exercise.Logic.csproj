@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>C2_PortfolioTreePrinter_Exercise.Logic</RootNamespace>
+    <RootNamespace>PortfolioTreePrinter_Exercise.Logic</RootNamespace>
   </PropertyGroup>
 
 </Project>

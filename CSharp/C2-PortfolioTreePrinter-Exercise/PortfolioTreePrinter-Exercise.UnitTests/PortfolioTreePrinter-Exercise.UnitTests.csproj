@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>C2_PortfolioTreePrinter_Exercise.UnitTests</RootNamespace>
+    <RootNamespace>PortfolioTreePrinter_Exercise.UnitTests</RootNamespace>
 
     <IsPackable>false</IsPackable>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\C2-PortfolioTreePrinter-Exercise.Logic\C2-PortfolioTreePrinter-Exercise.Logic.csproj" />
+    <ProjectReference Include="..\PortfolioTreePrinter-Exercise.Logic\PortfolioTreePrinter-Exercise.Logic.csproj" />
   </ItemGroup>
 
 </Project>

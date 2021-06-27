@@ -1,4 +1,4 @@
-﻿namespace C2_PortfolioTreePrinter_Exercise.Logic
+﻿namespace PortfolioTreePrinter_Exercise.Logic
 {
     public class Withdraw : AccountTransaction
     {
