@@ -21,7 +21,8 @@ jobs:
 
     - name: Restore packages
       run: |
-           for s in `find ./curso-objetos-2/CSharp -type f -name "*.sln" -print`; do
+           pwd
+           for s in `find . -type f -name "*.sln" -print`; do
                dotnet restore $s
            done
 
