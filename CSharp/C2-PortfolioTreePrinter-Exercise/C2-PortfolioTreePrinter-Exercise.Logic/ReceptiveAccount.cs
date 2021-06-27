@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace C2_PortfolioTreePrinter_Exercise
+namespace C2_PortfolioTreePrinter_Exercise.Logic
 {
-    internal class ReceptiveAccount : SummarizingAccount
+    public class ReceptiveAccount : SummarizingAccount
     {
         private readonly IList<AccountTransaction> m_transactions = new List<AccountTransaction>();
 

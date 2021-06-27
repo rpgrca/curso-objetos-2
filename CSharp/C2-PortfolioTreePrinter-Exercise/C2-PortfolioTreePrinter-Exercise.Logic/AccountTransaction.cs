@@ -1,6 +1,6 @@
-﻿namespace C2_PortfolioTreePrinter_Exercise
+﻿namespace C2_PortfolioTreePrinter_Exercise.Logic
 {
-    internal interface AccountTransaction
+    public interface AccountTransaction
     {
         double value();
         string Humanize();

@@ -1,7 +1,7 @@
-namespace C2_PortfolioTreePrinter_Exercise
+namespace C2_PortfolioTreePrinter_Exercise.Logic
 {
 
-    internal class DepositLeg : TransferLeg
+    public class DepositLeg : TransferLeg
     {
         private readonly Transfer _transfer;
 

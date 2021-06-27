@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace C2_PortfolioTreePrinter_Exercise
+namespace C2_PortfolioTreePrinter_Exercise.Logic
 {
-    class Portfolio : SummarizingAccount
+    public class Portfolio : SummarizingAccount
     {
         public static String ACCOUNT_NOT_MANAGED = "No se maneja esta cuenta";
         public static String ACCOUNT_ALREADY_MANAGED = "La cuenta ya está manejada por otro portfolio";
@@ -15,7 +14,7 @@ namespace C2_PortfolioTreePrinter_Exercise
         {
             Portfolio portfolio = new Portfolio();
             portfolio.add(anAccount);
-            
+
             return portfolio;
         }
 

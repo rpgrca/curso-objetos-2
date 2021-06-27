@@ -1,6 +1,6 @@
-namespace C2_PortfolioTreePrinter_Exercise
+namespace C2_PortfolioTreePrinter_Exercise.Logic
 {
-    internal class InvestmentNet
+    public class InvestmentNet
     {
         private readonly ReceptiveAccount _account;
 

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace C2_PortfolioTreePrinter_Exercise
+﻿namespace C2_PortfolioTreePrinter_Exercise.Logic
 {
-    internal class CertificateOfDeposit : AccountTransaction
+    public class CertificateOfDeposit : AccountTransaction
     {
         private readonly double _value;
         private readonly int _numberOfDays;

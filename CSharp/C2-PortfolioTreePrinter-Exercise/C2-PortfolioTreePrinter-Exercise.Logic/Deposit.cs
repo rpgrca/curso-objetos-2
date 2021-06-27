@@ -1,6 +1,6 @@
-﻿namespace C2_PortfolioTreePrinter_Exercise
+﻿namespace C2_PortfolioTreePrinter_Exercise.Logic
 {
-    internal class Deposit : AccountTransaction
+    public class Deposit : AccountTransaction
     {
 
         private readonly double _value;

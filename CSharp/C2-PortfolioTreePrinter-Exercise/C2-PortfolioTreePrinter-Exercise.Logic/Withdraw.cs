@@ -1,6 +1,6 @@
-﻿namespace C2_PortfolioTreePrinter_Exercise
+﻿namespace C2_PortfolioTreePrinter_Exercise.Logic
 {
-    internal class Withdraw : AccountTransaction
+    public class Withdraw : AccountTransaction
     {
         private readonly double _value;
 
