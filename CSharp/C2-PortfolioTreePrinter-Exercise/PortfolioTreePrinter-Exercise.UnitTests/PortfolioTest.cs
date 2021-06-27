@@ -21,7 +21,6 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Deposit.registerForOn(100, account);
 
             Assert.Equal(100.0, account.balance());
-
         }
 
         [Fact]

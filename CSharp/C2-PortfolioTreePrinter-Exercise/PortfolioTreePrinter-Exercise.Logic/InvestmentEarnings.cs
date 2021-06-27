@@ -2,19 +2,8 @@ namespace PortfolioTreePrinter_Exercise.Logic
 {
     public class InvestmentEarnings : Classificator
     {
-        private readonly ReceptiveAccount _account;
-        private double _investmentEarnings = 0.0;
-
-        public InvestmentEarnings(ReceptiveAccount account) => _account = account;
-
-        public double Compute()
+        public InvestmentEarnings(ReceptiveAccount account) : base(account)
         {
-            foreach (var transaction in _account.transactions())
-            {
-                _investmentEarnings = transaction.applyTo(this, _investmentEarnings);
-            }
-
-            return _investmentEarnings;
         }
 
         public override double applyTo(CertificateOfDeposit certificateOfDeposit, double balance) =>
