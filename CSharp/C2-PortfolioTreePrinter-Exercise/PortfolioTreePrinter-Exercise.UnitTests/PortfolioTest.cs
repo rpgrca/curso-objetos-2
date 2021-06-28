@@ -1,6 +1,9 @@
-﻿using System;
+﻿using System.Linq.Expressions;
+using System;
 using Xunit;
 using PortfolioTreePrinter_Exercise.Logic;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PortfolioTreePrinter_Exercise.UnitTests
 {
@@ -355,8 +358,6 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Assert.Equal(-150.0, new TransferNet(toAccount).Value());
         }
 
-// Still unfinished in classes
-#if false
         [Fact]
         public void test26PortfolioTreePrinter()
         {
@@ -365,7 +366,6 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             var account3 = new ReceptiveAccount();
             var complexPortfolio = Portfolio.createWith(account1, account2);
             var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
-
 
             var accountNames = new Dictionary<SummarizingAccount, string>();
             accountNames.Add(composedPortfolio, "composedPortfolio");
@@ -387,7 +387,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
         private List<string> portofolioTreeOf(Portfolio composedPortfolio,
                 Dictionary<SummarizingAccount, string> accountNames)
         {
-            throw new Exception("Implement");
+            return new TreePrinter(composedPortfolio, accountNames).Value();
         }
 
         [Fact]
@@ -422,6 +422,21 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
         {
             throw new Exception("Implement");
         }
-#endif
+    }
+
+    internal class TreePrinter
+    {
+        private readonly Portfolio _composedPortfolio;
+        private readonly Dictionary<SummarizingAccount, string> _accountNames;
+        private readonly List<string> _tree;
+
+        public TreePrinter(Portfolio composedPortfolio, Dictionary<SummarizingAccount, string> accountNames)
+        {
+            _composedPortfolio = composedPortfolio;
+            _accountNames = accountNames;
+            _tree = new();
+        }
+
+        public List<string> Value() => _tree;
     }
 }
