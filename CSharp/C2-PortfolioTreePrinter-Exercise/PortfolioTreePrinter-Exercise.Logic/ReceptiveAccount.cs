@@ -6,7 +6,7 @@ namespace PortfolioTreePrinter_Exercise.Logic
     {
         private readonly IList<AccountTransaction> m_transactions = new List<AccountTransaction>();
 
-        public double balance
+        public override double balance
         {
             get
             {
@@ -24,21 +24,15 @@ namespace PortfolioTreePrinter_Exercise.Logic
         public void register(AccountTransaction transaction) =>
             m_transactions.Add(transaction);
 
-        public bool registers(AccountTransaction transaction) =>
+        public override bool registers(AccountTransaction transaction) =>
             m_transactions.Contains(transaction);
 
-        public bool manages(SummarizingAccount account) =>
+        public override bool manages(SummarizingAccount account) =>
             this == account;
 
-        public IList<AccountTransaction> transactions() =>
+        public override IList<AccountTransaction> transactions() =>
             new List<AccountTransaction>(m_transactions);
 
-        public void visitTransactions(TransactionVisitor visitor)
-        {
-            foreach (var transaction in transactions())
-            {
-                transaction.accept(visitor);
-            }
-        }
+        public override void accept(TreePrinterVisitor visitor) => visitor.visit(this);
     }
 }

@@ -1,6 +1,9 @@
-﻿using System;
+﻿using System.Linq.Expressions;
+using System;
 using Xunit;
 using PortfolioTreePrinter_Exercise.Logic;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PortfolioTreePrinter_Exercise.UnitTests
 {
@@ -355,8 +358,6 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Assert.Equal(-150.0, new TransferNet(toAccount).Value());
         }
 
-// Still unfinished in classes
-#if false
         [Fact]
         public void test26PortfolioTreePrinter()
         {
@@ -365,7 +366,6 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             var account3 = new ReceptiveAccount();
             var complexPortfolio = Portfolio.createWith(account1, account2);
             var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
-
 
             var accountNames = new Dictionary<SummarizingAccount, string>();
             accountNames.Add(composedPortfolio, "composedPortfolio");
@@ -376,19 +376,17 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
 
             var lines = portofolioTreeOf(composedPortfolio, accountNames);
 
-            Assert.Equal(5, lines.Count);
-            Assert.Equal("composedPortfolio", lines.ElementAt(0));
-            Assert.Equal(" complexPortfolio", lines.ElementAt(1));
-            Assert.Equal("  account1", lines.ElementAt(2));
-            Assert.Equal("  account2", lines.ElementAt(3));
-            Assert.Equal(" account3", lines.ElementAt(4));
+            Assert.Collection(lines, 
+                p1 => Assert.Equal("composedPortfolio", p1),
+                p2 => Assert.Equal(" complexPortfolio", p2),
+                p3 => Assert.Equal("  account1", p3),
+                p4 => Assert.Equal("  account2", p4),
+                p5 => Assert.Equal(" account3", p5));
         }
 
         private List<string> portofolioTreeOf(Portfolio composedPortfolio,
-                Dictionary<SummarizingAccount, string> accountNames)
-        {
-            throw new Exception("Implement");
-        }
+                Dictionary<SummarizingAccount, string> accountNames) =>
+            new TreePrinterVisitor(composedPortfolio, accountNames).Value();
 
         [Fact]
         public void test27ReversePortfolioTreePrinter()
@@ -408,20 +406,16 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
 
             var lines = reversePortofolioTreeOf(composedPortfolio, accountNames);
 
-            Assert.Equal(5, lines.Count);
-            Assert.Equal(" account3", lines.ElementAt(0));
-            Assert.Equal("  account2", lines.ElementAt(1));
-            Assert.Equal("  account1", lines.ElementAt(2));
-            Assert.Equal(" complexPortfolio", lines.ElementAt(3));
-            Assert.Equal("composedPortfolio", lines.ElementAt(4));
-
+            Assert.Collection(lines,
+                p1 => Assert.Equal(" account3", p1),
+                p2 => Assert.Equal("  account2", p2),
+                p3 => Assert.Equal("  account1", p3),
+                p4 => Assert.Equal(" complexPortfolio", p4),
+                p5 => Assert.Equal("composedPortfolio", p5));
         }
 
         private List<string> reversePortofolioTreeOf(Portfolio composedPortfolio,
-                Dictionary<SummarizingAccount, string> accountNames)
-        {
-            throw new Exception("Implement");
-        }
-#endif
+                Dictionary<SummarizingAccount, string> accountNames) =>
+            new ReverseTreePrinterVisitor(composedPortfolio, accountNames).Value();
     }
 }
