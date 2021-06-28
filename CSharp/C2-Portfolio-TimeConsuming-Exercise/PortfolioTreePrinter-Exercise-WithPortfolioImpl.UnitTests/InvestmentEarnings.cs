@@ -3,11 +3,11 @@
     class InvestmentEarnings: AccountTransactionVisitor
     {
         private SummarizingAccount account;
-	    private double m_value;
+        private double m_value;
 
-	    public InvestmentEarnings(SummarizingAccount account) {
-		    this.account = account;
-	    }
+        public InvestmentEarnings(SummarizingAccount account) {
+            this.account = account;
+        }
 
         public double value()
         {
@@ -19,20 +19,20 @@
         }
 
         public void visitCertificateOfDeposit(
-			    CertificateOfDeposit certificateOfDeposit) {
-		    m_value += certificateOfDeposit.earnings();
-	    }
+                CertificateOfDeposit certificateOfDeposit) {
+            m_value += certificateOfDeposit.earnings();
+        }
 
-	    public void visitDeposit(Deposit deposit) {
-	    }
+        public void visitDeposit(Deposit deposit) {
+        }
 
-	    public void visitWithdraw(Withdraw withdraw) {
-	    }
+        public void visitWithdraw(Withdraw withdraw) {
+        }
 
         public void visitTransferDeposit(TransferDeposit transferDeposit) {
-	    }
+        }
 
-	    public void visitTransferWithdraw(TransferWithdraw transferWithdraw) {
-	    }
+        public void visitTransferWithdraw(TransferWithdraw transferWithdraw) {
+        }
     }
 }

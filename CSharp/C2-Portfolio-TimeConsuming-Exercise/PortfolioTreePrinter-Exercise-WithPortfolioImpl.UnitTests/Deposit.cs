@@ -2,23 +2,23 @@
 {
     class Deposit: AccountTransaction
     {
-	    private double m_value;
+        private double m_value;
 
-	    public static Deposit registerForOn(double value, ReceptiveAccount account) {
-		    Deposit deposit = new Deposit(value);
+        public static Deposit registerForOn(double value, ReceptiveAccount account) {
+            Deposit deposit = new Deposit(value);
 
-		    account.register(deposit);
+            account.register(deposit);
 
-		    return deposit;
-	    }
+            return deposit;
+        }
 
-	    public Deposit (double value) {
-		    m_value = value;
-	    }
+        public Deposit (double value) {
+            m_value = value;
+        }
 
-	    public double value(){
-		    return m_value;
-	    }
+        public double value(){
+            return m_value;
+        }
 
         public void accept(AccountTransactionVisitor visitor)
         {

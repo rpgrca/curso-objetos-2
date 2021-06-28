@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-	<RootNamespace>PortfolioTreePrinter_Exercise_WithPortfolioImpl</RootNamespace>
-	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  <RootNamespace>PortfolioTreePrinter_Exercise_WithPortfolioImpl</RootNamespace>
+  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
