@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 {
@@ -23,5 +21,4 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
             return lines;
         }
     }
-
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 {
     class TransferNet: AccountTransactionVisitor
     {
@@ -19,7 +14,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 		    m_value = 0.0;
 
             account.acceptTransactionsVisitor(this);
-		
+
 		    return m_value;
 	    }
 
@@ -34,14 +29,13 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
         public void visitCertificateOfDeposit(
 			    CertificateOfDeposit certificateOfDeposit) {
 	    }
-	    
+
 	    public void visitTransferDeposit(TransferDeposit transferDeposit) {
 		    m_value += transferDeposit.value();
 	    }
-	    
+
 	    public void visitTransferWithdraw(TransferWithdraw transferWithdraw) {
 		    m_value -= transferWithdraw.value();
 	    }
-
     }
 }

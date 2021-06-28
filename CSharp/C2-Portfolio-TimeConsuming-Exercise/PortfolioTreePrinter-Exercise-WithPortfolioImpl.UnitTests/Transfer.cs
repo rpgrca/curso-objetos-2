@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 {
     class Transfer
     {
@@ -26,7 +21,6 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
         public static Transfer registerFor(double value, ReceptiveAccount fromAccount,
                 ReceptiveAccount toAccount)
         {
-
             Transfer transfer = new Transfer(value, fromAccount, toAccount);
             fromAccount.register(transfer.withdrawLeg());
             toAccount.register(transfer.depositLeg());
@@ -48,6 +42,5 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
         {
             return m_depositLeg;
         }
-
     }
 }

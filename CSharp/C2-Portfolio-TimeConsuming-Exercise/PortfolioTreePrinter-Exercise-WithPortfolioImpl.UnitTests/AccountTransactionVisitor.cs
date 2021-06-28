@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 {
     interface AccountTransactionVisitor
     {
@@ -12,6 +7,5 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 	    void visitTransferWithdraw(TransferWithdraw transferWithdraw);
 	    void visitWithdraw(Withdraw withdraw);
 	    void visitCertificateOfDeposit(CertificateOfDeposit certificateOfDeposit);
-	
     }
 }

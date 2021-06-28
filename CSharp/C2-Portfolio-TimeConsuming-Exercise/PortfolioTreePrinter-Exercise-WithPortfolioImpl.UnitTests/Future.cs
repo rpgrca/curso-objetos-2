@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 {
-	class Future<T>
+    class Future<T>
 	{
 		private readonly Thread _thread;
 		private T _result;

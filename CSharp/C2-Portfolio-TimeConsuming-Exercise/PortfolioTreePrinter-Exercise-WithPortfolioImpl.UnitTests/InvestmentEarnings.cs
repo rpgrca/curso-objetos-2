@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 {
     class InvestmentEarnings: AccountTransactionVisitor
     {
@@ -22,13 +17,12 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
             account.acceptTransactionsVisitor(this);
             return m_value;
         }
-        
+
         public void visitCertificateOfDeposit(
 			    CertificateOfDeposit certificateOfDeposit) {
 		    m_value += certificateOfDeposit.earnings();
 	    }
 
-	    
 	    public void visitDeposit(Deposit deposit) {
 	    }
 
@@ -38,9 +32,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
         public void visitTransferDeposit(TransferDeposit transferDeposit) {
 	    }
 
-	    
 	    public void visitTransferWithdraw(TransferWithdraw transferWithdraw) {
-	    }	
-
+	    }
     }
 }

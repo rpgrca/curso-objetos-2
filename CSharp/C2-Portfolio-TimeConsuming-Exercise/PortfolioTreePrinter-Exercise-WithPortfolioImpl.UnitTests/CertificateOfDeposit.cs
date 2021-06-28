@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 {
     class CertificateOfDeposit:AccountTransaction
     {
@@ -23,11 +18,9 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 
 	    public static CertificateOfDeposit registerFor(double value, int numberOfDays, double tna,
 			    ReceptiveAccount account) {
-		
 		    CertificateOfDeposit certificateOfDeposit = new CertificateOfDeposit(value,numberOfDays,
 				    tna);
 		    account.register(certificateOfDeposit);
-		
 		    return certificateOfDeposit;
 	    }
 

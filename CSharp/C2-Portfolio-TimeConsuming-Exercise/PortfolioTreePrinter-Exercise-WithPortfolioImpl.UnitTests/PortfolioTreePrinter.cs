@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 {
@@ -21,13 +19,12 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 	    public List<String> lines() {
 		    m_lines = new List<String>();
 		    spaces = 0;
-		
+
 		    portfolio.accept(this);
-		
+
 		    return m_lines;
 	    }
 
-	    
 	    public void visitPortfolio(Portfolio portfolio) {
 		    lineFor(portfolio);
 		    spaces += 1;
@@ -42,16 +39,14 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 		    for (int i = 0; i < spaces; i++) {
 			    line = line + " ";
 		    }
-            
+
             accountNames.TryGetValue(summarizingAccount, out name);
             line = line + name; 
 		    m_lines.Add(line);
 	    }
 
-	    
 	    public void visitReceptiveAccount(ReceptiveAccount receptiveAccount) {
 		    lineFor(receptiveAccount);
 	    }
-
     }
 }
