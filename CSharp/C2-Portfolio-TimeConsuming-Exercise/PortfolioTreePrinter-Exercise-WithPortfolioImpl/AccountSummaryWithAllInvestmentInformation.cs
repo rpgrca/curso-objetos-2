@@ -17,14 +17,11 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 	    public List<String> lines() {
 		    AccountSummaryWithInvestmentEarnings summary = new AccountSummaryWithInvestmentEarnings(account);
 		    InvestmentNet investmentNet = new InvestmentNet(account);
-     		var value = 0.0;
+			var future = new Future<double>(() => investmentNet.value());
 
-			var thread = new Thread(() => value = investmentNet.value());
-			thread.Start();
-            List<String> lines = summary.lines();
-			thread.Join();
-            lines.Add("Inversiones por " + value);
-	
+            List<string> lines = summary.lines();
+            lines.Add($"Inversiones por {future.Value()}");
+
 		    return lines;
 	    }
     }

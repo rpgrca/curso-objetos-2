@@ -6,6 +6,7 @@ using System.Threading;
 
 namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 {
+
     class AccountSummaryWithInvestmentEarnings
     {
 	    private SummarizingAccount account;
@@ -14,19 +15,15 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 		    this.account = account;
 	    }
 
-	    public List<String> lines() {
+	    public List<string> lines() {
 		    AccountSummary summary = new AccountSummary(account);
 		    InvestmentEarnings investmentEarnings = new InvestmentEarnings(account);
-			var value = 0.0;
 
-			var thread = new Thread(() => value = investmentEarnings.value());
-			thread.Start();
-            List<String> lines = summary.lines();
-			thread.Join();
+			var future = new Future<double>(() => investmentEarnings.value());
+			List<string> lines = summary.lines();
 
-		    lines.Add("Ganancias por " + value);
-	
-		    return lines;
+			lines.Add($"Ganancias por {future.Value()}");
+			return lines;
 	    }
     }
 }

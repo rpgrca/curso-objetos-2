@@ -480,7 +480,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
                     return (new ReversePortfolioTreePrinter(composedPortfolio, accountNames)).lines();
 	    }
 	
-        public void shouldTakeLessThan(Action should, double milliseconds)
+        private void shouldTakeLessThan(Action should, double milliseconds)
         {
             DateTime timeBeforeRunning = DateTime.Now;
             should();
