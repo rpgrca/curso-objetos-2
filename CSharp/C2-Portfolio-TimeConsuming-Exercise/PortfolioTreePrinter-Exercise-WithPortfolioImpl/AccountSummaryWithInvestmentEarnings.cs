@@ -17,9 +17,14 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
 	    public List<String> lines() {
 		    AccountSummary summary = new AccountSummary(account);
 		    InvestmentEarnings investmentEarnings = new InvestmentEarnings(account);
-	       
+			var value = 0.0;
+
+			var thread = new Thread(() => value = investmentEarnings.value());
+			thread.Start();
             List<String> lines = summary.lines();
-		    lines.Add("Ganancias por " + investmentEarnings.value());
+			thread.Join();
+
+		    lines.Add("Ganancias por " + value);
 	
 		    return lines;
 	    }
