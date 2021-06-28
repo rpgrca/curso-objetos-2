@@ -32,5 +32,7 @@ namespace PortfolioTreePrinter_Exercise.Logic
 
         public override IList<AccountTransaction> transactions() =>
             new List<AccountTransaction>(m_transactions);
-   }
+
+        public override void accept(TreePrinterVisitor visitor) => visitor.visit(this);
+    }
 }

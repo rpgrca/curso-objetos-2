@@ -51,5 +51,15 @@ namespace PortfolioTreePrinter_Exercise.Logic
 
             return transactions;
         }
+
+        public void visitAccounts(TreePrinterVisitor visitor)
+        {
+            foreach (var account in summarizingAccounts)
+            {
+                account.accept(visitor);
+            }
+        }
+
+        public override void accept(TreePrinterVisitor visitor) => visitor.visit(this);
     }
 }

@@ -8,7 +8,7 @@ namespace PortfolioTreePrinter_Exercise.Logic
 
         public TransactionVisitor(SummarizingAccount account) => _account = account;
 
-        public void Compute() => _account.visitTransactions(this);
+        public virtual void Compute() => _account.visitTransactions(this);
 
         public virtual void visit(Withdraw withdraw)
         {

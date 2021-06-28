@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PortfolioTreePrinter_Exercise.Logic
 {
@@ -19,5 +20,7 @@ namespace PortfolioTreePrinter_Exercise.Logic
                 transaction.accept(visitor);
             }
         }
+
+        public abstract void accept(TreePrinterVisitor visitor);
     }
 }

@@ -387,7 +387,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
         private List<string> portofolioTreeOf(Portfolio composedPortfolio,
                 Dictionary<SummarizingAccount, string> accountNames)
         {
-            return new TreePrinter(composedPortfolio, accountNames).Value();
+            return new TreePrinterVisitor(composedPortfolio, accountNames).Value();
         }
 
         [Fact]
@@ -422,21 +422,5 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
         {
             throw new Exception("Implement");
         }
-    }
-
-    internal class TreePrinter : TransactionVisitor
-    {
-        private readonly Portfolio _composedPortfolio;
-        private readonly Dictionary<SummarizingAccount, string> _accountNames;
-        private readonly List<string> _tree;
-
-        public TreePrinter(Portfolio composedPortfolio, Dictionary<SummarizingAccount, string> accountNames) : base(composedPortfolio)
-        {
-            _composedPortfolio = composedPortfolio;
-            _accountNames = accountNames;
-            _tree = new();
-        }
-
-        public List<string> Value() => _tree;
     }
 }
