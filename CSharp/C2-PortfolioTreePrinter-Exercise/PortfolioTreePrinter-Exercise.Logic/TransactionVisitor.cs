@@ -4,9 +4,9 @@ namespace PortfolioTreePrinter_Exercise.Logic
 {
     public abstract class TransactionVisitor
     {
-        private readonly ReceptiveAccount _account;
+        private readonly SummarizingAccount _account;
 
-        public TransactionVisitor(ReceptiveAccount account) => _account = account;
+        public TransactionVisitor(SummarizingAccount account) => _account = account;
 
         public void Compute() => _account.visitTransactions(this);
 

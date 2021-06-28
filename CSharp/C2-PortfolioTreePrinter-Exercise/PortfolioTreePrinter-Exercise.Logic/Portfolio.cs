@@ -33,16 +33,16 @@ namespace PortfolioTreePrinter_Exercise.Logic
         public Portfolio() =>
             summarizingAccounts = new List<SummarizingAccount>();
 
-        public double balance =>
+        public override double balance =>
             summarizingAccounts.Sum(summarizingAccount => summarizingAccount.balance);
 
-        public bool registers(AccountTransaction transaction) =>
+        public override bool registers(AccountTransaction transaction) =>
             summarizingAccounts.Any(summarizingAccount => summarizingAccount.registers(transaction));
 
-        public bool manages(SummarizingAccount account) =>
+        public override bool manages(SummarizingAccount account) =>
             this == account || summarizingAccounts.Any(summarizingAccount => summarizingAccount.manages(account));
 
-        public IList<AccountTransaction> transactions()
+        public override IList<AccountTransaction> transactions()
         {
             var transactions = new List<AccountTransaction>();
 

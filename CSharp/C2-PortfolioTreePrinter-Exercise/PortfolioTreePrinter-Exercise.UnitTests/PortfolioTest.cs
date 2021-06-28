@@ -424,13 +424,13 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
         }
     }
 
-    internal class TreePrinter
+    internal class TreePrinter : TransactionVisitor
     {
         private readonly Portfolio _composedPortfolio;
         private readonly Dictionary<SummarizingAccount, string> _accountNames;
         private readonly List<string> _tree;
 
-        public TreePrinter(Portfolio composedPortfolio, Dictionary<SummarizingAccount, string> accountNames)
+        public TreePrinter(Portfolio composedPortfolio, Dictionary<SummarizingAccount, string> accountNames) : base(composedPortfolio)
         {
             _composedPortfolio = composedPortfolio;
             _accountNames = accountNames;
