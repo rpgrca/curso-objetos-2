@@ -32,5 +32,13 @@ namespace PortfolioTreePrinter_Exercise.Logic
 
         public IList<AccountTransaction> transactions() =>
             new List<AccountTransaction>(m_transactions);
+
+        public void visitTransactions(TransactionVisitor visitor)
+        {
+            foreach (var transaction in transactions())
+            {
+                transaction.accept(visitor);
+            }
+        }
     }
 }

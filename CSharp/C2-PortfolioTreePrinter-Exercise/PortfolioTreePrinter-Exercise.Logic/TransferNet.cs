@@ -1,15 +1,18 @@
 namespace PortfolioTreePrinter_Exercise.Logic
 {
-    public class TransferNet : Classificator
+    public class TransferNet : TransactionVisitor
     {
-        public TransferNet(ReceptiveAccount account) : base(account)
-        {
-        }
+        private double _totalTransferNet;
 
-        public override double applyTo(DepositLeg depositLeg, double balance) =>
-            depositLeg.applyTo(balance);
+        public TransferNet(ReceptiveAccount account) : base(account) =>
+            Compute();
 
-        public override double applyTo(WithdrawLeg withdrawLeg, double balance) =>
-            withdrawLeg.applyTo(balance);
+        public override void visit(DepositLeg depositLeg) =>
+            _totalTransferNet += depositLeg.value();
+
+        public override void visit(WithdrawLeg withdrawLeg) =>
+            _totalTransferNet -= withdrawLeg.value();
+
+        public double Value() => _totalTransferNet;
     }
 }

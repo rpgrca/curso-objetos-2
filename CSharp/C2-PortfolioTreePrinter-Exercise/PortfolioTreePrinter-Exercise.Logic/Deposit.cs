@@ -19,11 +19,9 @@ namespace PortfolioTreePrinter_Exercise.Logic
 
         public double value() => _value;
 
-        public double applyTo(double balance) => balance + _value;
+        public void accept(TransactionVisitor visitor) =>
+            visitor.visit(this);
 
-        public string Humanize() => $"Depósito por {value():F1}";
-
-        public double applyTo(Classificator classificator, double balance) =>
-            classificator.applyTo(this, balance);
+        public double applyTo(double balance) => balance + value();
     }
 }

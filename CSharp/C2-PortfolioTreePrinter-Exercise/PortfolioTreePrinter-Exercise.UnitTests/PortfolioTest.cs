@@ -264,7 +264,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Withdraw.registerForOn(50, fromAccount);
             Transfer.registerFor(100, fromAccount, toAccount);
 
-            var lines = new Summary(fromAccount).Lines();
+            var lines = new Summary(fromAccount).Value();
 
             Assert.Collection(lines,
                 p1 => Assert.Equal("Depósito por 100.0", p1),
@@ -284,8 +284,8 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Transfer.registerFor(100, fromAccount, toAccount);
             Transfer.registerFor(250, toAccount, fromAccount);
 
-            Assert.Equal(150.0, new TransferNet(fromAccount).Compute());
-            Assert.Equal(-150.0, new TransferNet(toAccount).Compute());
+            Assert.Equal(150.0, new TransferNet(fromAccount).Value());
+            Assert.Equal(-150.0, new TransferNet(toAccount).Value());
         }
 
         [Fact]
@@ -299,7 +299,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Transfer.registerFor(100, account, toAccount);
             CertificateOfDeposit.registerFor(100, 30, 0.1, account);
 
-            Assert.Equal(100.0, new InvestmentNet(account).Compute());
+            Assert.Equal(100.0, new InvestmentNet(account).Value());
             Assert.Equal(750.0, account.balance);
         }
 
@@ -315,7 +315,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
                 100.0 * (0.1 / 360) * 30 +
                 100.0 * (0.15 / 360) * 60;
 
-            Assert.Equal(m_investmentEarnings, new InvestmentEarnings(account).Compute());
+            Assert.Equal(m_investmentEarnings, new InvestmentEarnings(account).Value());
         }
 
         [Fact]
@@ -329,7 +329,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Transfer.registerFor(100, fromAccount, toAccount);
             CertificateOfDeposit.registerFor(1000, 30, 0.1, fromAccount);
 
-            var lines = new Summary(fromAccount).Lines();
+            var lines = new Summary(fromAccount).Value();
 
             Assert.Collection(lines,
                 p1 => Assert.Equal("Depósito por 100.0", p1),
@@ -351,8 +351,8 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Transfer.registerFor(250, toAccount, fromAccount);
             CertificateOfDeposit.registerFor(1000, 30, 0.1, fromAccount);
 
-            Assert.Equal(150.0, new TransferNet(fromAccount).Compute());
-            Assert.Equal(-150.0, new TransferNet(toAccount).Compute());
+            Assert.Equal(150.0, new TransferNet(fromAccount).Value());
+            Assert.Equal(-150.0, new TransferNet(toAccount).Value());
         }
 
 // Still unfinished in classes
