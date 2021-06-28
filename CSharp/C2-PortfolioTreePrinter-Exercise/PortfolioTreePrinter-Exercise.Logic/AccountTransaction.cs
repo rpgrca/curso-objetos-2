@@ -3,8 +3,7 @@
     public interface AccountTransaction
     {
         double value();
-        string Humanize();
+        void accept(TransactionVisitor visitor);
         double applyTo(double balance);
-        double applyTo(Classificator classificator, double balance);
     }
 }

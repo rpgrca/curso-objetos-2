@@ -1,12 +1,15 @@
 namespace PortfolioTreePrinter_Exercise.Logic
 {
-    public class InvestmentEarnings : Classificator
+    public class InvestmentEarnings : TransactionVisitor
     {
-        public InvestmentEarnings(ReceptiveAccount account) : base(account)
-        {
-        }
+        private double _totalInvestmentEarnings;
 
-        public override double applyTo(CertificateOfDeposit certificateOfDeposit, double balance) =>
-            balance + certificateOfDeposit.earnings();
+        public InvestmentEarnings(ReceptiveAccount account) : base(account) =>
+            Compute();
+
+        public override void visit(CertificateOfDeposit certificateOfDeposit) =>
+            _totalInvestmentEarnings += certificateOfDeposit.earnings();
+
+        public double Value() => _totalInvestmentEarnings;
     }
 }

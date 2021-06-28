@@ -13,15 +13,12 @@ namespace PortfolioTreePrinter_Exercise.Logic
             toAccount.register(this);
         }
 
-        public double applyTo(double balance) => balance + value();
-
-        public string Humanize() => $"Transferencia por {value():F1}";
-
         public Transfer transfer() => _transfer;
+
+        public double applyTo(double balance) => balance + value();
 
         public double value() => _transfer.value();
 
-        public double applyTo(Classificator classificator, double balance) =>
-            classificator.applyTo(this, balance);
+        public void accept(TransactionVisitor visitor) => visitor.visit(this);
     }
 }

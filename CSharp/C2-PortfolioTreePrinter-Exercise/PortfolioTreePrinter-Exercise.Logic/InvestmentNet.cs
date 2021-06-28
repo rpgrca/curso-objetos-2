@@ -1,12 +1,18 @@
+using System;
+using System.Collections.Generic;
+
 namespace PortfolioTreePrinter_Exercise.Logic
 {
-    public class InvestmentNet : Classificator
+    public class InvestmentNet : TransactionVisitor
     {
-        public InvestmentNet(ReceptiveAccount account) : base(account)
-        {
-        }
+        private double _balance;
 
-        public override double applyTo(CertificateOfDeposit certificateOfDeposit, double balance) =>
-            balance + certificateOfDeposit.value();
+        public InvestmentNet(ReceptiveAccount account) : base(account) =>
+            Compute();
+
+        public override void visit(CertificateOfDeposit certificateOfDeposit) =>
+            _balance += certificateOfDeposit.value();
+
+        public double Value() => _balance;
     }
 }
