@@ -376,12 +376,12 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
 
             var lines = portofolioTreeOf(composedPortfolio, accountNames);
 
-            Assert.Equal(5, lines.Count);
-            Assert.Equal("composedPortfolio", lines.ElementAt(0));
-            Assert.Equal(" complexPortfolio", lines.ElementAt(1));
-            Assert.Equal("  account1", lines.ElementAt(2));
-            Assert.Equal("  account2", lines.ElementAt(3));
-            Assert.Equal(" account3", lines.ElementAt(4));
+            Assert.Collection(lines, 
+                p1 => Assert.Equal("composedPortfolio", p1),
+                p2 => Assert.Equal(" complexPortfolio", p2),
+                p3 => Assert.Equal("  account1", p3),
+                p4 => Assert.Equal("  account2", p4),
+                p5 => Assert.Equal(" account3", p5));
         }
 
         private List<string> portofolioTreeOf(Portfolio composedPortfolio,
@@ -406,13 +406,12 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
 
             var lines = reversePortofolioTreeOf(composedPortfolio, accountNames);
 
-            Assert.Equal(5, lines.Count);
-            Assert.Equal(" account3", lines.ElementAt(0));
-            Assert.Equal("  account2", lines.ElementAt(1));
-            Assert.Equal("  account1", lines.ElementAt(2));
-            Assert.Equal(" complexPortfolio", lines.ElementAt(3));
-            Assert.Equal("composedPortfolio", lines.ElementAt(4));
-
+            Assert.Collection(lines,
+                p1 => Assert.Equal(" account3", p1),
+                p2 => Assert.Equal("  account2", p2),
+                p3 => Assert.Equal("  account1", p3),
+                p4 => Assert.Equal(" complexPortfolio", p4),
+                p5 => Assert.Equal("composedPortfolio", p5));
         }
 
         private List<string> reversePortofolioTreeOf(Portfolio composedPortfolio,
