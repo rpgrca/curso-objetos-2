@@ -385,10 +385,8 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
         }
 
         private List<string> portofolioTreeOf(Portfolio composedPortfolio,
-                Dictionary<SummarizingAccount, string> accountNames)
-        {
-            return new TreePrinterVisitor(composedPortfolio, accountNames).Value();
-        }
+                Dictionary<SummarizingAccount, string> accountNames) =>
+            new TreePrinterVisitor(composedPortfolio, accountNames).Value();
 
         [Fact]
         public void test27ReversePortfolioTreePrinter()
@@ -418,9 +416,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
         }
 
         private List<string> reversePortofolioTreeOf(Portfolio composedPortfolio,
-                Dictionary<SummarizingAccount, string> accountNames)
-        {
-            throw new Exception("Implement");
-        }
+                Dictionary<SummarizingAccount, string> accountNames) =>
+            new ReverseTreePrinterVisitor(composedPortfolio, accountNames).Value();
     }
 }
