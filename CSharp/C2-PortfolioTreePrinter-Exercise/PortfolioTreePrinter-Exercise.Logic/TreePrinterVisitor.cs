@@ -1,7 +1,4 @@
-using System.Linq.Expressions;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PortfolioTreePrinter_Exercise.Logic
 {
@@ -10,6 +7,7 @@ namespace PortfolioTreePrinter_Exercise.Logic
         private readonly Portfolio _composedPortfolio;
         private readonly Dictionary<SummarizingAccount, string> _accountNames;
         private readonly List<string> _tree;
+        private int level;
 
         public TreePrinterVisitor(Portfolio composedPortfolio, Dictionary<SummarizingAccount, string> accountNames)
         {
@@ -22,19 +20,21 @@ namespace PortfolioTreePrinter_Exercise.Logic
 
         public List<string> Value() => _tree;
 
-        public void Compute()
-        {
-            _composedPortfolio.visitAccounts(this);
-        }
+        public void Compute() => visit(_composedPortfolio);
 
         public void visit(Portfolio portfolio)
         {
+            _tree.Add(PrintAccountName(_accountNames[portfolio]));
+            level++;
             portfolio.visitAccounts(this);
+            level--;
         }
 
         internal void visit(ReceptiveAccount receptiveAccount)
         {
-            _tree.Add(_accountNames[receptiveAccount]);
+            _tree.Add(PrintAccountName(_accountNames[receptiveAccount]));
         }
+
+        private string PrintAccountName(string accountName) => $"{new string(' ', level)}{accountName}";
     }
 }
