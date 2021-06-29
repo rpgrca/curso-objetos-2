@@ -308,7 +308,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             Withdraw.registerForOn(50,fromAccount);
             Transfer.registerFor(100,fromAccount, toAccount);
 
-            List<String> lines = accountSummaryLines(fromAccount);
+            List<string> lines = accountSummaryLines(fromAccount);
 
             Assert.Equal(3,lines.Count);
             Assert.Equal("Depósito por 100", lines.ElementAt(0));
@@ -316,7 +316,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             Assert.Equal("Transferencia por -100", lines.ElementAt(2));
         }
 
-        private List<String> accountSummaryLines(ReceptiveAccount fromAccount) {
+        private List<string> accountSummaryLines(ReceptiveAccount fromAccount) {
             return (new AccountSummary(fromAccount)).lines();
         }
 
@@ -389,7 +389,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             Transfer.registerFor(100,fromAccount, toAccount);
             CertificateOfDeposit.registerFor(1000, 30, 0.1, fromAccount);
 
-            List<String> lines = accountSummaryLines(fromAccount);
+            List<string> lines = accountSummaryLines(fromAccount);
 
             Assert.Equal(4,lines.Count);
             Assert.Equal("Depósito por 100", lines.ElementAt(0));
@@ -423,14 +423,14 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             Portfolio complexPortfolio = Portfolio.createWith(account1,account2);
             Portfolio composedPortfolio = Portfolio.createWith(complexPortfolio,account3);
 
-            Dictionary<SummarizingAccount, String> accountNames = new Dictionary<SummarizingAccount, String>();
+            Dictionary<SummarizingAccount, string> accountNames = new Dictionary<SummarizingAccount, string>();
             accountNames.Add(composedPortfolio, "composedPortfolio");
             accountNames.Add(complexPortfolio, "complexPortfolio");
             accountNames.Add(account1, "account1");
             accountNames.Add(account2, "account2");
             accountNames.Add(account3, "account3");
 
-            List<String> lines = portofolioTreeOf(composedPortfolio, accountNames);
+            List<string> lines = portofolioTreeOf(composedPortfolio, accountNames);
 
             Assert.Equal(5, lines.Count);
             Assert.Equal("composedPortfolio", lines.ElementAt(0));
@@ -440,8 +440,8 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             Assert.Equal(" account3", lines.ElementAt(4));
         }
 
-        private List<String> portofolioTreeOf(Portfolio composedPortfolio,
-                Dictionary<SummarizingAccount, String> accountNames) {
+        private List<string> portofolioTreeOf(Portfolio composedPortfolio,
+                Dictionary<SummarizingAccount, string> accountNames) {
                     return (new PortfolioTreePrinter(composedPortfolio, accountNames)).lines();
         }
 
@@ -454,14 +454,14 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             Portfolio complexPortfolio = Portfolio.createWith(account1,account2);
             Portfolio composedPortfolio = Portfolio.createWith(complexPortfolio,account3);
 
-            Dictionary<SummarizingAccount, String> accountNames = new Dictionary<SummarizingAccount, String>();
+            Dictionary<SummarizingAccount, string> accountNames = new Dictionary<SummarizingAccount, string>();
             accountNames.Add(composedPortfolio, "composedPortfolio");
             accountNames.Add(complexPortfolio, "complexPortfolio");
             accountNames.Add(account1, "account1");
             accountNames.Add(account2, "account2");
             accountNames.Add(account3, "account3");
 
-            List<String> lines = reversePortofolioTreeOf(composedPortfolio, accountNames);
+            List<string> lines = reversePortofolioTreeOf(composedPortfolio, accountNames);
 
             Assert.Equal(5, lines.Count);
             Assert.Equal(" account3", lines.ElementAt(0));
@@ -471,8 +471,8 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             Assert.Equal("composedPortfolio", lines.ElementAt(4));
         }
 
-        private List<String> reversePortofolioTreeOf(Portfolio composedPortfolio,
-                Dictionary<SummarizingAccount, String> accountNames) {
+        private List<string> reversePortofolioTreeOf(Portfolio composedPortfolio,
+                Dictionary<SummarizingAccount, string> accountNames) {
                     return (new ReversePortfolioTreePrinter(composedPortfolio, accountNames)).lines();
         }
 
@@ -489,7 +489,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         public void test28AccountSummaryWithInvestmentEarningsShouldNotTakeTooLong(){
             ReceptiveAccount fromAccount = new ReceptiveAccount ();
             ReceptiveAccount toAccount = new ReceptiveAccount ();
-            List<String> lines = null;
+            List<string> lines = null;
 
             Deposit.registerForOn(100,fromAccount);
             Withdraw.registerForOn(50,fromAccount);
@@ -512,7 +512,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         public void test29AccountSummaryWithInvestmentFullInfoShouldNotTakeTooLong(){
             ReceptiveAccount fromAccount = new ReceptiveAccount ();
             ReceptiveAccount toAccount = new ReceptiveAccount ();
-            List<String> lines = null;
+            List<string> lines = null;
 
             Deposit.registerForOn(100,fromAccount);
             Withdraw.registerForOn(50,fromAccount);

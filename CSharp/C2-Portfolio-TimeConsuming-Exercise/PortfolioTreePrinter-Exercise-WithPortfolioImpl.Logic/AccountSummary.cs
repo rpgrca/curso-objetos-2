@@ -6,17 +6,17 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
     public class AccountSummary: AccountTransactionVisitor
     {
         private SummarizingAccount account;
-        private List<String> m_lines;
+        private List<string> m_lines;
 
         public AccountSummary(SummarizingAccount account)
         {
             this.account = account;
         }
 
-        public List<String> lines() {
+        public List<string> lines() {
             System.Threading.Thread.Sleep(1000);
 
-            m_lines = new List<String>();
+            m_lines = new List<string>();
 
             account.acceptTransactionsVisitor(this);
             return m_lines;

@@ -6,18 +6,18 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
     public class PortfolioTreePrinter : SummarizingAccountVisitor
     {
          private Portfolio portfolio;
-        private Dictionary<SummarizingAccount, String> accountNames;
-        private List<String> m_lines;
+        private Dictionary<SummarizingAccount, string> accountNames;
+        private List<string> m_lines;
         private int spaces;
 
         public PortfolioTreePrinter(Portfolio portfolio,
-                Dictionary<SummarizingAccount, String> accountNames) {
+                Dictionary<SummarizingAccount, string> accountNames) {
             this.portfolio = portfolio;
             this.accountNames = accountNames;
         }
 
-        public List<String> lines() {
-            m_lines = new List<String>();
+        public List<string> lines() {
+            m_lines = new List<string>();
             spaces = 0;
 
             portfolio.accept(this);
@@ -33,8 +33,8 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
         }
 
         private void lineFor(SummarizingAccount summarizingAccount) {
-            String line = "";
-            String name;
+            string line = "";
+            string name;
 
             for (int i = 0; i < spaces; i++) {
                 line = line + " ";

@@ -6,8 +6,8 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
     public class Portfolio: SummarizingAccount
     {
-        public static String ACCOUNT_NOT_MANAGED = "No se maneja esta cuenta";
-        public static String ACCOUNT_ALREADY_MANAGED = "La cuenta ya está manejada por otro portfolio";
+        public const string ACCOUNT_NOT_MANAGED = "No se maneja esta cuenta";
+        public const string ACCOUNT_ALREADY_MANAGED = "La cuenta ya está manejada por otro portfolio";
         private IList<SummarizingAccount> summarizingAccounts; 
 
         public static Portfolio createWith(SummarizingAccount anAccout){

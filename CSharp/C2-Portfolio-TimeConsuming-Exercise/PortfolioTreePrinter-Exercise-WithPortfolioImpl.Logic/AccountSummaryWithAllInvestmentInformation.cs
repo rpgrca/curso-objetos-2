@@ -11,7 +11,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
             this.account = account;
         }
 
-        public List<String> lines() {
+        public List<string> lines() {
             AccountSummaryWithInvestmentEarnings summary = new AccountSummaryWithInvestmentEarnings(account);
             InvestmentNet investmentNet = new InvestmentNet(account);
             var future = new Future<double>(() => investmentNet.value());

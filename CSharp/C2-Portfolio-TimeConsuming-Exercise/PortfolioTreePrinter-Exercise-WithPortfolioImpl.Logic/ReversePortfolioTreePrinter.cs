@@ -8,14 +8,14 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
         private PortfolioTreePrinter printer;
 
         public ReversePortfolioTreePrinter(Portfolio portfolio,
-                    Dictionary<SummarizingAccount, String> accountNames)
+                    Dictionary<SummarizingAccount, string> accountNames)
         {
             printer = new PortfolioTreePrinter(portfolio, accountNames);
         }
 
-        public List<String> lines()
+        public List<string> lines()
         {
-            List<String> lines = printer.lines();
+            List<string> lines = printer.lines();
             lines.Reverse();
 
             return lines;
