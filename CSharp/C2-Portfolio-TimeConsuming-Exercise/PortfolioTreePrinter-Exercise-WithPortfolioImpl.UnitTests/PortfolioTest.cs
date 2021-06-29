@@ -13,27 +13,27 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         {
             var account = new ReceptiveAccount();
 
-            Assert.Equal(0.0,account.balance());
+            Assert.Equal(0.0, account.balance());
         }
 
         [Fact]
         public void test02DepositIncreasesBalanceOnTransactionValue()
         {
             var account = new ReceptiveAccount();
-            Deposit.registerForOn(100,account);
+            Deposit.registerForOn(100, account);
 
-            Assert.Equal(100.0,account.balance());
+            Assert.Equal(100.0, account.balance());
         }
 
         [Fact]
         public void test03WithdrawDecreasesBalanceOnTransactionValue()
         {
             var account = new ReceptiveAccount();
-            Deposit.registerForOn(100,account);
-            var withdraw = Withdraw.registerForOn(50,account);
+            Deposit.registerForOn(100, account);
+            var withdraw = Withdraw.registerForOn(50, account);
 
-            Assert.Equal(50.0,account.balance());
-            Assert.Equal(50.0,withdraw.value());
+            Assert.Equal(50.0, account.balance());
+            Assert.Equal(50.0, withdraw.value());
         }
 
         [Fact]
@@ -41,12 +41,12 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         {
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1,account2);
+            var complexPortfolio = Portfolio.createWith(account1, account2);
 
-            Deposit.registerForOn(100,account1);
-            Deposit.registerForOn(200,account2);
+            Deposit.registerForOn(100, account1);
+            Deposit.registerForOn(200, account2);
 
-            Assert.Equal(300.0,complexPortfolio.balance());
+            Assert.Equal(300.0, complexPortfolio.balance());
         }
 
         [Fact]
@@ -55,21 +55,21 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1,account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio,account3);
+            var complexPortfolio = Portfolio.createWith(account1, account2);
+            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
 
-            Deposit.registerForOn(100,account1);
-            Deposit.registerForOn(200,account2);
-            Deposit.registerForOn(300,account3);
-            Assert.Equal(600.0,composedPortfolio.balance());
+            Deposit.registerForOn(100, account1);
+            Deposit.registerForOn(200, account2);
+            Deposit.registerForOn(300, account3);
+            Assert.Equal(600.0, composedPortfolio.balance());
         }
 
         [Fact]
         public void test06ReceptiveAccountsKnowsRegisteredTransactions()
         {
             var account = new ReceptiveAccount();
-            var deposit = Deposit.registerForOn(100,account);
-            var withdraw = Withdraw.registerForOn(50,account);
+            var deposit = Deposit.registerForOn(100, account);
+            var withdraw = Withdraw.registerForOn(50, account);
 
             Assert.True(account.registers(deposit));
             Assert.True(account.registers(withdraw));
@@ -81,12 +81,12 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1,account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio,account3);
+            var complexPortfolio = Portfolio.createWith(account1, account2);
+            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
 
-            var deposit1 = Deposit.registerForOn(100,account1);
-            var deposit2 = Deposit.registerForOn(200,account2);
-            var deposit3 = Deposit.registerForOn(300,account3);
+            var deposit1 = Deposit.registerForOn(100, account1);
+            var deposit2 = Deposit.registerForOn(200, account2);
+            var deposit3 = Deposit.registerForOn(300, account3);
 
             Assert.True(composedPortfolio.registers(deposit1));
             Assert.True(composedPortfolio.registers(deposit2));
@@ -129,8 +129,8 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1,account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio,account3);
+            var complexPortfolio = Portfolio.createWith(account1, account2);
+            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
 
             Assert.True(composedPortfolio.manages(account1));
             Assert.True(composedPortfolio.manages(account2));
@@ -143,9 +143,9 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         {
             var account1 = new ReceptiveAccount();
 
-            var deposit1 = Deposit.registerForOn(100,account1);
+            var deposit1 = Deposit.registerForOn(100, account1);
 
-            Assert.Equal(1,account1.transactions().Count);
+            Assert.Equal(1, account1.transactions().Count);
             Assert.True(account1.transactions().Contains(deposit1));
         }
 
@@ -155,14 +155,14 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1,account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio,account3);
+            var complexPortfolio = Portfolio.createWith(account1, account2);
+            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
 
-            var deposit1 = Deposit.registerForOn(100,account1);
-            var deposit2 = Deposit.registerForOn(200,account2);
-            var deposit3 = Deposit.registerForOn(300,account3);
+            var deposit1 = Deposit.registerForOn(100, account1);
+            var deposit2 = Deposit.registerForOn(200, account2);
+            var deposit3 = Deposit.registerForOn(300, account3);
 
-            Assert.Equal(3,composedPortfolio.transactions().Count);
+            Assert.Equal(3, composedPortfolio.transactions().Count);
             Assert.True(composedPortfolio.transactions().Contains(deposit1));
             Assert.True(composedPortfolio.transactions().Contains(deposit2));
             Assert.True(composedPortfolio.transactions().Contains(deposit3));
@@ -174,12 +174,12 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1,account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio,account3);
+            var complexPortfolio = Portfolio.createWith(account1, account2);
+            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
 
-            var deposit1 = Deposit.registerForOn(100,account1);
+            var deposit1 = Deposit.registerForOn(100, account1);
 
-            Assert.Equal(1,composedPortfolio.transactionsOf(account1).Count);
+            Assert.Equal(1, composedPortfolio.transactionsOf(account1).Count);
             Assert.True(composedPortfolio.transactionsOf(account1).Contains(deposit1));
         }
 
@@ -189,14 +189,14 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1,account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio,account3);
+            var complexPortfolio = Portfolio.createWith(account1, account2);
+            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
 
-            var deposit1 = Deposit.registerForOn(100,account1);
-            var deposit2 = Deposit.registerForOn(100,account2);
-            Deposit.registerForOn(100,account3);
+            var deposit1 = Deposit.registerForOn(100, account1);
+            var deposit2 = Deposit.registerForOn(100, account2);
+            Deposit.registerForOn(100, account3);
 
-            Assert.Equal(2,composedPortfolio.transactionsOf(complexPortfolio).Count);
+            Assert.Equal(2, composedPortfolio.transactionsOf(complexPortfolio).Count);
             Assert.True(composedPortfolio.transactionsOf(complexPortfolio).Contains(deposit1));
             Assert.True(composedPortfolio.transactionsOf(complexPortfolio).Contains(deposit2));
         }
@@ -207,7 +207,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1,account2);
+            var complexPortfolio = Portfolio.createWith(account1, account2);
 
             try
             {
@@ -227,12 +227,12 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
 
             try
             {
-                Portfolio.createWith(account1,account1);
+                Portfolio.createWith(account1, account1);
                 Assert.True(false);
             }
             catch (Exception invalidPortfolio)
             {
-                Assert.Equal(Portfolio.ACCOUNT_ALREADY_MANAGED, invalidPortfolio.Message); 
+                Assert.Equal(Portfolio.ACCOUNT_ALREADY_MANAGED, invalidPortfolio.Message);
             }
         }
 
@@ -241,7 +241,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         {
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1,account2);
+            var complexPortfolio = Portfolio.createWith(account1, account2);
 
             try
             {
@@ -316,9 +316,9 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Deposit.registerForOn(100,fromAccount);
-            Withdraw.registerForOn(50,fromAccount);
-            Transfer.registerFor(100,fromAccount, toAccount);
+            Deposit.registerForOn(100, fromAccount);
+            Withdraw.registerForOn(50, fromAccount);
+            Transfer.registerFor(100, fromAccount, toAccount);
 
             var lines = accountSummaryLines(fromAccount);
 
@@ -337,13 +337,13 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Deposit.registerForOn(100,fromAccount);
-            Withdraw.registerForOn(50,fromAccount);
-            Transfer.registerFor(100,fromAccount, toAccount);
-            Transfer.registerFor(250,toAccount, fromAccount);
+            Deposit.registerForOn(100, fromAccount);
+            Withdraw.registerForOn(50, fromAccount);
+            Transfer.registerFor(100, fromAccount, toAccount);
+            Transfer.registerFor(250, toAccount, fromAccount);
 
-            Assert.Equal(150.0,accountTransferNet(fromAccount));
-            Assert.Equal(-150.0,accountTransferNet(toAccount));
+            Assert.Equal(150.0, accountTransferNet(fromAccount));
+            Assert.Equal(-150.0, accountTransferNet(toAccount));
         }
 
         private double accountTransferNet(ReceptiveAccount account) =>
@@ -355,13 +355,13 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Deposit.registerForOn(1000,account);
-            Withdraw.registerForOn(50,account);
-            Transfer.registerFor(100,account, toAccount);
-            CertificateOfDeposit.registerFor(100,30,0.1,account);
+            Deposit.registerForOn(1000, account);
+            Withdraw.registerForOn(50, account);
+            Transfer.registerFor(100, account, toAccount);
+            CertificateOfDeposit.registerFor(100, 30, 0.1, account);
 
-            Assert.Equal(100.0,investmentNet(account));
-            Assert.Equal(750.0,account.balance());
+            Assert.Equal(100.0, investmentNet(account));
+            Assert.Equal(750.0, account.balance());
         }
 
         private double investmentNet(ReceptiveAccount account) =>
@@ -372,10 +372,10 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         {
             var account = new ReceptiveAccount();
 
-            CertificateOfDeposit.registerFor(100,30,0.1,account);
-            CertificateOfDeposit.registerFor(100,60,0.15,account);
+            CertificateOfDeposit.registerFor(100, 30, 0.1, account);
+            CertificateOfDeposit.registerFor(100, 60, 0.15, account);
 
-            const double fixedInvestmentEarnings = (100.0 *(0.1/360)*30) + (100.0 *(0.15/360)*60);
+            const double fixedInvestmentEarnings = (100.0 * (0.1 / 360) * 30) + (100.0 * (0.15 / 360) * 60);
 
             Assert.Equal(fixedInvestmentEarnings, investmentEarnings(account));
         }
@@ -389,9 +389,9 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Deposit.registerForOn(100,fromAccount);
-            Withdraw.registerForOn(50,fromAccount);
-            Transfer.registerFor(100,fromAccount, toAccount);
+            Deposit.registerForOn(100, fromAccount);
+            Withdraw.registerForOn(50, fromAccount);
+            Transfer.registerFor(100, fromAccount, toAccount);
             CertificateOfDeposit.registerFor(1000, 30, 0.1, fromAccount);
 
             var lines = accountSummaryLines(fromAccount);
@@ -409,14 +409,14 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Deposit.registerForOn(100,fromAccount);
-            Withdraw.registerForOn(50,fromAccount);
-            Transfer.registerFor(100,fromAccount, toAccount);
-            Transfer.registerFor(250,toAccount, fromAccount);
+            Deposit.registerForOn(100, fromAccount);
+            Withdraw.registerForOn(50, fromAccount);
+            Transfer.registerFor(100, fromAccount, toAccount);
+            Transfer.registerFor(250, toAccount, fromAccount);
             CertificateOfDeposit.registerFor(1000, 30, 0.1, fromAccount);
 
-            Assert.Equal(150.0,accountTransferNet(fromAccount));
-            Assert.Equal(-150.0,accountTransferNet(toAccount));
+            Assert.Equal(150.0, accountTransferNet(fromAccount));
+            Assert.Equal(-150.0, accountTransferNet(toAccount));
         }
 
         [Fact]
@@ -425,8 +425,8 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1,account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio,account3);
+            var complexPortfolio = Portfolio.createWith(account1, account2);
+            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
 
             var accountNames = new Dictionary<SummarizingAccount, string>
             {
@@ -457,8 +457,8 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1,account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio,account3);
+            var complexPortfolio = Portfolio.createWith(account1, account2);
+            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
 
             var accountNames = new Dictionary<SummarizingAccount, string>
             {
@@ -499,8 +499,8 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var toAccount = new ReceptiveAccount();
 
             Deposit.registerForOn(100, fromAccount);
-            Withdraw.registerForOn(50,fromAccount);
-            Transfer.registerFor(100,fromAccount, toAccount);
+            Withdraw.registerForOn(50, fromAccount);
+            Transfer.registerFor(100, fromAccount, toAccount);
             CertificateOfDeposit.registerFor(1000, 360, 0.1, fromAccount);
 
             List<string> lines = null;
@@ -517,13 +517,14 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         }
 
         [Fact]
-        public void test29AccountSummaryWithInvestmentFullInfoShouldNotTakeTooLong(){
+        public void test29AccountSummaryWithInvestmentFullInfoShouldNotTakeTooLong()
+        {
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
             Deposit.registerForOn(100, fromAccount);
-            Withdraw.registerForOn(50,fromAccount);
-            Transfer.registerFor(100,fromAccount, toAccount);
+            Withdraw.registerForOn(50, fromAccount);
+            Transfer.registerFor(100, fromAccount, toAccount);
             CertificateOfDeposit.registerFor(1000, 360, 0.1, fromAccount);
 
             List<string> lines = null;
