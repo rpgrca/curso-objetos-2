@@ -1,6 +1,6 @@
-﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    interface SummarizingAccountVisitor
+    public interface SummarizingAccountVisitor
     {
         void visitPortfolio(Portfolio portfolio);
         void visitReceptiveAccount(ReceptiveAccount receptiveAccount);

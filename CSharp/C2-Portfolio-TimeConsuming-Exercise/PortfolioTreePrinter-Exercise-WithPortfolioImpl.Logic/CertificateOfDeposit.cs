@@ -1,6 +1,6 @@
-﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class CertificateOfDeposit:AccountTransaction
+    public class CertificateOfDeposit:AccountTransaction
     {
         private double m_value;
         private int m_numberOfDays;

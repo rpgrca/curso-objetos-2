@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class ReversePortfolioTreePrinter
+    public class ReversePortfolioTreePrinter
     {
         private PortfolioTreePrinter printer;
 

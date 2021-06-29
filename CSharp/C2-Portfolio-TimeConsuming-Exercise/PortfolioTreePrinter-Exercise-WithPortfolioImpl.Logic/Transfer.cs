@@ -1,6 +1,6 @@
-﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class Transfer
+    public class Transfer
     {
         private double m_value;
         private ReceptiveAccount m_fromAccount;

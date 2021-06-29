@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-  <RootNamespace>PortfolioTreePrinter_Exercise_WithPortfolioImpl</RootNamespace>
+    <RootNamespace>PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests</RootNamespace>
   <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 
     <IsPackable>false</IsPackable>
@@ -19,6 +19,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PortfolioTreePrinter-Exercise-WithPortfolioImpl.Logic\PortfolioTreePrinter-Exercise-WithPortfolioImpl.Logic.csproj" />
   </ItemGroup>
 
 </Project>

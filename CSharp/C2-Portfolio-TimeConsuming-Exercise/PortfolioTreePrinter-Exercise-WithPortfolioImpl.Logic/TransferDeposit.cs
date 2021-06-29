@@ -1,6 +1,6 @@
-﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class TransferDeposit : TransferLeg
+    public class TransferDeposit : TransferLeg
     {
         private Transfer m_transfer;
 

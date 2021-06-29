@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class AccountSummaryWithInvestmentEarnings
+    public class AccountSummaryWithInvestmentEarnings
     {
         private SummarizingAccount account;
 

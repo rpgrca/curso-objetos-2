@@ -1,6 +1,6 @@
-﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class Withdraw: AccountTransaction
+    public class Withdraw: AccountTransaction
     {
         private double m_value;
 

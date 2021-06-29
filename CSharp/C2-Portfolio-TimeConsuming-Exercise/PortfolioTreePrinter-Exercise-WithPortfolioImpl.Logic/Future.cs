@@ -1,9 +1,9 @@
 using System;
 using System.Threading;
 
-namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class Future<T>
+    public class Future<T>
     {
         private readonly Thread _thread;
         private T _result;

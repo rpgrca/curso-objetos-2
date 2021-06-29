@@ -1,11 +1,11 @@
-﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class InvestmentEarnings: AccountTransactionVisitor
+    public class InvestmentNet: AccountTransactionVisitor
     {
         private SummarizingAccount account;
         private double m_value;
 
-        public InvestmentEarnings(SummarizingAccount account) {
+        public InvestmentNet(SummarizingAccount account) {
             this.account = account;
         }
 
@@ -20,7 +20,7 @@
 
         public void visitCertificateOfDeposit(
                 CertificateOfDeposit certificateOfDeposit) {
-            m_value += certificateOfDeposit.earnings();
+            m_value += certificateOfDeposit.value();
         }
 
         public void visitDeposit(Deposit deposit) {

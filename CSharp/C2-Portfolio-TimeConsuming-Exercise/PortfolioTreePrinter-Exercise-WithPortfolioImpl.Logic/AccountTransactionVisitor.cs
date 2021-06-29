@@ -1,6 +1,6 @@
-﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    interface AccountTransactionVisitor
+    public interface AccountTransactionVisitor
     {
         void visitDeposit(Deposit deposit);
         void visitTransferDeposit(TransferDeposit transferDeposit);

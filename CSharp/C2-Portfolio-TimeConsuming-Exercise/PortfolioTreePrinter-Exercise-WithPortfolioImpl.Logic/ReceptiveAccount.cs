@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class ReceptiveAccount: SummarizingAccount
+    public class ReceptiveAccount: SummarizingAccount
     {
         private IList<AccountTransaction> m_transactions = new List<AccountTransaction>();
 

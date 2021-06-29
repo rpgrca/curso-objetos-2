@@ -1,6 +1,6 @@
-﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class Deposit: AccountTransaction
+    public class Deposit: AccountTransaction
     {
         private double m_value;
 

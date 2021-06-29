@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    interface SummarizingAccount
+    public interface SummarizingAccount
     {
         double balance(); 
         bool registers(AccountTransaction transaction);

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class AccountSummary: AccountTransactionVisitor
+    public class AccountSummary: AccountTransactionVisitor
     {
         private SummarizingAccount account;
         private List<String> m_lines;

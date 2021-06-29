@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
+using PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic;
 
-namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
 {
     public class PortfolioTest
     {

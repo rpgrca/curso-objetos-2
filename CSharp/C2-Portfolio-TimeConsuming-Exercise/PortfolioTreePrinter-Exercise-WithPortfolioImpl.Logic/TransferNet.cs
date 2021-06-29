@@ -1,6 +1,6 @@
-﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class TransferNet: AccountTransactionVisitor
+    public class TransferNet: AccountTransactionVisitor
     {
         private SummarizingAccount account;
         private double m_value;

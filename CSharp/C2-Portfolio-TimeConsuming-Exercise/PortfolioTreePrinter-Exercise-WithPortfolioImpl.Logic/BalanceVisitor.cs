@@ -1,6 +1,6 @@
-﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl
+﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    class BalanceVisitor: AccountTransactionVisitor
+    public class BalanceVisitor: AccountTransactionVisitor
     {
         private double m_value;
         private readonly ReceptiveAccount account;
