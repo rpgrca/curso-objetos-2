@@ -36,7 +36,7 @@ jobs:
 
     - name: Testing solutions
       run: |
-           for s in Patterns-Portfolio-Exercise-WithAccountImplementation PortfolioTreePrinter-Exercise; do
+           for s in Patterns-Portfolio-Exercise-WithAccountImplementation PortfolioTreePrinter-Exercise PortfolioTreePrinter-Exercise-WithPortfolioImpl; do
                coverlet CSharp/C2-$s/$s.UnitTests/bin/Debug/net5.0/$s.UnitTests.dll --target "dotnet" --targetargs "test CSharp/C2-$s/$s.UnitTests/$s.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output $s.coverage.xml
            done
 
