@@ -1,38 +1,39 @@
 ﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    public class InvestmentNet: AccountTransactionVisitor
+    public class InvestmentNet : AccountTransactionVisitor
     {
-        private SummarizingAccount account;
-        private double m_value;
+        private readonly SummarizingAccount _account;
+        private double _value;
 
-        public InvestmentNet(SummarizingAccount account) {
-            this.account = account;
-        }
+        public InvestmentNet(SummarizingAccount account) =>
+            _account = account;
 
-        public double value()
+        public double Value()
         {
             System.Threading.Thread.Sleep(1200);
 
-            m_value = 0.0;
-            account.acceptTransactionsVisitor(this);
-            return m_value;
+            _value = 0.0;
+            _account.Accept(this);
+            return _value;
         }
 
-        public void visitCertificateOfDeposit(
-                CertificateOfDeposit certificateOfDeposit) {
-            m_value += certificateOfDeposit.value();
+        public void VisitCertificateOfDeposit(CertificateOfDeposit certificateOfDeposit) =>
+            _value += certificateOfDeposit.Value();
+
+        public void VisitDeposit(Deposit deposit)
+        {
         }
 
-        public void visitDeposit(Deposit deposit) {
+        public void VisitWithdraw(Withdraw withdraw)
+        {
         }
 
-        public void visitWithdraw(Withdraw withdraw) {
+        public void VisitTransferDeposit(TransferDeposit transferDeposit)
+        {
         }
 
-        public void visitTransferDeposit(TransferDeposit transferDeposit) {
-        }
-
-        public void visitTransferWithdraw(TransferWithdraw transferWithdraw) {
+        public void VisitTransferWithdraw(TransferWithdraw transferWithdraw)
+        {
         }
     }
 }

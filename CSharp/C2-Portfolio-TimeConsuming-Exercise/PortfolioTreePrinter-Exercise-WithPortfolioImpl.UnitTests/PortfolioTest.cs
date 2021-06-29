@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 using PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic;
 
@@ -13,27 +12,27 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         {
             var account = new ReceptiveAccount();
 
-            Assert.Equal(0.0, account.balance());
+            Assert.Equal(0.0, account.Balance());
         }
 
         [Fact]
         public void test02DepositIncreasesBalanceOnTransactionValue()
         {
             var account = new ReceptiveAccount();
-            Deposit.registerForOn(100, account);
+            Deposit.RegisterForOn(100, account);
 
-            Assert.Equal(100.0, account.balance());
+            Assert.Equal(100.0, account.Balance());
         }
 
         [Fact]
         public void test03WithdrawDecreasesBalanceOnTransactionValue()
         {
             var account = new ReceptiveAccount();
-            Deposit.registerForOn(100, account);
-            var withdraw = Withdraw.registerForOn(50, account);
+            Deposit.RegisterForOn(100, account);
+            var withdraw = Withdraw.RegisterForOn(50, account);
 
-            Assert.Equal(50.0, account.balance());
-            Assert.Equal(50.0, withdraw.value());
+            Assert.Equal(50.0, account.Balance());
+            Assert.Equal(50.0, withdraw.Value());
         }
 
         [Fact]
@@ -41,12 +40,12 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         {
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1, account2);
+            var complexPortfolio = Portfolio.CreateWith(account1, account2);
 
-            Deposit.registerForOn(100, account1);
-            Deposit.registerForOn(200, account2);
+            Deposit.RegisterForOn(100, account1);
+            Deposit.RegisterForOn(200, account2);
 
-            Assert.Equal(300.0, complexPortfolio.balance());
+            Assert.Equal(300.0, complexPortfolio.Balance());
         }
 
         [Fact]
@@ -55,24 +54,24 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1, account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
+            var complexPortfolio = Portfolio.CreateWith(account1, account2);
+            var composedPortfolio = Portfolio.CreateWith(complexPortfolio, account3);
 
-            Deposit.registerForOn(100, account1);
-            Deposit.registerForOn(200, account2);
-            Deposit.registerForOn(300, account3);
-            Assert.Equal(600.0, composedPortfolio.balance());
+            Deposit.RegisterForOn(100, account1);
+            Deposit.RegisterForOn(200, account2);
+            Deposit.RegisterForOn(300, account3);
+            Assert.Equal(600.0, composedPortfolio.Balance());
         }
 
         [Fact]
         public void test06ReceptiveAccountsKnowsRegisteredTransactions()
         {
             var account = new ReceptiveAccount();
-            var deposit = Deposit.registerForOn(100, account);
-            var withdraw = Withdraw.registerForOn(50, account);
+            var deposit = Deposit.RegisterForOn(100, account);
+            var withdraw = Withdraw.RegisterForOn(50, account);
 
-            Assert.True(account.registers(deposit));
-            Assert.True(account.registers(withdraw));
+            Assert.True(account.Registers(deposit));
+            Assert.True(account.Registers(withdraw));
         }
 
         [Fact]
@@ -81,16 +80,16 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1, account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
+            var complexPortfolio = Portfolio.CreateWith(account1, account2);
+            var composedPortfolio = Portfolio.CreateWith(complexPortfolio, account3);
 
-            var deposit1 = Deposit.registerForOn(100, account1);
-            var deposit2 = Deposit.registerForOn(200, account2);
-            var deposit3 = Deposit.registerForOn(300, account3);
+            var deposit1 = Deposit.RegisterForOn(100, account1);
+            var deposit2 = Deposit.RegisterForOn(200, account2);
+            var deposit3 = Deposit.RegisterForOn(300, account3);
 
-            Assert.True(composedPortfolio.registers(deposit1));
-            Assert.True(composedPortfolio.registers(deposit2));
-            Assert.True(composedPortfolio.registers(deposit3));
+            Assert.True(composedPortfolio.Registers(deposit1));
+            Assert.True(composedPortfolio.Registers(deposit2));
+            Assert.True(composedPortfolio.Registers(deposit3));
         }
 
         [Fact]
@@ -98,7 +97,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         {
             var account1 = new ReceptiveAccount();
 
-            Assert.True(account1.manages(account1));
+            Assert.True(account1.Manages(account1));
         }
 
         [Fact]
@@ -107,7 +106,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
 
-            Assert.False(account1.manages(account2));
+            Assert.False(account1.Manages(account2));
         }
 
         [Fact]
@@ -116,11 +115,11 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1, account2);
+            var complexPortfolio = Portfolio.CreateWith(account1, account2);
 
-            Assert.True(complexPortfolio.manages(account1));
-            Assert.True(complexPortfolio.manages(account2));
-            Assert.False(complexPortfolio.manages(account3));
+            Assert.True(complexPortfolio.Manages(account1));
+            Assert.True(complexPortfolio.Manages(account2));
+            Assert.False(complexPortfolio.Manages(account3));
         }
 
         [Fact]
@@ -129,13 +128,13 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1, account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
+            var complexPortfolio = Portfolio.CreateWith(account1, account2);
+            var composedPortfolio = Portfolio.CreateWith(complexPortfolio, account3);
 
-            Assert.True(composedPortfolio.manages(account1));
-            Assert.True(composedPortfolio.manages(account2));
-            Assert.True(composedPortfolio.manages(account3));
-            Assert.True(composedPortfolio.manages(complexPortfolio));
+            Assert.True(composedPortfolio.Manages(account1));
+            Assert.True(composedPortfolio.Manages(account2));
+            Assert.True(composedPortfolio.Manages(account3));
+            Assert.True(composedPortfolio.Manages(complexPortfolio));
         }
 
         [Fact]
@@ -143,10 +142,10 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         {
             var account1 = new ReceptiveAccount();
 
-            var deposit1 = Deposit.registerForOn(100, account1);
+            var deposit1 = Deposit.RegisterForOn(100, account1);
 
-            Assert.Equal(1, account1.transactions().Count);
-            Assert.True(account1.transactions().Contains(deposit1));
+            Assert.Equal(1, account1.Transactions().Count);
+            Assert.True(account1.Transactions().Contains(deposit1));
         }
 
         [Fact]
@@ -155,17 +154,17 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1, account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
+            var complexPortfolio = Portfolio.CreateWith(account1, account2);
+            var composedPortfolio = Portfolio.CreateWith(complexPortfolio, account3);
 
-            var deposit1 = Deposit.registerForOn(100, account1);
-            var deposit2 = Deposit.registerForOn(200, account2);
-            var deposit3 = Deposit.registerForOn(300, account3);
+            var deposit1 = Deposit.RegisterForOn(100, account1);
+            var deposit2 = Deposit.RegisterForOn(200, account2);
+            var deposit3 = Deposit.RegisterForOn(300, account3);
 
-            Assert.Equal(3, composedPortfolio.transactions().Count);
-            Assert.True(composedPortfolio.transactions().Contains(deposit1));
-            Assert.True(composedPortfolio.transactions().Contains(deposit2));
-            Assert.True(composedPortfolio.transactions().Contains(deposit3));
+            Assert.Equal(3, composedPortfolio.Transactions().Count);
+            Assert.True(composedPortfolio.Transactions().Contains(deposit1));
+            Assert.True(composedPortfolio.Transactions().Contains(deposit2));
+            Assert.True(composedPortfolio.Transactions().Contains(deposit3));
         }
 
         [Fact]
@@ -174,13 +173,13 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1, account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
+            var complexPortfolio = Portfolio.CreateWith(account1, account2);
+            var composedPortfolio = Portfolio.CreateWith(complexPortfolio, account3);
 
-            var deposit1 = Deposit.registerForOn(100, account1);
+            var deposit1 = Deposit.RegisterForOn(100, account1);
 
-            Assert.Equal(1, composedPortfolio.transactionsOf(account1).Count);
-            Assert.True(composedPortfolio.transactionsOf(account1).Contains(deposit1));
+            Assert.Equal(1, composedPortfolio.TransactionsOf(account1).Count);
+            Assert.True(composedPortfolio.TransactionsOf(account1).Contains(deposit1));
         }
 
         [Fact]
@@ -189,16 +188,16 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1, account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
+            var complexPortfolio = Portfolio.CreateWith(account1, account2);
+            var composedPortfolio = Portfolio.CreateWith(complexPortfolio, account3);
 
-            var deposit1 = Deposit.registerForOn(100, account1);
-            var deposit2 = Deposit.registerForOn(100, account2);
-            Deposit.registerForOn(100, account3);
+            var deposit1 = Deposit.RegisterForOn(100, account1);
+            var deposit2 = Deposit.RegisterForOn(100, account2);
+            Deposit.RegisterForOn(100, account3);
 
-            Assert.Equal(2, composedPortfolio.transactionsOf(complexPortfolio).Count);
-            Assert.True(composedPortfolio.transactionsOf(complexPortfolio).Contains(deposit1));
-            Assert.True(composedPortfolio.transactionsOf(complexPortfolio).Contains(deposit2));
+            Assert.Equal(2, composedPortfolio.TransactionsOf(complexPortfolio).Count);
+            Assert.True(composedPortfolio.TransactionsOf(complexPortfolio).Contains(deposit1));
+            Assert.True(composedPortfolio.TransactionsOf(complexPortfolio).Contains(deposit2));
         }
 
         [Fact]
@@ -207,11 +206,11 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1, account2);
+            var complexPortfolio = Portfolio.CreateWith(account1, account2);
 
             try
             {
-                complexPortfolio.transactionsOf(account3);
+                complexPortfolio.TransactionsOf(account3);
                 Assert.True(false);
             }
             catch (Exception accountNotManaged)
@@ -227,7 +226,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
 
             try
             {
-                Portfolio.createWith(account1, account1);
+                Portfolio.CreateWith(account1, account1);
                 Assert.True(false);
             }
             catch (Exception invalidPortfolio)
@@ -241,11 +240,11 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         {
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1, account2);
+            var complexPortfolio = Portfolio.CreateWith(account1, account2);
 
             try
             {
-                Portfolio.createWith(complexPortfolio, account1);
+                Portfolio.CreateWith(complexPortfolio, account1);
                 Assert.True(false);
             }
             catch (Exception invalidPortfolio)
@@ -260,9 +259,9 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            var transfer = Transfer.registerFor(100, fromAccount, toAccount);
+            var transfer = Transfer.RegisterFor(100, fromAccount, toAccount);
 
-            Assert.True(toAccount.registers(transfer.depositLeg()));
+            Assert.True(toAccount.Registers(transfer.DepositLeg()));
         }
 
         [Fact]
@@ -271,9 +270,9 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            var transfer = Transfer.registerFor(100, fromAccount, toAccount);
+            var transfer = Transfer.RegisterFor(100, fromAccount, toAccount);
 
-            Assert.True(fromAccount.registers(transfer.withdrawLeg()));
+            Assert.True(fromAccount.Registers(transfer.WithdrawLeg()));
         }
 
         [Fact]
@@ -282,9 +281,9 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            var transfer = Transfer.registerFor(100, fromAccount, toAccount);
+            var transfer = Transfer.RegisterFor(100, fromAccount, toAccount);
 
-            Assert.Equal(transfer.depositLeg().transfer(), transfer.withdrawLeg().transfer());
+            Assert.Equal(transfer.DepositLeg().Transfer(), transfer.WithdrawLeg().Transfer());
         }
 
         [Fact]
@@ -293,9 +292,9 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            var transfer = Transfer.registerFor(100, fromAccount, toAccount);
+            var transfer = Transfer.RegisterFor(100, fromAccount, toAccount);
 
-            Assert.Equal(100, transfer.value());
+            Assert.Equal(100, transfer.Value());
         }
 
         [Fact]
@@ -304,10 +303,10 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Transfer.registerFor(100, fromAccount, toAccount);
+            Transfer.RegisterFor(100, fromAccount, toAccount);
 
-            Assert.Equal(-100.0, fromAccount.balance());
-            Assert.Equal(100.0, toAccount.balance());
+            Assert.Equal(-100.0, fromAccount.Balance());
+            Assert.Equal(100.0, toAccount.Balance());
         }
 
         [Fact]
@@ -316,9 +315,9 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Deposit.registerForOn(100, fromAccount);
-            Withdraw.registerForOn(50, fromAccount);
-            Transfer.registerFor(100, fromAccount, toAccount);
+            Deposit.RegisterForOn(100, fromAccount);
+            Withdraw.RegisterForOn(50, fromAccount);
+            Transfer.RegisterFor(100, fromAccount, toAccount);
 
             var lines = accountSummaryLines(fromAccount);
 
@@ -329,7 +328,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         }
 
         private List<string> accountSummaryLines(ReceptiveAccount fromAccount) =>
-            new AccountSummary(fromAccount).lines();
+            new AccountSummary(fromAccount).Lines();
 
         [Fact]
         public void test21ShouldBeAbleToBeQueryTransferNet()
@@ -337,17 +336,17 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Deposit.registerForOn(100, fromAccount);
-            Withdraw.registerForOn(50, fromAccount);
-            Transfer.registerFor(100, fromAccount, toAccount);
-            Transfer.registerFor(250, toAccount, fromAccount);
+            Deposit.RegisterForOn(100, fromAccount);
+            Withdraw.RegisterForOn(50, fromAccount);
+            Transfer.RegisterFor(100, fromAccount, toAccount);
+            Transfer.RegisterFor(250, toAccount, fromAccount);
 
             Assert.Equal(150.0, accountTransferNet(fromAccount));
             Assert.Equal(-150.0, accountTransferNet(toAccount));
         }
 
         private double accountTransferNet(ReceptiveAccount account) =>
-            new TransferNet(account).value();
+            new TransferNet(account).Value();
 
         [Fact]
         public void test22CertificateOfDepositShouldWithdrawInvestmentValue()
@@ -355,25 +354,25 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Deposit.registerForOn(1000, account);
-            Withdraw.registerForOn(50, account);
-            Transfer.registerFor(100, account, toAccount);
-            CertificateOfDeposit.registerFor(100, 30, 0.1, account);
+            Deposit.RegisterForOn(1000, account);
+            Withdraw.RegisterForOn(50, account);
+            Transfer.RegisterFor(100, account, toAccount);
+            CertificateOfDeposit.RegisterFor(100, 30, 0.1, account);
 
             Assert.Equal(100.0, investmentNet(account));
-            Assert.Equal(750.0, account.balance());
+            Assert.Equal(750.0, account.Balance());
         }
 
         private double investmentNet(ReceptiveAccount account) =>
-            new InvestmentNet(account).value();
+            new InvestmentNet(account).Value();
 
         [Fact]
         public void test23ShouldBeAbleToQueryInvestmentEarnings()
         {
             var account = new ReceptiveAccount();
 
-            CertificateOfDeposit.registerFor(100, 30, 0.1, account);
-            CertificateOfDeposit.registerFor(100, 60, 0.15, account);
+            CertificateOfDeposit.RegisterFor(100, 30, 0.1, account);
+            CertificateOfDeposit.RegisterFor(100, 60, 0.15, account);
 
             const double fixedInvestmentEarnings = (100.0 * (0.1 / 360) * 30) + (100.0 * (0.15 / 360) * 60);
 
@@ -381,7 +380,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
         }
 
         private double investmentEarnings(ReceptiveAccount account) =>
-            new InvestmentEarnings(account).value();
+            new InvestmentEarnings(account).Value();
 
         [Fact]
         public void test24AccountSummaryShouldWorkWithCertificateOfDeposit()
@@ -389,10 +388,10 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Deposit.registerForOn(100, fromAccount);
-            Withdraw.registerForOn(50, fromAccount);
-            Transfer.registerFor(100, fromAccount, toAccount);
-            CertificateOfDeposit.registerFor(1000, 30, 0.1, fromAccount);
+            Deposit.RegisterForOn(100, fromAccount);
+            Withdraw.RegisterForOn(50, fromAccount);
+            Transfer.RegisterFor(100, fromAccount, toAccount);
+            CertificateOfDeposit.RegisterFor(1000, 30, 0.1, fromAccount);
 
             var lines = accountSummaryLines(fromAccount);
 
@@ -409,11 +408,11 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Deposit.registerForOn(100, fromAccount);
-            Withdraw.registerForOn(50, fromAccount);
-            Transfer.registerFor(100, fromAccount, toAccount);
-            Transfer.registerFor(250, toAccount, fromAccount);
-            CertificateOfDeposit.registerFor(1000, 30, 0.1, fromAccount);
+            Deposit.RegisterForOn(100, fromAccount);
+            Withdraw.RegisterForOn(50, fromAccount);
+            Transfer.RegisterFor(100, fromAccount, toAccount);
+            Transfer.RegisterFor(250, toAccount, fromAccount);
+            CertificateOfDeposit.RegisterFor(1000, 30, 0.1, fromAccount);
 
             Assert.Equal(150.0, accountTransferNet(fromAccount));
             Assert.Equal(-150.0, accountTransferNet(toAccount));
@@ -425,8 +424,8 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1, account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
+            var complexPortfolio = Portfolio.CreateWith(account1, account2);
+            var composedPortfolio = Portfolio.CreateWith(complexPortfolio, account3);
 
             var accountNames = new Dictionary<SummarizingAccount, string>
             {
@@ -449,7 +448,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
 
         private List<string> portofolioTreeOf(Portfolio composedPortfolio,
                 Dictionary<SummarizingAccount, string> accountNames) =>
-                    new PortfolioTreePrinter(composedPortfolio, accountNames).lines();
+                    new PortfolioTreePrinter(composedPortfolio, accountNames).Lines();
 
         [Fact]
         public void test27ReversePortfolioTreePrinter()
@@ -457,8 +456,8 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var account1 = new ReceptiveAccount();
             var account2 = new ReceptiveAccount();
             var account3 = new ReceptiveAccount();
-            var complexPortfolio = Portfolio.createWith(account1, account2);
-            var composedPortfolio = Portfolio.createWith(complexPortfolio, account3);
+            var complexPortfolio = Portfolio.CreateWith(account1, account2);
+            var composedPortfolio = Portfolio.CreateWith(complexPortfolio, account3);
 
             var accountNames = new Dictionary<SummarizingAccount, string>
             {
@@ -481,7 +480,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
 
         private List<string> reversePortofolioTreeOf(Portfolio composedPortfolio,
                 Dictionary<SummarizingAccount, string> accountNames) =>
-                    new ReversePortfolioTreePrinter(composedPortfolio, accountNames).lines();
+                    new ReversePortfolioTreePrinter(composedPortfolio, accountNames).Lines();
 
         private void shouldTakeLessThan(Action should, double milliseconds)
         {
@@ -498,14 +497,14 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Deposit.registerForOn(100, fromAccount);
-            Withdraw.registerForOn(50, fromAccount);
-            Transfer.registerFor(100, fromAccount, toAccount);
-            CertificateOfDeposit.registerFor(1000, 360, 0.1, fromAccount);
+            Deposit.RegisterForOn(100, fromAccount);
+            Withdraw.RegisterForOn(50, fromAccount);
+            Transfer.RegisterFor(100, fromAccount, toAccount);
+            CertificateOfDeposit.RegisterFor(1000, 360, 0.1, fromAccount);
 
             List<string> lines = null;
             shouldTakeLessThan(
-                () => lines = new AccountSummaryWithInvestmentEarnings(fromAccount).lines(),
+                () => lines = new AccountSummaryWithInvestmentEarnings(fromAccount).Lines(),
                 1500);
 
             Assert.Collection(lines,
@@ -522,14 +521,14 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             var fromAccount = new ReceptiveAccount();
             var toAccount = new ReceptiveAccount();
 
-            Deposit.registerForOn(100, fromAccount);
-            Withdraw.registerForOn(50, fromAccount);
-            Transfer.registerFor(100, fromAccount, toAccount);
-            CertificateOfDeposit.registerFor(1000, 360, 0.1, fromAccount);
+            Deposit.RegisterForOn(100, fromAccount);
+            Withdraw.RegisterForOn(50, fromAccount);
+            Transfer.RegisterFor(100, fromAccount, toAccount);
+            CertificateOfDeposit.RegisterFor(1000, 360, 0.1, fromAccount);
 
             List<string> lines = null;
             shouldTakeLessThan(
-                () => lines = new AccountSummaryWithAllInvestmentInformation(fromAccount).lines(),
+                () => lines = new AccountSummaryWithAllInvestmentInformation(fromAccount).Lines(),
                 1500);
 
             Assert.Collection(lines,

@@ -2,26 +2,15 @@
 {
     public class TransferWithdraw : TransferLeg
     {
-        private Transfer m_transfer;
+        private readonly Transfer _transfer;
 
-        public TransferWithdraw(Transfer transfer)
-        {
-            m_transfer = transfer;
-        }
+        public TransferWithdraw(Transfer transfer) => _transfer = transfer;
 
-        public double value()
-        {
-            return m_transfer.value();
-        }
+        public double Value() => _transfer.Value();
 
-        public void accept(AccountTransactionVisitor visitor)
-        {
-            visitor.visitTransferWithdraw(this);
-        }
+        public void Accept(AccountTransactionVisitor visitor) =>
+            visitor.VisitTransferWithdraw(this);
 
-        public Transfer transfer()
-        {
-            return m_transfer;
-        }
+        public Transfer Transfer() => _transfer;
     }
 }

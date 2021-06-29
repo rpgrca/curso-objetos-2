@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
     public class ReversePortfolioTreePrinter
     {
-        private PortfolioTreePrinter printer;
+        private readonly PortfolioTreePrinter _printer;
 
-        public ReversePortfolioTreePrinter(Portfolio portfolio,
-                    Dictionary<SummarizingAccount, string> accountNames)
-        {
-            printer = new PortfolioTreePrinter(portfolio, accountNames);
-        }
+        public ReversePortfolioTreePrinter(Portfolio portfolio, Dictionary<SummarizingAccount, string> accountNames) =>
+            _printer = new PortfolioTreePrinter(portfolio, accountNames);
 
-        public List<string> lines()
+        public List<string> Lines()
         {
-            List<string> lines = printer.lines();
+            var lines = _printer.Lines();
             lines.Reverse();
 
             return lines;

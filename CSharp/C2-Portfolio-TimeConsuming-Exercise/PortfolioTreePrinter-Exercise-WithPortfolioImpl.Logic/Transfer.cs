@@ -2,45 +2,27 @@
 {
     public class Transfer
     {
-        private double m_value;
-        private ReceptiveAccount m_fromAccount;
-        private ReceptiveAccount m_toAccount;
-        private TransferDeposit m_depositLeg;
-        private TransferWithdraw m_withdrawLeg;
+        private readonly double _value;
+        private readonly TransferDeposit _depositLeg;
+        private readonly TransferWithdraw _withdrawLeg;
 
-        public Transfer(double value, ReceptiveAccount fromAccount,
-                ReceptiveAccount toAccount)
-        {
-            m_value = value;
-            m_fromAccount = fromAccount;
-            m_toAccount = toAccount;
-            m_depositLeg = new TransferDeposit(this);
-            m_withdrawLeg = new TransferWithdraw(this);
-        }
+        public Transfer(double value) =>
+            (_value, _depositLeg, _withdrawLeg) =
+                (value, new TransferDeposit(this), new TransferWithdraw(this));
 
-        public static Transfer registerFor(double value, ReceptiveAccount fromAccount,
-                ReceptiveAccount toAccount)
+        public static Transfer RegisterFor(double value, ReceptiveAccount fromAccount, ReceptiveAccount toAccount)
         {
-            Transfer transfer = new Transfer(value, fromAccount, toAccount);
-            fromAccount.register(transfer.withdrawLeg());
-            toAccount.register(transfer.depositLeg());
+            var transfer = new Transfer(value);
+            fromAccount.Register(transfer.WithdrawLeg());
+            toAccount.Register(transfer.DepositLeg());
 
             return transfer;
         }
 
-        public double value()
-        {
-            return m_value;
-        }
+        public double Value() => _value;
 
-        public TransferLeg withdrawLeg()
-        {
-            return m_withdrawLeg;
-        }
+        public TransferLeg WithdrawLeg() => _withdrawLeg;
 
-        public TransferLeg depositLeg()
-        {
-            return m_depositLeg;
-        }
+        public TransferLeg DepositLeg() => _depositLeg;
     }
 }

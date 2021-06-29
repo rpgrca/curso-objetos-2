@@ -2,7 +2,7 @@
 {
     public interface AccountTransaction
     {
-        double value();
-        void accept(AccountTransactionVisitor visitor);
+        double Value();
+        void Accept(AccountTransactionVisitor visitor);
     }
 }

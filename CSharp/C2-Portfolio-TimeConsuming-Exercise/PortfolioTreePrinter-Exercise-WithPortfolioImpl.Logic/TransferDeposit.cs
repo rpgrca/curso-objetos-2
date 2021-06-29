@@ -2,26 +2,15 @@
 {
     public class TransferDeposit : TransferLeg
     {
-        private Transfer m_transfer;
+        private readonly Transfer _transfer;
 
-        public TransferDeposit(Transfer transfer)
-        {
-            m_transfer = transfer;
-        }
+        public TransferDeposit(Transfer transfer) => _transfer = transfer;
 
-        public double value()
-        {
-            return m_transfer.value();
-        }
+        public double Value() => _transfer.Value();
 
-        public void accept(AccountTransactionVisitor visitor)
-        {
-            visitor.visitTransferDeposit(this);
-        }
+        public void Accept(AccountTransactionVisitor visitor) =>
+            visitor.VisitTransferDeposit(this);
 
-        public Transfer transfer()
-        {
-            return m_transfer;
-        }
+        public Transfer Transfer() => _transfer;
     }
 }

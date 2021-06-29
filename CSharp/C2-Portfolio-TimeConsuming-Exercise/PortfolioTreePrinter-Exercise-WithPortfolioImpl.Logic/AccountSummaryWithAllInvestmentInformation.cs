@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
     public class AccountSummaryWithAllInvestmentInformation
     {
-        private SummarizingAccount account;
+        private readonly SummarizingAccount _account;
 
-        public AccountSummaryWithAllInvestmentInformation(SummarizingAccount account) {
-            this.account = account;
-        }
+        public AccountSummaryWithAllInvestmentInformation(SummarizingAccount account) =>
+            _account = account;
 
-        public List<string> lines() {
-            AccountSummaryWithInvestmentEarnings summary = new AccountSummaryWithInvestmentEarnings(account);
-            InvestmentNet investmentNet = new InvestmentNet(account);
-            var future = new Future<double>(() => investmentNet.value());
+        public List<string> Lines()
+        {
+            var summary = new AccountSummaryWithInvestmentEarnings(_account);
+            var investmentNet = new InvestmentNet(_account);
+            var future = new Future<double>(() => investmentNet.Value());
 
-            List<string> lines = summary.lines();
+            var lines = summary.Lines();
             lines.Add($"Inversiones por {future.Value()}");
 
             return lines;

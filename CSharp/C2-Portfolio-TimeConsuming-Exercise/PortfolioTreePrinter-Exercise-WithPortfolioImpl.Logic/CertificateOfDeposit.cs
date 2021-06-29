@@ -1,44 +1,30 @@
 ﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    public class CertificateOfDeposit:AccountTransaction
+    public class CertificateOfDeposit : AccountTransaction
     {
-        private double m_value;
-        private int m_numberOfDays;
-        private double m_tna;
+        private readonly double _value;
+        private readonly int _numberOfDays;
+        private readonly double _tna;
 
-        public CertificateOfDeposit(double value, int numberOfDays, double tna) {
-                    m_value = value;
-                    m_numberOfDays = numberOfDays;
-                    m_tna = tna;
-                      }
+        public CertificateOfDeposit(double value, int numberOfDays, double tna) =>
+            (_value, _numberOfDays, _tna) = (value, numberOfDays, tna);
 
-        public double value() {
-            return m_value;
-        }
+        public double Value() => _value;
 
-        public static CertificateOfDeposit registerFor(double value, int numberOfDays, double tna,
-                ReceptiveAccount account) {
-            CertificateOfDeposit certificateOfDeposit = new CertificateOfDeposit(value,numberOfDays,
-                    tna);
-            account.register(certificateOfDeposit);
+        public static CertificateOfDeposit RegisterFor(double value, int numberOfDays, double tna, ReceptiveAccount account)
+        {
+            var certificateOfDeposit = new CertificateOfDeposit(value, numberOfDays, tna);
+            account.Register(certificateOfDeposit);
+
             return certificateOfDeposit;
         }
 
-        public double earnings() {
-            return m_value*m_tna/360*m_numberOfDays;
-        }
+        public double Earnings() => _value * _tna / 360 * _numberOfDays;
 
-        public int numberOfDays() {
-            return m_numberOfDays;
-        }
+        public int NumberOfDays() => _numberOfDays;
 
-        public double tna() {
-            return m_tna;
-        }
+        public double Tna() => _tna;
 
-        public void accept(AccountTransactionVisitor visitor)
-        {
-            visitor.visitCertificateOfDeposit(this);
-        }
+        public void Accept(AccountTransactionVisitor visitor) => visitor.VisitCertificateOfDeposit(this);
     }
 }

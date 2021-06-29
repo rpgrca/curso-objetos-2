@@ -1,28 +1,21 @@
 ﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    public class Deposit: AccountTransaction
+    public class Deposit : AccountTransaction
     {
-        private double m_value;
+        private readonly double _value;
 
-        public static Deposit registerForOn(double value, ReceptiveAccount account) {
-            Deposit deposit = new Deposit(value);
-
-            account.register(deposit);
+        public static Deposit RegisterForOn(double value, ReceptiveAccount account)
+        {
+            var deposit = new Deposit(value);
+            account.Register(deposit);
 
             return deposit;
         }
 
-        public Deposit (double value) {
-            m_value = value;
-        }
+        public Deposit(double value) => _value = value;
 
-        public double value(){
-            return m_value;
-        }
+        public double Value() => _value;
 
-        public void accept(AccountTransactionVisitor visitor)
-        {
-            visitor.visitDeposit(this);
-        }
+        public void Accept(AccountTransactionVisitor visitor) => visitor.VisitDeposit(this);
     }
 }

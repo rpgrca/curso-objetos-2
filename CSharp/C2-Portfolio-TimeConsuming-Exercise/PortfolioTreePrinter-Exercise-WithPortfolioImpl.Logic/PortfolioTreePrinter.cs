@@ -1,52 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
     public class PortfolioTreePrinter : SummarizingAccountVisitor
     {
-         private Portfolio portfolio;
-        private Dictionary<SummarizingAccount, string> accountNames;
-        private List<string> m_lines;
-        private int spaces;
+        private readonly Portfolio _portfolio;
+        private readonly Dictionary<SummarizingAccount, string> _accountNames;
+        private List<string> _lines;
+        private int _spaces;
 
-        public PortfolioTreePrinter(Portfolio portfolio,
-                Dictionary<SummarizingAccount, string> accountNames) {
-            this.portfolio = portfolio;
-            this.accountNames = accountNames;
+        public PortfolioTreePrinter(Portfolio portfolio, Dictionary<SummarizingAccount, string> accountNames) =>
+            (_portfolio, _accountNames) = (portfolio, accountNames);
+
+        public List<string> Lines()
+        {
+            _lines = new List<string>();
+            _spaces = 0;
+            _portfolio.Accept(this);
+
+            return _lines;
         }
 
-        public List<string> lines() {
-            m_lines = new List<string>();
-            spaces = 0;
-
-            portfolio.accept(this);
-
-            return m_lines;
-        }
-
-        public void visitPortfolio(Portfolio portfolio) {
-            lineFor(portfolio);
-            spaces += 1;
+        public void VisitPortfolio(Portfolio portfolio)
+        {
+            LineFor(portfolio);
+            _spaces++;
             portfolio.visitAccountsWith(this);
-            spaces -= 1;
+            _spaces--;
         }
 
-        private void lineFor(SummarizingAccount summarizingAccount) {
-            string line = "";
-            string name;
+        private void LineFor(SummarizingAccount summarizingAccount)
+        {
+            var line = string.Empty;
 
-            for (int i = 0; i < spaces; i++) {
-                line = line + " ";
+            for (var i = 0; i < _spaces; i++)
+            {
+                line += " ";
             }
 
-            accountNames.TryGetValue(summarizingAccount, out name);
-            line = line + name; 
-            m_lines.Add(line);
+            _accountNames.TryGetValue(summarizingAccount, out string name);
+            line += name;
+            _lines.Add(line);
         }
 
-        public void visitReceptiveAccount(ReceptiveAccount receptiveAccount) {
-            lineFor(receptiveAccount);
-        }
+        public void VisitReceptiveAccount(ReceptiveAccount receptiveAccount) =>
+            LineFor(receptiveAccount);
     }
 }

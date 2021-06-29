@@ -4,18 +4,18 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
     public class AccountSummaryWithInvestmentEarnings
     {
-        private SummarizingAccount account;
+        private readonly SummarizingAccount _account;
 
-        public AccountSummaryWithInvestmentEarnings(SummarizingAccount account) {
-            this.account = account;
-        }
+        public AccountSummaryWithInvestmentEarnings(SummarizingAccount account) =>
+            _account = account;
 
-        public List<string> lines() {
-            AccountSummary summary = new AccountSummary(account);
-            InvestmentEarnings investmentEarnings = new InvestmentEarnings(account);
+        public List<string> Lines()
+        {
+            var summary = new AccountSummary(_account);
+            var investmentEarnings = new InvestmentEarnings(_account);
 
-            var future = new Future<double>(() => investmentEarnings.value());
-            List<string> lines = summary.lines();
+            var future = new Future<double>(() => investmentEarnings.Value());
+            var lines = summary.Lines();
 
             lines.Add($"Ganancias por {future.Value()}");
             return lines;

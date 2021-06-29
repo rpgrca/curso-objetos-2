@@ -2,6 +2,6 @@
 {
     public interface TransferLeg : AccountTransaction
     {
-        Transfer transfer();
+        Transfer Transfer();
     }
 }

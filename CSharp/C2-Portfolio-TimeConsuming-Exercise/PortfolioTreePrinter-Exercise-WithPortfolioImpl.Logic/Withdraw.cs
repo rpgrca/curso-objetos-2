@@ -1,27 +1,21 @@
 ﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    public class Withdraw: AccountTransaction
+    public class Withdraw : AccountTransaction
     {
-        private double m_value;
+        private readonly double _value;
 
-        public static Withdraw registerForOn(double value, ReceptiveAccount account) {
-            Withdraw withdraw = new Withdraw(value);
-            account.register(withdraw);
+        public static Withdraw RegisterForOn(double value, ReceptiveAccount account)
+        {
+            var withdraw = new Withdraw(value);
+            account.Register(withdraw);
 
             return withdraw;
         }
 
-        public Withdraw (double value) {
-            m_value = value;
-        }
+        public Withdraw(double value) => _value = value;
 
-        public double value() {
-            return m_value;
-        }
+        public double Value() => _value;
 
-        public void accept(AccountTransactionVisitor visitor)
-        {
-            visitor.visitWithdraw(this);
-        }
+        public void Accept(AccountTransactionVisitor visitor) => visitor.VisitWithdraw(this);
     }
 }

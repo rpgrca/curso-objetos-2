@@ -2,10 +2,10 @@
 {
     public interface AccountTransactionVisitor
     {
-        void visitDeposit(Deposit deposit);
-        void visitTransferDeposit(TransferDeposit transferDeposit);
-        void visitTransferWithdraw(TransferWithdraw transferWithdraw);
-        void visitWithdraw(Withdraw withdraw);
-        void visitCertificateOfDeposit(CertificateOfDeposit certificateOfDeposit);
+        void VisitDeposit(Deposit deposit);
+        void VisitTransferDeposit(TransferDeposit transferDeposit);
+        void VisitTransferWithdraw(TransferWithdraw transferWithdraw);
+        void VisitWithdraw(Withdraw withdraw);
+        void VisitCertificateOfDeposit(CertificateOfDeposit certificateOfDeposit);
     }
 }

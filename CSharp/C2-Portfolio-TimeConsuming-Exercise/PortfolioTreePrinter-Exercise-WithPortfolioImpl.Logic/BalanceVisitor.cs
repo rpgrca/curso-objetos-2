@@ -1,39 +1,33 @@
 ﻿namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    public class BalanceVisitor: AccountTransactionVisitor
+    public class BalanceVisitor : AccountTransactionVisitor
     {
-        private double m_value;
-        private readonly ReceptiveAccount account;
+        private double _value;
+        private readonly ReceptiveAccount _account;
 
-        public BalanceVisitor(ReceptiveAccount account) {
-            this.account = account;
+        public BalanceVisitor(ReceptiveAccount account) =>
+            _account = account;
+
+        public double Value()
+        {
+            _value = 0;
+            _account.Accept(this);
+            return _value;
         }
 
-        public double value (){
-            m_value = 0;
-            account.acceptTransactionsVisitor(this);
-            return m_value;
-        }
+        public void VisitDeposit(Deposit deposit) =>
+            _value += deposit.Value();
 
-        public void visitDeposit(Deposit deposit) {
-            m_value += deposit.value();
-        }
+        public void VisitWithdraw(Withdraw withdraw) =>
+            _value -= withdraw.Value();
 
-        public void visitWithdraw(Withdraw withdraw) {
-            m_value -= withdraw.value();
-        }
+        public void VisitCertificateOfDeposit(CertificateOfDeposit certificateOfDeposit) =>
+            _value -= certificateOfDeposit.Value();
 
-        public void visitCertificateOfDeposit(
-                CertificateOfDeposit certificateOfDeposit) {
-            m_value -= certificateOfDeposit.value();
-        }
+        public void VisitTransferDeposit(TransferDeposit transferDeposit) =>
+            _value += transferDeposit.Value();
 
-        public void visitTransferDeposit(TransferDeposit transferDeposit) {
-            m_value += transferDeposit.value();
-        }
-
-        public void visitTransferWithdraw(TransferWithdraw transferWithdraw) {
-            m_value -= transferWithdraw.value();
-        }
+        public void VisitTransferWithdraw(TransferWithdraw transferWithdraw) =>
+            _value -= transferWithdraw.Value();
     }
 }

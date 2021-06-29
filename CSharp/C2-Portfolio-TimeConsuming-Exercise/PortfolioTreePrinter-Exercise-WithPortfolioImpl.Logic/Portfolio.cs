@@ -4,87 +4,98 @@ using System.Linq;
 
 namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    public class Portfolio: SummarizingAccount
+    public class Portfolio : SummarizingAccount
     {
         public const string ACCOUNT_NOT_MANAGED = "No se maneja esta cuenta";
         public const string ACCOUNT_ALREADY_MANAGED = "La cuenta ya está manejada por otro portfolio";
-        private IList<SummarizingAccount> summarizingAccounts; 
+        private readonly IList<SummarizingAccount> _summarizingAccounts;
 
-        public static Portfolio createWith(SummarizingAccount anAccout){
-            List<SummarizingAccount> summarizingAccounts = new List<SummarizingAccount>();
-            summarizingAccounts.Add(anAccout);
+        public static Portfolio CreateWith(SummarizingAccount anAccout)
+        {
+            var summarizingAccounts = new List<SummarizingAccount>
+            {
+                anAccout
+            };
 
-            return Portfolio.createWith(summarizingAccounts);
+            return CreateWith(summarizingAccounts);
         }
 
-        public static Portfolio createWith(SummarizingAccount anAccount1, SummarizingAccount anAccount2) {
-            List<SummarizingAccount> summarizingAccounts = new List<SummarizingAccount>();
-            summarizingAccounts.Add(anAccount1);
-            summarizingAccounts.Add(anAccount2);
+        public static Portfolio CreateWith(SummarizingAccount anAccount1, SummarizingAccount anAccount2)
+        {
+            var summarizingAccounts = new List<SummarizingAccount>
+            {
+                anAccount1,
+                anAccount2
+            };
 
-            return Portfolio.createWith(summarizingAccounts);
+            return CreateWith(summarizingAccounts);
         }
 
-        public static Portfolio createWith(List<SummarizingAccount> summarizingAccounts) {
-            if(new HashSet<SummarizingAccount>(summarizingAccounts).Count!=summarizingAccounts.Count)
+        public static Portfolio CreateWith(List<SummarizingAccount> summarizingAccounts)
+        {
+            if (new HashSet<SummarizingAccount>(summarizingAccounts).Count != summarizingAccounts.Count)
                 throw new Exception(ACCOUNT_ALREADY_MANAGED);
 
-            foreach (SummarizingAccount summarizingAccountSource in summarizingAccounts)
-                foreach (SummarizingAccount summarizingAccountTarget in summarizingAccounts)
-                    if (summarizingAccountSource!=summarizingAccountTarget)
-                        if(summarizingAccountSource.manages(summarizingAccountTarget))
-                            throw new Exception(ACCOUNT_ALREADY_MANAGED);
+            foreach (var summarizingAccountSource in summarizingAccounts)
+            {
+                foreach (var summarizingAccountTarget in summarizingAccounts)
+                {
+                    if (summarizingAccountSource != summarizingAccountTarget && summarizingAccountSource.Manages(summarizingAccountTarget))
+                    {
+                        throw new Exception(ACCOUNT_ALREADY_MANAGED);
+                    }
+                }
+            }
 
             return new Portfolio(summarizingAccounts);
         }
-    
-        private Portfolio(List<SummarizingAccount> summarizingAccounts){
-            this.summarizingAccounts = summarizingAccounts;
-        }
 
-        public double balance() {
-            return summarizingAccounts.Sum( summarizingAccount => summarizingAccount.balance() );
-        }
+        private Portfolio(List<SummarizingAccount> summarizingAccounts) =>
+            _summarizingAccounts = summarizingAccounts;
 
-        public bool registers(AccountTransaction transaction) {
-            return summarizingAccounts.Any( summarizingAccount => summarizingAccount.registers(transaction) );
-        }
+        public double Balance() =>
+            _summarizingAccounts.Sum(summarizingAccount => summarizingAccount.Balance());
 
-        public IList<AccountTransaction> transactionsOf(SummarizingAccount account) {
-            if (manages(account))
-                return account.transactions();
-            else
-                throw new Exception (ACCOUNT_NOT_MANAGED);
-        }
+        public bool Registers(AccountTransaction transaction) =>
+            _summarizingAccounts.Any(summarizingAccount => summarizingAccount.Registers(transaction));
 
-        public bool manages(SummarizingAccount account) {
-            return this == account || summarizingAccounts.Any( summarizingAccount => summarizingAccount.manages(account) );
-        }
+        public IList<AccountTransaction> TransactionsOf(SummarizingAccount account) =>
+            Manages(account)
+                ? account.Transactions()
+                : throw new Exception(ACCOUNT_NOT_MANAGED);
 
-        public IList<AccountTransaction> transactions() {
-            List<AccountTransaction> transactions = new List<AccountTransaction>();
-            foreach (SummarizingAccount summarizingAccount in summarizingAccounts)
-                transactions.AddRange(summarizingAccount.transactions());
+        public bool Manages(SummarizingAccount account) =>
+            this == account || _summarizingAccounts.Any(summarizingAccount => summarizingAccount.Manages(account));
+
+        public IList<AccountTransaction> Transactions()
+        {
+            var transactions = new List<AccountTransaction>();
+
+            foreach (var summarizingAccount in _summarizingAccounts)
+            {
+                transactions.AddRange(summarizingAccount.Transactions());
+            }
 
             return transactions;
         }
 
-        public void acceptTransactionsVisitor(AccountTransactionVisitor aVisitor)
+        public void Accept(AccountTransactionVisitor aVisitor)
         {
-            foreach (AccountTransaction transaction in transactions())
-                transaction.accept(aVisitor);
+            foreach (var transaction in Transactions())
+            {
+                transaction.Accept(aVisitor);
+            }
         }
 
-        public void accept(SummarizingAccountVisitor aVisitor)
-        {
-            aVisitor.visitPortfolio(this);
-        }
+        public void Accept(SummarizingAccountVisitor aVisitor) =>
+            aVisitor.VisitPortfolio(this);
 
         public void visitAccountsWith(SummarizingAccountVisitor aVisitor)
         {
-            foreach (SummarizingAccount summarizinAccount in summarizingAccounts) {
-                summarizinAccount.accept(aVisitor);
+            foreach (var summarizinAccount in _summarizingAccounts)
+            {
+                summarizinAccount.Accept(aVisitor);
+            }
         }
     }
-}
 }

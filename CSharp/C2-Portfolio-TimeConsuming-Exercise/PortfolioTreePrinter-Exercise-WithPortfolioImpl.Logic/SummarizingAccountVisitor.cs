@@ -2,7 +2,7 @@
 {
     public interface SummarizingAccountVisitor
     {
-        void visitPortfolio(Portfolio portfolio);
-        void visitReceptiveAccount(ReceptiveAccount receptiveAccount);
+        void VisitPortfolio(Portfolio portfolio);
+        void VisitReceptiveAccount(ReceptiveAccount receptiveAccount);
     }
 }

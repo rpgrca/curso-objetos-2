@@ -1,49 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    public class AccountSummary: AccountTransactionVisitor
+    public class AccountSummary : AccountTransactionVisitor
     {
-        private SummarizingAccount account;
-        private List<string> m_lines;
+        private readonly SummarizingAccount _account;
+        private List<string> _lines;
 
-        public AccountSummary(SummarizingAccount account)
+        public AccountSummary(SummarizingAccount account) =>
+            _account = account;
+
+        public List<string> Lines()
         {
-            this.account = account;
-        }
-
-        public List<string> lines() {
             System.Threading.Thread.Sleep(1000);
 
-            m_lines = new List<string>();
+            _lines = new List<string>();
 
-            account.acceptTransactionsVisitor(this);
-            return m_lines;
+            _account.Accept(this);
+            return _lines;
         }
 
-        public void visitDeposit(Deposit deposit) {
-            m_lines.Add("Depósito por " + deposit.value() );
-        }
+        public void VisitDeposit(Deposit deposit) =>
+            _lines.Add($"Depósito por {deposit.Value()}");
 
-        public void visitWithdraw(Withdraw withdraw) {
-            m_lines.Add("Extracción por " + withdraw.value() );
-        }
+        public void VisitWithdraw(Withdraw withdraw) =>
+            _lines.Add($"Extracción por {withdraw.Value()}");
 
-        public void visitCertificateOfDeposit(
-                CertificateOfDeposit certificateOfDeposit) {
-            m_lines.Add(
-                    "Plazo fijo por " + certificateOfDeposit.value()+ 
-                    " durante " + certificateOfDeposit.numberOfDays()+
-                    " días a una tna de " + certificateOfDeposit.tna());
-        }
+        public void VisitCertificateOfDeposit(CertificateOfDeposit certificateOfDeposit) =>
+            _lines.Add($"Plazo fijo por {certificateOfDeposit.Value()} durante {certificateOfDeposit.NumberOfDays()} días a una tna de {certificateOfDeposit.Tna()}");
 
-        public void visitTransferDeposit(TransferDeposit transferDeposit) {
-            m_lines.Add("Transferencia por " + transferDeposit.value () );
-        }
+        public void VisitTransferDeposit(TransferDeposit transferDeposit) =>
+            _lines.Add($"Transferencia por {transferDeposit.Value()}");
 
-        public void visitTransferWithdraw(TransferWithdraw transferWithdraw) {
-            m_lines.Add("Transferencia por " + -transferWithdraw.value () );
-        }
+        public void VisitTransferWithdraw(TransferWithdraw transferWithdraw) =>
+            _lines.Add($"Transferencia por {-transferWithdraw.Value()}");
     }
 }

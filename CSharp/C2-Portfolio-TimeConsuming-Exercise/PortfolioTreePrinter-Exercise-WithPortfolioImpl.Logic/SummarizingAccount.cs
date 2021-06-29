@@ -4,11 +4,11 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
     public interface SummarizingAccount
     {
-        double balance(); 
-        bool registers(AccountTransaction transaction);
-        bool manages(SummarizingAccount account);
-        IList<AccountTransaction> transactions();
-        void acceptTransactionsVisitor(AccountTransactionVisitor aVisitor);
-        void accept(SummarizingAccountVisitor aVisitor);
+        double Balance();
+        bool Registers(AccountTransaction transaction);
+        bool Manages(SummarizingAccount account);
+        IList<AccountTransaction> Transactions();
+        void Accept(AccountTransactionVisitor aVisitor);
+        void Accept(SummarizingAccountVisitor aVisitor);
     }
 }

@@ -2,39 +2,34 @@
 
 namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 {
-    public class ReceptiveAccount: SummarizingAccount
+    public class ReceptiveAccount : SummarizingAccount
     {
-        private IList<AccountTransaction> m_transactions = new List<AccountTransaction>();
+        private readonly IList<AccountTransaction> _transactions = new List<AccountTransaction>();
 
-        public double balance() {
-            return (new BalanceVisitor(this)).value();
-        }
+        public double Balance() =>
+            new BalanceVisitor(this).Value();
 
-        public void register(AccountTransaction transaction) {
-            m_transactions.Add(transaction);
-        }
+        public void Register(AccountTransaction transaction) =>
+            _transactions.Add(transaction);
 
-        public bool registers(AccountTransaction transaction) {
-            return m_transactions.Contains(transaction);
-        }
+        public bool Registers(AccountTransaction transaction) =>
+            _transactions.Contains(transaction);
 
-        public bool manages(SummarizingAccount account) {
-            return this == account;
-        }
+        public bool Manages(SummarizingAccount account) =>
+            this == account;
 
-        public IList<AccountTransaction> transactions() {
-            return new List<AccountTransaction>(m_transactions);
-        }
+        public IList<AccountTransaction> Transactions() =>
+            new List<AccountTransaction>(_transactions);
 
-        public void acceptTransactionsVisitor(AccountTransactionVisitor aVisitor)
+        public void Accept(AccountTransactionVisitor aVisitor)
         {
-            foreach (AccountTransaction transaction in m_transactions)
-                transaction.accept(aVisitor);
+            foreach (var transaction in _transactions)
+            {
+                transaction.Accept(aVisitor);
+            }
         }
 
-        public void accept(SummarizingAccountVisitor aVisitor)
-        {
-            aVisitor.visitReceptiveAccount(this);
-        }
+        public void Accept(SummarizingAccountVisitor aVisitor) =>
+            aVisitor.VisitReceptiveAccount(this);
     }
 }
