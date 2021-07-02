@@ -7,8 +7,8 @@ namespace ElevatorConsole_Exercise
 {
     class ElevatorControllerStatusView: CabinStateVisitor,CabinDoorStateVisitor 
     {
-	    private String m_cabinFieldModel;
-	    private String m_cabinDoorFieldModel;
+	    private string m_cabinFieldModel;
+	    private string m_cabinDoorFieldModel;
 
 	    public ElevatorControllerStatusView(ElevatorController elevatorController) {
 	    }
@@ -56,11 +56,11 @@ namespace ElevatorConsole_Exercise
 		    m_cabinFieldModel = "Waiting People";
 	    }
 
-	    public String cabinFieldModel() {
+	    public string cabinFieldModel() {
 		    return m_cabinFieldModel;
 	    }
 
-	    public String cabinDoorFieldModel() {
+	    public string cabinDoorFieldModel() {
 		    return m_cabinDoorFieldModel;
 	    }
     }

@@ -7,10 +7,10 @@ namespace ElevatorConsole_Exercise
 {
     class ElevatorControllerConsole : CabinStateVisitor, CabinDoorStateVisitor
     {
-	    private List<String> console;
+	    private List<string> console;
 
 	    public ElevatorControllerConsole(ElevatorController elevatorController) {
-            console = new List<String>();
+            console = new List<string>();
 	    }
 
 	    protected void cabinDoorStateChangedTo(CabinDoorState cabinDoorState) {
@@ -21,7 +21,7 @@ namespace ElevatorConsole_Exercise
 		    cabinState.accept(this);
 	    }
 
-	    public IEnumerator<String> consoleReader() {
+	    public IEnumerator<string> consoleReader() {
 		    return console.GetEnumerator();
 	    }
 
