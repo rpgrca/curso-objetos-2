@@ -11,12 +11,12 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void test01ElevatorControllerConsoleTracksDoorClosingState()
         {
-            ElevatorController elevatorController = new ElevatorController();
-            ElevatorControllerConsole elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
+            var elevatorController = new ElevatorController();
+            var elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
 
             elevatorController.goUpPushedFromFloor(1);
 
-            IEnumerator<String> reader = elevatorControllerConsole.consoleReader();
+            var reader = elevatorControllerConsole.consoleReader();
 
             reader.MoveNext();
             Assert.Equal("Puerta Cerrandose", reader.Current);
@@ -27,13 +27,13 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void test02ElevatorControllerConsoleTracksCabinState()
         {
-            ElevatorController elevatorController = new ElevatorController();
-            ElevatorControllerConsole elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
+            var elevatorController = new ElevatorController();
+            var elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
 
-            IEnumerator<String> reader = elevatorControllerConsole.consoleReader();
+            var reader = elevatorControllerConsole.consoleReader();
 
             reader.MoveNext();
             Assert.Equal("Puerta Cerrandose", reader.Current);
@@ -48,14 +48,14 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void test03ElevatorControllerConsoleTracksCabinAndDoorStateChanges()
         {
-            ElevatorController elevatorController = new ElevatorController();
-            ElevatorControllerConsole elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
+            var elevatorController = new ElevatorController();
+            var elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
             elevatorController.cabinOnFloor(1);
 
-            IEnumerator<String> reader = elevatorControllerConsole.consoleReader();
+            var reader = elevatorControllerConsole.consoleReader();
 
             reader.MoveNext();
             Assert.Equal("Puerta Cerrandose", reader.Current);
@@ -68,21 +68,20 @@ namespace ElevatorConsole_Exercise
             reader.MoveNext();
             Assert.Equal("Puerta Abriendose", reader.Current);
             Assert.False(reader.MoveNext());
-
         }
 
         [Fact]
         public void test04ElevatorControllerCanHaveMoreThanOneView()
         {
-            ElevatorController elevatorController = new ElevatorController();
-            ElevatorControllerConsole elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
-            ElevatorControllerStatusView elevatorControllerStatusView = new ElevatorControllerStatusView(elevatorController);
+            var elevatorController = new ElevatorController();
+            var elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
+            var elevatorControllerStatusView = new ElevatorControllerStatusView(elevatorController);
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
             elevatorController.cabinOnFloor(1);
 
-            IEnumerator<String> reader = elevatorControllerConsole.consoleReader();
+            var reader = elevatorControllerConsole.consoleReader();
 
             reader.MoveNext();
             Assert.Equal("Puerta Cerrandose", reader.Current);

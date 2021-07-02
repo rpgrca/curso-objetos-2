@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace ElevatorConsole_Exercise
@@ -11,7 +8,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testElevatorStartsIdleWithDoorOpenOnFloorZero()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             Assert.True(elevatorController.isIdle());
             Assert.True(elevatorController.isCabinStopped());
@@ -22,7 +19,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testCabinDoorStartsClosingWhenElevatorGetsCalled()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
 
@@ -41,7 +38,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testCabinStartsMovingWhenDoorGetsClosed()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -61,7 +58,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testCabinStopsAndStartsOpeningDoorWhenGetsToDestination()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -84,7 +81,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testElevatorGetsIdleWhenDoorGetOpened()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -110,20 +107,19 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testDoorKeepsOpenedWhenOpeningIsRequested()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             Assert.True(elevatorController.isCabinDoorOpened());
 
             elevatorController.openCabinDoor();
 
             Assert.True(elevatorController.isCabinDoorOpened());
-
         }
 
         [Fact]
         public void testDoorMustBeOpenedWhenCabinIsStoppedAndClosingDoors()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
 
@@ -140,7 +136,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testCanNotOpenDoorWhenCabinIsMoving()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -158,7 +154,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testDoorKeepsOpeneingWhenItIsOpeneing()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -179,7 +175,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testRequestToGoUpAreEnqueueWhenRequestedWhenCabinIsMoving()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -195,7 +191,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testCabinDoorStartClosingAfterWaitingForPeople()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -212,7 +208,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testStopsWaitingForPeopleIfCloseDoorIsPressed()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -229,26 +225,24 @@ namespace ElevatorConsole_Exercise
             Assert.True(elevatorController.isWorking());
             Assert.True(elevatorController.isCabinStopped());
             Assert.True(elevatorController.isCabinDoorClosing());
-
         }
 
         [Fact]
         public void testCloseDoorDoesNothingIfIdle()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.closeCabinDoor();
 
             Assert.True(elevatorController.isIdle());
             Assert.True(elevatorController.isCabinStopped());
             Assert.True(elevatorController.isCabinDoorOpened());
-
         }
 
         [Fact]
         public void testCloseDoorDoesNothingWhenCabinIsMoving()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -267,7 +261,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testCloseDoorDoesNothingWhenOpeningTheDoorToWaitForPeople()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -282,7 +276,6 @@ namespace ElevatorConsole_Exercise
             Assert.True(elevatorController.isWorking());
             Assert.True(elevatorController.isCabinStopped());
             Assert.True(elevatorController.isCabinDoorOpening());
-
         }
 
         // STOP HERE!!
@@ -290,7 +283,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testElevatorHasToEnterEmergencyIfStoppedAndOtherFloorSensorTurnsOn()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -309,7 +302,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testElevatorHasToEnterEmergencyIfFalling()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(2);
             elevatorController.cabinDoorClosed();
@@ -328,7 +321,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testElevatorHasToEnterEmergencyIfJumpsFloors()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(3);
             elevatorController.cabinDoorClosed();
@@ -346,7 +339,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testElevatorHasToEnterEmergencyIfDoorClosesAutomatically()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             try
             {
@@ -362,7 +355,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testElevatorHasToEnterEmergencyIfDoorClosedSensorTurnsOnWhenClosed()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -380,7 +373,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testElevatorHasToEnterEmergencyIfDoorClosesWhenOpening()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -402,7 +395,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testCabinHasToStopOnTheFloorsOnItsWay()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -417,7 +410,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testElevatorCompletesAllTheRequests()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
@@ -436,7 +429,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testCabinHasToStopOnFloorsOnItsWayNoMatterHowTheyWellCalled()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(2);
             elevatorController.cabinDoorClosed();
@@ -451,7 +444,7 @@ namespace ElevatorConsole_Exercise
         [Fact]
         public void testCabinHasToStopAndWaitForPeopleOnFloorsOnItsWayNoMatterHowTheyWellCalled()
         {
-            ElevatorController elevatorController = new ElevatorController();
+            var elevatorController = new ElevatorController();
 
             elevatorController.goUpPushedFromFloor(2);
             elevatorController.cabinDoorClosed();
