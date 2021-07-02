@@ -9,10 +9,10 @@ namespace ElevatorConsole_Exercise
     {
         private ElevatorController elevatorController;
 	
-	    public CabinDoorClosingState(ElevatorController elevatorController) {
+	    public CabinDoorClosingState(ElevatorController elevatorController, ElevatorControllerVisitor visitor) {
 		    this.elevatorController = elevatorController;
+			visitor.visitCabinDoorClosing(this);
 	    }
-
 	    
 	    public bool isOpened() {
 		    return false;

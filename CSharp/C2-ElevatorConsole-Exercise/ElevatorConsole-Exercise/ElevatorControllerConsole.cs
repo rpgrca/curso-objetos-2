@@ -1,17 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ElevatorConsole_Exercise
 {
-    class ElevatorControllerConsole : CabinStateVisitor, CabinDoorStateVisitor
-    {
-	    private List<string> console;
+	interface ElevatorControllerVisitor : CabinStateVisitor, CabinDoorStateVisitor
+	{
+	}
 
-	    public ElevatorControllerConsole(ElevatorController elevatorController) {
-            console = new List<string>();
-	    }
+    class ElevatorControllerDummy : ElevatorControllerVisitor
+    {
+        public void visitCabinDoorClosed(CabinDoorClosedState cabinDoorClosedState)
+        {
+        }
+
+        public void visitCabinDoorClosing(CabinDoorClosingState cabindDoorClosingState)
+        {
+        }
+
+        public void visitCabinDoorOpened(CabinDoorOpenedState cabinDoorOpenedState)
+        {
+        }
+
+        public void visitCabinDoorOpening(CabinDoorOpeningState cabinDoorOpeningState)
+        {
+        }
+
+        public void visitCabinMoving(CabinMovingState cabinMovingState)
+        {
+        }
+
+        public void visitCabinStopped(CabinStoppedState cabinStoppedState)
+        {
+        }
+
+        public void visitCabinWaitingPeople(CabinWaitingForPeopleState cabinWaitingForPeopleState)
+        {
+        }
+    }
+
+    class ElevatorControllerConsole : ElevatorControllerVisitor
+    {
+	    private readonly List<string> _console;
+
+        public ElevatorControllerConsole(ElevatorController elevatorController) {
+            _console = new List<string>();
+            elevatorController.accept(this);
+        }
 
 	    protected void cabinDoorStateChangedTo(CabinDoorState cabinDoorState) {
 		    cabinDoorState.accept(this);
@@ -22,35 +55,35 @@ namespace ElevatorConsole_Exercise
 	    }
 
 	    public IEnumerator<string> consoleReader() {
-		    return console.GetEnumerator();
+		    return _console.GetEnumerator();
 	    }
 
 	    public void visitCabinMoving(CabinMovingState cabinMovingState) {
-		    console.Add("Cabina Moviendose");
+		    _console.Add("Cabina Moviendose");
 	    }
 
 	    public void visitCabinStopped(CabinStoppedState cabinStoppedState) {
-		    console.Add("Cabina Detenida");
+		    _console.Add("Cabina Detenida");
 	    }
 
 	    public void visitCabinWaitingPeople(CabinWaitingForPeopleState cabinWaitingForPeopleState) {
-		    console.Add("Cabina Esperando Gente");
+		    _console.Add("Cabina Esperando Gente");
 	    }
 
 	    public void visitCabinDoorClosing(CabinDoorClosingState cabinDoorClosingState) {
-		    console.Add("Puerta Cerrandose");
+		    _console.Add("Puerta Cerrandose");
 	    }
 
 	    public void visitCabinDoorClosed(CabinDoorClosedState cabinDoorClosedState) {
-		    console.Add("Puerta Cerrada");
+		    _console.Add("Puerta Cerrada");
 	    }
 
 	    public void visitCabinDoorOpened(CabinDoorOpenedState cabinDoorOpenedState) {
-		    console.Add("Puerta Abierta");
+		    _console.Add("Puerta Abierta");
 	    }
 
 	    public void visitCabinDoorOpening(CabinDoorOpeningState cabinDoorOpeningState) {
-		    console.Add("Puerta Abriendose");
+		    _console.Add("Puerta Abriendose");
 	    }
     }
 }

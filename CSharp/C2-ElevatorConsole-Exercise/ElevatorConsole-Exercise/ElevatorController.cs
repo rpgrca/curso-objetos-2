@@ -11,7 +11,8 @@ namespace ElevatorConsole_Exercise
         private CabinState cabinState;
         private CabinDoorState cabinDoorState;
         private int currentCabinFloorNumber;
-        private SortedSet<int> floorsToGo = new SortedSet<int>();
+        private ElevatorControllerVisitor _elevatorControllerVisitor = new ElevatorControllerDummy();
+        private readonly SortedSet<int> floorsToGo = new();
 
         public ElevatorController()
         {
@@ -55,7 +56,7 @@ namespace ElevatorConsole_Exercise
 
         private void cabinDoorIsClosing()
         {
-            cabinDoorState = new CabinDoorClosingState(this);
+            cabinDoorState = new CabinDoorClosingState(this, _elevatorControllerVisitor);
         }
 
         private void cabinDoorIsOpening()
@@ -119,7 +120,6 @@ namespace ElevatorConsole_Exercise
             return cabinState.isWaitingForPeople();
         }
 
-
         //Events
         public void goUpPushedFromFloor(int aFloorNumber)
         {
@@ -161,6 +161,7 @@ namespace ElevatorConsole_Exercise
             floorsToGo.Add(aFloorNumber);
             controllerIsWorking();
             cabinDoorIsClosing();
+            
         }
 
         public void cabinDoorClosedWhenWorking()
@@ -294,6 +295,11 @@ namespace ElevatorConsole_Exercise
         public void cabinDoorClosedWhenWorkingAndCabinStoppedAndCabinDoorOpening()
         {
             throw new Exception("Sensor de puerta desincronizado");
+        }
+
+        public void accept(ElevatorControllerVisitor elevatorControllerConsole)
+        {
+            _elevatorControllerVisitor = elevatorControllerConsole;
         }
     }
 }
