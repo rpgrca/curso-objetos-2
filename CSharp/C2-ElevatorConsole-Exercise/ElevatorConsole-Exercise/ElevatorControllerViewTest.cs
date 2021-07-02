@@ -2,14 +2,13 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace ElevatorConsole_Exercise
 {
-    [TestClass]
     public class ElevatorControllerViewTest
     {
-        [TestMethod]
+        [Fact]
         public void test01ElevatorControllerConsoleTracksDoorClosingState()
         {
             ElevatorController elevatorController = new ElevatorController();
@@ -20,12 +19,12 @@ namespace ElevatorConsole_Exercise
             IEnumerator<String> reader = elevatorControllerConsole.consoleReader();
 
             reader.MoveNext();
-            Assert.AreEqual("Puerta Cerrandose", reader.Current);
-            Assert.IsFalse(reader.MoveNext());
+            Assert.Equal("Puerta Cerrandose", reader.Current);
+            Assert.False(reader.MoveNext());
 
         }
 
-        [TestMethod]
+        [Fact]
         public void test02ElevatorControllerConsoleTracksCabinState()
         {
             ElevatorController elevatorController = new ElevatorController();
@@ -37,16 +36,16 @@ namespace ElevatorConsole_Exercise
             IEnumerator<String> reader = elevatorControllerConsole.consoleReader();
 
             reader.MoveNext();
-            Assert.AreEqual("Puerta Cerrandose", reader.Current);
+            Assert.Equal("Puerta Cerrandose", reader.Current);
             reader.MoveNext();
-            Assert.AreEqual("Puerta Cerrada", reader.Current);
+            Assert.Equal("Puerta Cerrada", reader.Current);
             reader.MoveNext();
-            Assert.AreEqual("Cabina Moviendose", reader.Current);
-            Assert.IsFalse(reader.MoveNext());
+            Assert.Equal("Cabina Moviendose", reader.Current);
+            Assert.False(reader.MoveNext());
 
         }
 
-        [TestMethod]
+        [Fact]
         public void test03ElevatorControllerConsoleTracksCabinAndDoorStateChanges()
         {
             ElevatorController elevatorController = new ElevatorController();
@@ -59,20 +58,20 @@ namespace ElevatorConsole_Exercise
             IEnumerator<String> reader = elevatorControllerConsole.consoleReader();
 
             reader.MoveNext();
-            Assert.AreEqual("Puerta Cerrandose", reader.Current);
+            Assert.Equal("Puerta Cerrandose", reader.Current);
             reader.MoveNext();
-            Assert.AreEqual("Puerta Cerrada", reader.Current);
+            Assert.Equal("Puerta Cerrada", reader.Current);
             reader.MoveNext();
-            Assert.AreEqual("Cabina Moviendose", reader.Current);
+            Assert.Equal("Cabina Moviendose", reader.Current);
             reader.MoveNext();
-            Assert.AreEqual("Cabina Detenida", reader.Current);
+            Assert.Equal("Cabina Detenida", reader.Current);
             reader.MoveNext();
-            Assert.AreEqual("Puerta Abriendose", reader.Current);
-            Assert.IsFalse(reader.MoveNext());
+            Assert.Equal("Puerta Abriendose", reader.Current);
+            Assert.False(reader.MoveNext());
 
         }
 
-        [TestMethod]
+        [Fact]
         public void test04ElevatorControllerCanHaveMoreThanOneView()
         {
             ElevatorController elevatorController = new ElevatorController();
@@ -86,19 +85,19 @@ namespace ElevatorConsole_Exercise
             IEnumerator<String> reader = elevatorControllerConsole.consoleReader();
 
             reader.MoveNext();
-            Assert.AreEqual("Puerta Cerrandose", reader.Current);
+            Assert.Equal("Puerta Cerrandose", reader.Current);
             reader.MoveNext();
-            Assert.AreEqual("Puerta Cerrada", reader.Current);
+            Assert.Equal("Puerta Cerrada", reader.Current);
             reader.MoveNext();
-            Assert.AreEqual("Cabina Moviendose", reader.Current);
+            Assert.Equal("Cabina Moviendose", reader.Current);
             reader.MoveNext();
-            Assert.AreEqual("Cabina Detenida", reader.Current);
+            Assert.Equal("Cabina Detenida", reader.Current);
             reader.MoveNext();
-            Assert.AreEqual("Puerta Abriendose", reader.Current);
-            Assert.IsFalse(reader.MoveNext());
+            Assert.Equal("Puerta Abriendose", reader.Current);
+            Assert.False(reader.MoveNext());
 
-            Assert.AreEqual("Stopped", elevatorControllerStatusView.cabinFieldModel());
-            Assert.AreEqual("Opening", elevatorControllerStatusView.cabinDoorFieldModel());
+            Assert.Equal("Stopped", elevatorControllerStatusView.cabinFieldModel());
+            Assert.Equal("Opening", elevatorControllerStatusView.cabinDoorFieldModel());
         }
     }
 }
