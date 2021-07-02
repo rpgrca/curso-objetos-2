@@ -11,7 +11,8 @@ namespace ElevatorConsole_Exercise
         private CabinState cabinState;
         private CabinDoorState cabinDoorState;
         private int currentCabinFloorNumber;
-        private ElevatorControllerVisitor _elevatorControllerVisitor = new ElevatorControllerDummy();
+        private readonly List<CabinStateVisitor> _cabinStateObservers = new();
+        private readonly List<CabinDoorStateVisitor> _cabinDoorStateObservers = new();
         private readonly SortedSet<int> floorsToGo = new();
 
         public ElevatorController()
@@ -47,6 +48,7 @@ namespace ElevatorConsole_Exercise
         private void cabinDoorIsClosed()
         {
             cabinDoorState = new CabinDoorClosedState(this);
+            _cabinDoorStateObservers.ForEach(p => cabinDoorState.accept(p));
         }
 
         private void cabinDoorIsOpened()
@@ -56,12 +58,14 @@ namespace ElevatorConsole_Exercise
 
         private void cabinDoorIsClosing()
         {
-            cabinDoorState = new CabinDoorClosingState(this, _elevatorControllerVisitor);
+            cabinDoorState = new CabinDoorClosingState(this);
+            _cabinDoorStateObservers.ForEach(p => cabinDoorState.accept(p));
         }
 
         private void cabinDoorIsOpening()
         {
             cabinDoorState = new CabinDoorOpeningState(this);
+            _cabinDoorStateObservers.ForEach(p => cabinDoorState.accept(p));
         }
 
         public bool isCabinDoorOpened()
@@ -88,11 +92,13 @@ namespace ElevatorConsole_Exercise
         private void cabinIsStopped()
         {
             cabinState = new CabinStoppedState(this);
+            _cabinStateObservers.ForEach(p => cabinState.accept(p));
         }
 
         private void cabinMoving()
         {
             cabinState = new CabinMovingState(this);
+            _cabinStateObservers.ForEach(p => cabinState.accept(p));
         }
 
         private void cabinIsWaitingForPeople()
@@ -297,9 +303,14 @@ namespace ElevatorConsole_Exercise
             throw new Exception("Sensor de puerta desincronizado");
         }
 
-        public void accept(ElevatorControllerVisitor elevatorControllerConsole)
+        public void addCabinObserver(CabinStateVisitor cabinStateVisitor)
         {
-            _elevatorControllerVisitor = elevatorControllerConsole;
+            _cabinStateObservers.Add(cabinStateVisitor);
+        }
+
+        public void addCabinDoorObserver(CabinDoorStateVisitor cabinDoorStateVisitor)
+        {
+            _cabinDoorStateObservers.Add(cabinDoorStateVisitor);
         }
     }
 }

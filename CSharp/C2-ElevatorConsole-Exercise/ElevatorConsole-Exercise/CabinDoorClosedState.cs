@@ -12,7 +12,6 @@ namespace ElevatorConsole_Exercise
 		    this.elevatorController = elevatorController;
 	    }
 
-	    
 	    public void cabinDoorClosedWhenWorkingAndCabinStopped() {
 		    throw new Exception();
 	    }

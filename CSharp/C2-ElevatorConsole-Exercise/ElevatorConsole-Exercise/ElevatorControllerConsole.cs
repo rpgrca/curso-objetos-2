@@ -2,48 +2,14 @@
 
 namespace ElevatorConsole_Exercise
 {
-	interface ElevatorControllerVisitor : CabinStateVisitor, CabinDoorStateVisitor
-	{
-	}
-
-    class ElevatorControllerDummy : ElevatorControllerVisitor
-    {
-        public void visitCabinDoorClosed(CabinDoorClosedState cabinDoorClosedState)
-        {
-        }
-
-        public void visitCabinDoorClosing(CabinDoorClosingState cabindDoorClosingState)
-        {
-        }
-
-        public void visitCabinDoorOpened(CabinDoorOpenedState cabinDoorOpenedState)
-        {
-        }
-
-        public void visitCabinDoorOpening(CabinDoorOpeningState cabinDoorOpeningState)
-        {
-        }
-
-        public void visitCabinMoving(CabinMovingState cabinMovingState)
-        {
-        }
-
-        public void visitCabinStopped(CabinStoppedState cabinStoppedState)
-        {
-        }
-
-        public void visitCabinWaitingPeople(CabinWaitingForPeopleState cabinWaitingForPeopleState)
-        {
-        }
-    }
-
-    class ElevatorControllerConsole : ElevatorControllerVisitor
+    class ElevatorControllerConsole : CabinStateVisitor, CabinDoorStateVisitor
     {
 	    private readonly List<string> _console;
 
         public ElevatorControllerConsole(ElevatorController elevatorController) {
             _console = new List<string>();
-            elevatorController.accept(this);
+            elevatorController.addCabinObserver(this);
+			elevatorController.addCabinDoorObserver(this);
         }
 
 	    protected void cabinDoorStateChangedTo(CabinDoorState cabinDoorState) {

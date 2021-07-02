@@ -5,12 +5,14 @@ using System.Text;
 
 namespace ElevatorConsole_Exercise
 {
-    class ElevatorControllerStatusView: CabinStateVisitor,CabinDoorStateVisitor 
+    class ElevatorControllerStatusView: CabinStateVisitor, CabinDoorStateVisitor
     {
 	    private string m_cabinFieldModel;
 	    private string m_cabinDoorFieldModel;
 
 	    public ElevatorControllerStatusView(ElevatorController elevatorController) {
+			elevatorController.addCabinObserver(this);
+			elevatorController.addCabinDoorObserver(this);
 	    }
 
 	    protected void cabinDoorStateChangedTo(CabinDoorState cabinDoorState) {
