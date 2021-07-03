@@ -2,131 +2,91 @@
 
 namespace ElevatorExercise
 {
-    public abstract class CabinState1
+    public interface CabinState
     {
-        protected DoorState1 _doorState;
+        bool IsStopped();
 
-        protected CabinState _cabinState;
-
-        public abstract void OpenDoor();
-
-        internal void OpenedDoor() => _doorState = new OpenedDoor();
-
-        internal bool IsDoorOpened() => _doorState.IsOpened();
-
-        internal bool IsDoorOpening() => _doorState.IsOpening();
-
-        internal bool IsDoorClosed() => _doorState.IsClosed();
-
-        internal bool IsDoorClosing() => _doorState.IsClosing();
-
-        public abstract bool IsStopped();
-
-        public abstract bool IsMoving();
+        bool IsMoving();
     }
 
-    public class StoppedCabin : CabinState1
+    public class StoppedCabin : CabinState
     {
-        public StoppedCabin()
-        {
-            _doorState = new OpenedDoor();
-        }
-
-        public StoppedCabin(DoorState1 doorState) => _doorState = doorState;
-
-        public override void OpenDoor() => _doorState.Open();
-        public override bool IsStopped() => true;
-        public override bool IsMoving() => false;
+        public bool IsStopped() => true;
+        public bool IsMoving() => false;
     }
 
-    public class MovingCabin : CabinState1
+    public class MovingCabin : CabinState
     {
-        public MovingCabin()
-        {
-            _doorState = new ClosedDoor();
-        }
-
-        public override bool IsStopped() => false;
-        public override bool IsMoving() => true;
-
-        public override void OpenDoor() {}
+        public bool IsStopped() => false;
+        public bool IsMoving() => true;
     }
 
-    public class DoorState1
+    public abstract class DoorState
     {
-        private DoorState _state;
+        public abstract bool IsClosed();
 
-        public DoorState1(DoorState state) => _state = state;
+        public abstract bool IsClosing();
 
-        internal void Open()
-        {
-            if (_state != DoorState.Opened)
-            {
-                _state = DoorState.Opening;
-            }
-        }
+        public abstract bool IsOpened();
 
-        internal bool IsClosed() => _state == DoorState.Closed;
-
-        internal bool IsClosing() => _state == DoorState.Closing;
-
-        internal bool IsOpened() => _state == DoorState.Opened;
-
-        internal bool IsOpening() => _state == DoorState.Opening;
+        public abstract bool IsOpening();
     }
 
-    public class ClosedDoor : DoorState1
+    public class ClosedDoor : DoorState
     {
-        public ClosedDoor() : base(DoorState.Closed)
-        {
-        }
+        public override bool IsClosed() => true;
+
+        public override bool IsClosing() => false;
+
+        public override bool IsOpened() => false;
+
+        public override bool IsOpening() => false;
     }
 
-    public class ClosingDoor : DoorState1
+    public class ClosingDoor : DoorState
     {
-        public ClosingDoor() : base(DoorState.Closing)
-        {
-        }
+        public override bool IsClosed() => false;
+
+        public override bool IsClosing() => true;
+
+        public override bool IsOpened() => false;
+
+        public override bool IsOpening() => false;
     }
 
-    public class OpenedDoor : DoorState1
+    public class OpenedDoor : DoorState
     {
-        public OpenedDoor() : base(DoorState.Opened)
-        {
-        }
+        public override bool IsClosed() => false;
+
+        public override bool IsClosing() => false;
+
+        public override bool IsOpened() => true;
+
+        public override bool IsOpening() => false;
     }
 
-    public class OpeningDoor : DoorState1
+    public class OpeningDoor : DoorState
     {
-        public OpeningDoor() : base(DoorState.Opening)
-        {
-        }
-    }
+        public override bool IsClosed() => false;
 
+        public override bool IsClosing() => false;
 
-    public enum DoorState
-    {
-        Opening,
-        Opened,
-        Closing,
-        Closed
-    }
+        public override bool IsOpened() => false;
 
-    public enum CabinState
-    {
-        Stopped,
-        Moving
+        public override bool IsOpening() => true;
     }
 
     internal class ElevatorController
     {
         private int _cabinFloorNumber;
-        private CabinState1 _cabinState;
+        private CabinState _cabinState;
+        private DoorState _doorState;
         private bool _isIdle;
 
         public ElevatorController()
         {
             _cabinState = new StoppedCabin();
+            _doorState = new OpenedDoor();
             _isIdle = true;
         }
 
@@ -136,13 +96,13 @@ namespace ElevatorExercise
         public bool isWorking() => ! isIdle();
 
         //Door state
-        public bool isCabinDoorOpened() => _cabinState.IsDoorOpened();
+        public bool isCabinDoorOpened() => _doorState.IsOpened();
 
-        public bool isCabinDoorOpening() => _cabinState.IsDoorOpening();
+        public bool isCabinDoorOpening() => _doorState.IsOpening();
 
-        public bool isCabinDoorClosed() => _cabinState.IsDoorClosed();
+        public bool isCabinDoorClosed() => _doorState.IsClosed();
 
-        public bool isCabinDoorClosing() => _cabinState.IsDoorClosing();
+        public bool isCabinDoorClosing() => _doorState.IsClosing();
 
         //Cabin state
         public int cabinFloorNumber() => _cabinFloorNumber;
@@ -156,29 +116,34 @@ namespace ElevatorExercise
         //Events
         public void goUpPushedFromFloor(int aFloorNumber)
         {
-            _cabinState = new StoppedCabin(new ClosingDoor());
+            _doorState = new ClosingDoor();
             _isIdle = false;
         }
 
         public void cabinOnFloor(int aFloorNumber)
         {
             _cabinFloorNumber = aFloorNumber;
-            _cabinState = new StoppedCabin(new OpeningDoor());
+            _cabinState = new StoppedCabin();
+            _doorState = new OpeningDoor();
         }
 
         public void cabinDoorClosed()
         {
+            _doorState = new ClosedDoor();
             _cabinState = new MovingCabin();
         }
 
         public void openCabinDoor()
         {
-            _cabinState.OpenDoor();
+            if (!_doorState.IsOpened() && !_doorState.IsOpening())
+            {
+                _doorState = new OpeningDoor();
+            }
         }
 
         public void cabinDoorOpened()
         {
-            _cabinState.OpenedDoor();
+            _doorState = new OpenedDoor();
             _isIdle = true;
         }
 
