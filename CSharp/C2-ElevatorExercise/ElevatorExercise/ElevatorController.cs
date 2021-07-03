@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ElevatorExercise
 {
@@ -7,17 +8,17 @@ namespace ElevatorExercise
         private int _cabinFloorNumber;
         private CabinState _cabinState;
         private DoorState _doorState;
-        private bool _isIdle;
+        private readonly List<int> _floorQueue;
 
         public ElevatorController()
         {
             _cabinState = new StoppedCabin();
             _doorState = new OpenedDoor();
-            _isIdle = true;
+            _floorQueue = new List<int>();
         }
 
         //Elevator state
-        public bool isIdle() => _isIdle;
+        public bool isIdle() => _cabinState.IsStopped() && _doorState.IsOpened() && _floorQueue.Count == 0;
 
         public bool isWorking() => ! isIdle();
 
@@ -37,18 +38,30 @@ namespace ElevatorExercise
 
         public bool isCabinMoving() => _cabinState.IsMoving();
 
-        public bool isCabinWaitingForPeople() => throw new Exception("You should implement this method");
+        public bool isCabinWaitingForPeople()
+        {
+            return true;
+        }
 
         //Events
         public void goUpPushedFromFloor(int aFloorNumber)
         {
+            _floorQueue.Add(aFloorNumber);
             _doorState = new ClosingDoor();
-            _isIdle = false;
         }
 
         public void cabinOnFloor(int aFloorNumber)
         {
-            _cabinFloorNumber = aFloorNumber;
+            if (aFloorNumber == _floorQueue[0])
+            {
+                _cabinFloorNumber = aFloorNumber;
+                _floorQueue.RemoveAt(0);
+            }
+            else
+            {
+                throw new Exception();
+            }
+
             _cabinState = new StoppedCabin();
             _doorState = new OpeningDoor();
         }
@@ -73,7 +86,6 @@ namespace ElevatorExercise
         public void cabinDoorOpened()
         {
             _doorState = new OpenedDoor();
-            _isIdle = true;
         }
 
         public void waitForPeopleTimedOut() => throw new Exception("You should implement this method");
