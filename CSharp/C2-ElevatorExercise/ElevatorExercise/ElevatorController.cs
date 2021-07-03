@@ -61,9 +61,12 @@ namespace ElevatorExercise
 
         public void openCabinDoor()
         {
-            if (!_doorState.IsOpened() && !_doorState.IsOpening())
+            if (! _cabinState.IsMoving())
             {
-                _doorState = new OpeningDoor();
+                if (!_doorState.IsOpened() && !_doorState.IsOpening())
+                {
+                    _doorState = new OpeningDoor();
+                }
             }
         }
 
