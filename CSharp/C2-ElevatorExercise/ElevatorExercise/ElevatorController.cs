@@ -98,7 +98,7 @@ namespace ElevatorExercise
 
         public void closeCabinDoor()
         {
-            if (! isIdle())
+            if (! isIdle() && !isCabinMoving())
             {
                 _doorState = new ClosingDoor();
             }
