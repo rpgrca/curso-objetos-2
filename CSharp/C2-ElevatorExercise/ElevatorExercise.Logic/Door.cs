@@ -1,5 +1,3 @@
-using System;
-
 namespace ElevatorExercise.Logic
 {
     public class Door
@@ -53,18 +51,6 @@ namespace ElevatorExercise.Logic
 
         internal void ClosedDoorWhenOpening() => ThrowOutOfSyncException();
 
-        internal void CloseWhenClosing() => _state = new ClosedDoor(this);
-
-        internal void CloseWhenAlreadyClosed()
-        {
-            // door is already closed, do nothing
-        }
-
         internal void CloseWhenOpened() => _state = new ClosingDoor(this);
-
-        internal void CloseWhenOpening()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

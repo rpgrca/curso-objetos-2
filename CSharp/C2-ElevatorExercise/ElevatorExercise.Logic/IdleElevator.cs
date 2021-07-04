@@ -12,7 +12,10 @@ namespace ElevatorExercise.Logic
 
         public void goUpPushedFromFloor(int aFloorNumber) => _elevator.goUpPushedFromFloorWhileIdle(aFloorNumber);
 
-        public void DoorOpened() => _elevator.OpenedDoorWhenIdle();
+        public void DoorOpened()
+        {
+            // undefined
+        }
 
         public void CloseDoor() => _elevator.CloseDoorWhenIdle();
     }

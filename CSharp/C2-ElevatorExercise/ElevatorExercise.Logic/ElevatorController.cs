@@ -93,8 +93,6 @@ namespace ElevatorExercise.Logic
             _cabin.DoorOpened();
         }
 
-        internal void OpenedDoorWhenIdle() => _cabin.OpenDoor();
-
         internal void CloseDoorWhenWorking()
         {
             if (_floorQueue.Count > 0)

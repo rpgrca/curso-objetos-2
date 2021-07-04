@@ -18,6 +18,9 @@ namespace ElevatorExercise.Logic
 
         public void Open() => _door.OpenWhenClosing();
 
-        public void Close() => _door.CloseWhenClosing();
+        public void Close()
+        {
+            // undefined
+        }
     }
 }
