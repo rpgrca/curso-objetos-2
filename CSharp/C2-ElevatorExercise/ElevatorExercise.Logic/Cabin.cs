@@ -4,7 +4,7 @@ namespace ElevatorExercise.Logic
     {
         private CabinState _cabinState;
 
-        public Cabin() => _cabinState = new StoppedCabin();
+        public Cabin() => Stop();
 
         internal bool IsStopped() => _cabinState.IsStopped();
 
