@@ -7,8 +7,11 @@ namespace ElevatorExercise.Logic
         public MovingCabin(Cabin cabin) => _cabin = cabin;
 
         public bool IsStopped() => false;
+
         public bool IsMoving() => true;
 
         public void OpenDoor() => _cabin.OpenDoorWhenCabinIsMoving();
+
+        public void CloseDoor() => _cabin.CloseDoorWhileCabinIsMoving();
     }
 }

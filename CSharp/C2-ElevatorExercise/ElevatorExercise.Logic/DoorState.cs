@@ -11,5 +11,6 @@ namespace ElevatorExercise.Logic
         bool IsOpening();
         void Open();
         void OnClosed();
+        void Close();
     }
 }

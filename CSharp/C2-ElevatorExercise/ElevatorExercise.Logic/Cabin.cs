@@ -1,3 +1,5 @@
+using System;
+
 namespace ElevatorExercise.Logic
 {
     public class Cabin
@@ -23,15 +25,13 @@ namespace ElevatorExercise.Logic
 
         public bool IsDoorOpened() => _door.IsOpened();
 
-        public bool IsIdle() => _door.IsOpened();
-
         public bool IsDoorOpening() => _door.IsOpening();
 
         public bool IsDoorClosed() => _door.IsClosed();
 
         public bool IsDoorClosing() => _door.IsClosing();
 
-        public void CloseDoor() => _door.Close();
+        public void CloseDoor() => _state.CloseDoor();
 
         public void OpenDoor() => _state.OpenDoor();
 
@@ -39,9 +39,9 @@ namespace ElevatorExercise.Logic
 
         public void DoorOpened() => _door.OnOpened();
 
-        public void OnArriving()
+        public void OnArrivingAt(int aFloorNumber)
         {
-            _elevatorController.ReachedFloorCorrectly();
+            _elevatorController.ReachedFloor(aFloorNumber);
             Stop();
             OpenDoor();
         }
@@ -60,9 +60,16 @@ namespace ElevatorExercise.Logic
 
         internal void OpenDoorWhenCabinIsMoving()
         {
-            // Cannot open the door while the cabin is moving
+            // Cannot open the door while the cabin is moving, do nothing
         }
 
         internal void OpenDoorWhileCabinIsStopped() => _door.Open();
+
+        internal void CloseDoorWhileCabinIsMoving()
+        {
+            //Cannot close the door while cabin is moving, should already be closed
+        }
+
+        internal void CloseDoorWhileCabinIsStopped() => _door.Close();
     }
 }

@@ -1,27 +1,73 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Linq;
 using System.Collections.Generic;
 using System;
 
 namespace ElevatorExercise.Logic
 {
+    public interface ElevatorState
+    {
+        bool IsIdle();
+        bool IsWorking();
+        void goUpPushedFromFloor(int aFloorNumber);
+        void DoorOpened();
+        void CloseDoor();
+    }
+
+    public class WorkingElevator : ElevatorState
+    {
+        private readonly ElevatorController _elevator;
+
+        public WorkingElevator(ElevatorController elevator) => _elevator = elevator;
+
+        public bool IsIdle() => false;
+
+        public bool IsWorking() => true;
+
+        public void goUpPushedFromFloor(int aFloorNumber) => _elevator.goUpPushedFromFloorWhileWorking(aFloorNumber);
+
+        public void DoorOpened() => _elevator.OpenedDoorWhenWorking();
+
+        public void CloseDoor() => _elevator.CloseDoorWhenWorking();
+    }
+
+    public class IdleElevator : ElevatorState
+    {
+        private readonly ElevatorController _elevator;
+
+        public IdleElevator(ElevatorController elevator) => _elevator = elevator;
+
+        public bool IsIdle() => true;
+
+        public bool IsWorking() => false;
+
+        public void goUpPushedFromFloor(int aFloorNumber) => _elevator.goUpPushedFromFloorWhileIdle(aFloorNumber);
+
+        public void DoorOpened() => _elevator.OpenedDoorWhenIdle();
+
+        public void CloseDoor() => _elevator.CloseDoorWhenIdle();
+    }
+
     public class ElevatorController
     {
         private int _cabinFloorNumber;
+        private ElevatorState _state;
         private readonly Cabin _cabin;
         private readonly List<int> _floorQueue;
         private bool _waitingForPeople;
 
         public ElevatorController()
         {
+            _state = new IdleElevator(this);
             _cabin = new Cabin(this);
             _floorQueue = new List<int>();
             _waitingForPeople = true;
         }
 
         //Elevator state
-        public bool isIdle() => _floorQueue.Count == 0 && _cabin.IsIdle();
+        public bool isIdle() => _state.IsIdle(); //_floorQueue.Count == 0 && _cabin.IsIdle();
 
-        public bool isWorking() => ! isIdle();
+        public bool isWorking() => _state.IsWorking();
 
         //Door state
         public bool isCabinDoorOpened() => _cabin.IsDoorOpened();
@@ -42,42 +88,18 @@ namespace ElevatorExercise.Logic
         public bool isCabinWaitingForPeople() => _waitingForPeople;
 
         //Events
-        public void goUpPushedFromFloor(int aFloorNumber)
-        {
-            if (_floorQueue.Count > 0)
-            {
-                _floorQueue.AddRange(Enumerable.Range(_floorQueue.Last() + 1, aFloorNumber));
-            }
-            else
-            {
-                _floorQueue.AddRange(Enumerable.Range(1, aFloorNumber));
-            }
-
-            _cabin.CloseDoor();
-        }
+        public void goUpPushedFromFloor(int aFloorNumber) => _state.goUpPushedFromFloor(aFloorNumber);
 
         public void cabinOnFloor(int aFloorNumber)
         {
-            if (_floorQueue.Count > 0 && aFloorNumber == _floorQueue[0])
-            {
-                _cabinFloorNumber = aFloorNumber;
-            }
-            else
-            {
-                throw new ElevatorEmergency("Sensor de cabina desincronizado");
-            }
-
-            _cabin.OnArriving();
+            _cabin.OnArrivingAt(aFloorNumber);
         }
 
-        public void cabinDoorClosed()
-        {
-            _cabin.OnDoorClosed();
-        }
+        public void cabinDoorClosed() => _cabin.OnDoorClosed();
 
         public void openCabinDoor() => _cabin.OpenDoor();
 
-        public void cabinDoorOpened() => _cabin.DoorOpened();
+        public void cabinDoorOpened() => _state.DoorOpened();
 
         public void waitForPeopleTimedOut()
         {
@@ -85,13 +107,7 @@ namespace ElevatorExercise.Logic
             _cabin.CloseDoor();
         }
 
-        public void closeCabinDoor()
-        {
-            if (! isIdle() && !isCabinMoving() && !isCabinDoorOpening())
-            {
-                _cabin.CloseDoor();
-            }
-        }
+        public void closeCabinDoor() => _state.CloseDoor();
 
         internal void OnDoorClosed()
         {
@@ -101,6 +117,65 @@ namespace ElevatorExercise.Logic
             }
         }
 
-        internal void ReachedFloorCorrectly() => _floorQueue.RemoveAt(0);
+        internal void ReachedFloor(int aFloorNumber)
+        {
+            if (_floorQueue.Count == 0 || aFloorNumber != _floorQueue[0])
+            {
+                throw new ElevatorEmergency("Sensor de cabina desincronizado");
+            }
+
+            _cabinFloorNumber = aFloorNumber;
+            _floorQueue.RemoveAt(0);
+            _waitingForPeople = true;
+        }
+
+        internal void goUpPushedFromFloorWhileWorking(int aFloorNumber) => QueueFloors(aFloorNumber);
+
+        private void QueueFloors(int aFloorNumber)
+        {
+            if (_floorQueue.Count > 0)
+            {
+                _floorQueue.AddRange(Enumerable.Range(_floorQueue.Last() + 1, aFloorNumber));
+            }
+            else
+            {
+                _floorQueue.AddRange(Enumerable.Range(1, aFloorNumber));
+            }
+        }
+
+        internal void goUpPushedFromFloorWhileIdle(int aFloorNumber)
+        {
+            _state = new WorkingElevator(this);
+
+            QueueFloors(aFloorNumber);
+            _waitingForPeople = false;
+            _cabin.CloseDoor();
+        }
+
+        internal void OpenedDoorWhenWorking()
+        {
+            if (_floorQueue.Count == 0)
+            {
+                _state = new IdleElevator(this);
+            }
+
+            _cabin.DoorOpened();
+        }
+
+        internal void OpenedDoorWhenIdle() => _cabin.OpenDoor();
+
+        internal void CloseDoorWhenWorking()
+        {
+            if (_floorQueue.Count > 0)
+            {
+                _waitingForPeople = false;
+                _cabin.CloseDoor();
+            }
+        }
+
+        internal void CloseDoorWhenIdle()
+        {
+            // idle, no commands entered, do nothing
+        }
     }
 }

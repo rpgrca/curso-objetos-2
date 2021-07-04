@@ -21,7 +21,7 @@ namespace ElevatorExercise.Logic
 
         public bool IsClosing() => _state.IsClosing();
 
-        public void Close() => _state = new ClosingDoor(this);
+        public void Close() => _state.Close();
 
         public void Open() => _state.Open();
 
@@ -43,14 +43,28 @@ namespace ElevatorExercise.Logic
 
         internal void OpenWhenAlreadyClosed() => _state = new OpeningDoor(this);
 
-        internal void CloseDoorWhenAlreadyClosed() => ThrowOutOfSyncException();
+        internal void DoorClosedWhenAlreadyClosed() => ThrowOutOfSyncException();
 
         private static void ThrowOutOfSyncException() => throw new ElevatorEmergency("Sensor de puerta desincronizado");
 
-        internal void CloseDoorWhenClosing() => _state = new ClosedDoor(this);
+        internal void DoorClosedWhenClosing() => _state = new ClosedDoor(this);
 
         internal void ClosedDoorWhenOpened() => ThrowOutOfSyncException();
 
         internal void ClosedDoorWhenOpening() => ThrowOutOfSyncException();
+
+        internal void CloseWhenClosing() => _state = new ClosedDoor(this);
+
+        internal void CloseWhenAlreadyClosed()
+        {
+            // door is already closed, do nothing
+        }
+
+        internal void CloseWhenOpened() => _state = new ClosingDoor(this);
+
+        internal void CloseWhenOpening()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

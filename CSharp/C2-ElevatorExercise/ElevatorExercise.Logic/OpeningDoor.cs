@@ -17,5 +17,7 @@ namespace ElevatorExercise.Logic
         public void OnClosed() => _door.ClosedDoorWhenOpening();
 
         public void Open() => _door.OpenWhenOpening();
+
+        public void Close() => _door.CloseWhenOpening();
     }
 }
