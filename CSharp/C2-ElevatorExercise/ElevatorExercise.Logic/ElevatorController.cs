@@ -1,10 +1,9 @@
 ﻿using System.Linq;
-using System;
 using System.Collections.Generic;
 
-namespace ElevatorExercise
+namespace ElevatorExercise.Logic
 {
-    internal class ElevatorController
+    public class ElevatorController
     {
         private int _cabinFloorNumber;
         private CabinState _cabinState;

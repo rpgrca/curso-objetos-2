@@ -1,6 +1,7 @@
 ﻿using Xunit;
+using ElevatorExercise.Logic;
 
-namespace ElevatorExercise
+namespace ElevatorExercise.UnitTests
 {
     public class ElevatorTest
     {

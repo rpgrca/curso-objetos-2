@@ -5,6 +5,7 @@
 
     <IsPackable>false</IsPackable>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>ElevatorExercise.Logic</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ElevatorExercise.Logic\ElevatorExercise.Logic.csproj" />
   </ItemGroup>
 
 </Project>

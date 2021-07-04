@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ElevatorExercise
+namespace ElevatorExercise.Logic
 {
-    internal class ElevatorEmergency : Exception
+    public class ElevatorEmergency : Exception
     {
         public ElevatorEmergency(string message) : base(message)
         {

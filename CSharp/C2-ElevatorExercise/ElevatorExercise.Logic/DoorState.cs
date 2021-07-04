@@ -1,4 +1,4 @@
-namespace ElevatorExercise
+namespace ElevatorExercise.Logic
 {
     public interface DoorState
     {
