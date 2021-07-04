@@ -78,6 +78,11 @@ namespace ElevatorExercise
 
         public void cabinDoorClosed()
         {
+            if (_floorQueue.Count == 0)
+            {
+                throw new ElevatorEmergency("Sensor de puerta desincronizado");
+            }
+
             _doorState = new ClosedDoor();
             _cabinState = new MovingCabin();
         }
