@@ -7,31 +7,29 @@ namespace ElevatorExercise.Logic
     {
         private int _cabinFloorNumber;
         private readonly Cabin _cabin;
-        private readonly Door _door;
         private readonly List<int> _floorQueue;
         private bool _waitingForPeople;
 
         public ElevatorController()
         {
             _cabin = new Cabin();
-            _door = new Door();
             _floorQueue = new List<int>();
             _waitingForPeople = true;
         }
 
         //Elevator state
-        public bool isIdle() => _door.IsOpened() && _floorQueue.Count == 0;
+        public bool isIdle() => _cabin.IsDoorOpened() && _floorQueue.Count == 0;
 
         public bool isWorking() => ! isIdle();
 
         //Door state
-        public bool isCabinDoorOpened() => _door.IsOpened();
+        public bool isCabinDoorOpened() => _cabin.IsDoorOpened();
 
-        public bool isCabinDoorOpening() => _door.IsOpening();
+        public bool isCabinDoorOpening() => _cabin.IsDoorOpening();
 
-        public bool isCabinDoorClosed() => _door.IsClosed();
+        public bool isCabinDoorClosed() => _cabin.IsDoorClosed();
 
-        public bool isCabinDoorClosing() => _door.IsClosing();
+        public bool isCabinDoorClosing() => _cabin.IsDoorClosing();
 
         //Cabin state
         public int cabinFloorNumber() => _cabinFloorNumber;
@@ -57,7 +55,7 @@ namespace ElevatorExercise.Logic
                 _floorQueue.AddRange(Enumerable.Range(1, aFloorNumber));
             }
 
-            _door.Close();
+            _cabin.CloseDoor();
         }
 
         public void cabinOnFloor(int aFloorNumber)
@@ -73,7 +71,7 @@ namespace ElevatorExercise.Logic
             }
 
             _cabin.Stop();
-            _door.Open();
+            _cabin.OpenDoor();
         }
 
         public void cabinDoorClosed()
@@ -83,12 +81,12 @@ namespace ElevatorExercise.Logic
                 throw new ElevatorEmergency("Sensor de puerta desincronizado");
             }
 
-            if (_door.IsClosed())
+            if (_cabin.IsDoorClosed())
             {
                 throw new ElevatorEmergency("Sensor de puerta desincronizado");
             }
 
-            _door.Closed();
+            _cabin.DoorClosed();
             _cabin.Move();
         }
 
@@ -96,29 +94,29 @@ namespace ElevatorExercise.Logic
         {
             if (! _cabin.IsMoving())
             {
-                if (!_door.IsOpened() && !_door.IsOpening())
+                if (!_cabin.IsDoorOpened() && !_cabin.IsDoorOpening())
                 {
-                    _door.Open();
+                    _cabin.OpenDoor();
                 }
             }
         }
 
         public void cabinDoorOpened()
         {
-            _door.Opened();
+            _cabin.DoorOpened();
         }
 
         public void waitForPeopleTimedOut()
         {
             _waitingForPeople = false;
-            _door.Close();
+            _cabin.CloseDoor();
         }
 
         public void closeCabinDoor()
         {
             if (! isIdle() && !isCabinMoving() && !isCabinDoorOpening())
             {
-                _door.Close();
+                _cabin.CloseDoor();
             }
         }
     }
