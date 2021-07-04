@@ -51,7 +51,7 @@ namespace ElevatorExercise
         {
             if (_floorQueue.Count > 0)
             {
-                _floorQueue.AddRange(Enumerable.Range(_floorQueue.Last(), aFloorNumber));
+                _floorQueue.AddRange(Enumerable.Range(_floorQueue.Last() + 1, aFloorNumber));
             }
             else
             {
