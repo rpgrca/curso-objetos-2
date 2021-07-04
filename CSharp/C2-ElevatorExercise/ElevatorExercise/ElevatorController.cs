@@ -54,14 +54,14 @@ namespace ElevatorExercise
 
         public void cabinOnFloor(int aFloorNumber)
         {
-            if (aFloorNumber == _floorQueue[0])
+            if (_floorQueue.Count > 0 && aFloorNumber == _floorQueue[0])
             {
                 _cabinFloorNumber = aFloorNumber;
                 _floorQueue.RemoveAt(0);
             }
             else
             {
-                throw new Exception();
+                throw new ElevatorEmergency("Sensor de cabina desincronizado");
             }
 
             _cabinState = new StoppedCabin();
