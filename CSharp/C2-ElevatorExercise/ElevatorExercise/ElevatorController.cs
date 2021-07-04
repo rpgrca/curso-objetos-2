@@ -96,6 +96,9 @@ namespace ElevatorExercise
             _doorState = new ClosingDoor();
         }
 
-        public void closeCabinDoor() => throw new Exception("You should implement this method");
+        public void closeCabinDoor()
+        {
+            _doorState = new ClosingDoor();
+        }
     }
 }
