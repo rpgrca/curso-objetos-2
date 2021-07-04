@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 using System;
 
@@ -50,8 +49,8 @@ namespace ElevatorExercise.Logic
 
     public class ElevatorController
     {
-        private int _cabinFloorNumber;
         private ElevatorState _state;
+
         private readonly Cabin _cabin;
         private readonly List<int> _floorQueue;
         private bool _waitingForPeople;
@@ -79,7 +78,7 @@ namespace ElevatorExercise.Logic
         public bool isCabinDoorClosing() => _cabin.IsDoorClosing();
 
         //Cabin state
-        public int cabinFloorNumber() => _cabinFloorNumber;
+        public int cabinFloorNumber() => _cabin.FloorNumber();
 
         public bool isCabinStopped() => _cabin.IsStopped();
 
@@ -119,28 +118,24 @@ namespace ElevatorExercise.Logic
 
         internal void ReachedFloor(int aFloorNumber)
         {
-            if (_floorQueue.Count == 0 || aFloorNumber != _floorQueue[0])
+            if (_floorQueue.Count == 0 || aFloorNumber > _floorQueue[0])
             {
                 throw new ElevatorEmergency("Sensor de cabina desincronizado");
             }
 
-            _cabinFloorNumber = aFloorNumber;
-            _floorQueue.RemoveAt(0);
-            _waitingForPeople = true;
+            if (_floorQueue[0] == aFloorNumber)
+            {
+                _floorQueue.RemoveAt(0);
+                _waitingForPeople = true;
+            }
         }
 
         internal void goUpPushedFromFloorWhileWorking(int aFloorNumber) => QueueFloors(aFloorNumber);
 
         private void QueueFloors(int aFloorNumber)
         {
-            if (_floorQueue.Count > 0)
-            {
-                _floorQueue.AddRange(Enumerable.Range(_floorQueue.Last() + 1, aFloorNumber));
-            }
-            else
-            {
-                _floorQueue.AddRange(Enumerable.Range(1, aFloorNumber));
-            }
+            _floorQueue.Add(aFloorNumber);
+            _floorQueue.Sort();
         }
 
         internal void goUpPushedFromFloorWhileIdle(int aFloorNumber)
@@ -177,5 +172,7 @@ namespace ElevatorExercise.Logic
         {
             // idle, no commands entered, do nothing
         }
+
+        internal bool MustStopOnFloor(int aFloorNumber) => _floorQueue[0] == aFloorNumber;
     }
 }

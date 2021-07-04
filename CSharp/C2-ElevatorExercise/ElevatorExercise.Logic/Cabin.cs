@@ -7,11 +7,13 @@ namespace ElevatorExercise.Logic
         private CabinState _state;
         private readonly Door _door;
         private readonly ElevatorController _elevatorController;
+        private int _cabinFloorNumber;
 
         public Cabin(ElevatorController elevatorController)
         {
             _elevatorController = elevatorController;
             _door = new Door(this);
+            _cabinFloorNumber = 0;
             Stop();
         }
 
@@ -41,9 +43,18 @@ namespace ElevatorExercise.Logic
 
         public void OnArrivingAt(int aFloorNumber)
         {
-            _elevatorController.ReachedFloor(aFloorNumber);
-            Stop();
-            OpenDoor();
+            if (_cabinFloorNumber + 1 != aFloorNumber)
+            {
+                throw new ElevatorEmergency("Sensor de cabina desincronizado");
+            }
+
+            _cabinFloorNumber = aFloorNumber;
+            if (_elevatorController.MustStopOnFloor(aFloorNumber))
+            {
+                _elevatorController.ReachedFloor(aFloorNumber);
+                Stop();
+                OpenDoor();
+            }
         }
 
         public void OnDeparting()
@@ -71,5 +82,7 @@ namespace ElevatorExercise.Logic
         }
 
         internal void CloseDoorWhileCabinIsStopped() => _door.Close();
+
+        public int FloorNumber() => _cabinFloorNumber;
     }
 }
