@@ -6,21 +6,21 @@ namespace ElevatorExercise.Logic
     public class ElevatorController
     {
         private int _cabinFloorNumber;
-        private CabinState _cabinState;
+        private Cabin _cabin;
         private DoorState _doorState;
         private readonly List<int> _floorQueue;
         private bool _waitingForPeople;
 
         public ElevatorController()
         {
-            _cabinState = new StoppedCabin();
+            _cabin = new Cabin();
             _doorState = new OpenedDoor();
             _floorQueue = new List<int>();
             _waitingForPeople = true;
         }
 
         //Elevator state
-        public bool isIdle() => _cabinState.IsStopped() && _doorState.IsOpened() && _floorQueue.Count == 0;
+        public bool isIdle() => _doorState.IsOpened() && _floorQueue.Count == 0;
 
         public bool isWorking() => ! isIdle();
 
@@ -36,9 +36,9 @@ namespace ElevatorExercise.Logic
         //Cabin state
         public int cabinFloorNumber() => _cabinFloorNumber;
 
-        public bool isCabinStopped() => _cabinState.IsStopped();
+        public bool isCabinStopped() => _cabin.IsStopped();
 
-        public bool isCabinMoving() => _cabinState.IsMoving();
+        public bool isCabinMoving() => _cabin.IsMoving();
 
         public bool isCabinWaitingForPeople()
         {
@@ -56,6 +56,7 @@ namespace ElevatorExercise.Logic
             {
                 _floorQueue.AddRange(Enumerable.Range(1, aFloorNumber));
             }
+
             _doorState = new ClosingDoor();
         }
 
@@ -71,7 +72,7 @@ namespace ElevatorExercise.Logic
                 throw new ElevatorEmergency("Sensor de cabina desincronizado");
             }
 
-            _cabinState = new StoppedCabin();
+            _cabin.Stop();
             _doorState = new OpeningDoor();
         }
 
@@ -88,12 +89,12 @@ namespace ElevatorExercise.Logic
             }
 
             _doorState = new ClosedDoor();
-            _cabinState = new MovingCabin();
+            _cabin.Move();
         }
 
         public void openCabinDoor()
         {
-            if (! _cabinState.IsMoving())
+            if (! _cabin.IsMoving())
             {
                 if (!_doorState.IsOpened() && !_doorState.IsOpening())
                 {
