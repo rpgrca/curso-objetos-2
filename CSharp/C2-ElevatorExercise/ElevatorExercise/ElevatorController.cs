@@ -9,12 +9,14 @@ namespace ElevatorExercise
         private CabinState _cabinState;
         private DoorState _doorState;
         private readonly List<int> _floorQueue;
+        private bool _waitingForPeople;
 
         public ElevatorController()
         {
             _cabinState = new StoppedCabin();
             _doorState = new OpenedDoor();
             _floorQueue = new List<int>();
+            _waitingForPeople = true;
         }
 
         //Elevator state
@@ -40,7 +42,7 @@ namespace ElevatorExercise
 
         public bool isCabinWaitingForPeople()
         {
-            return true;
+            return _waitingForPeople;
         }
 
         //Events
@@ -88,7 +90,11 @@ namespace ElevatorExercise
             _doorState = new OpenedDoor();
         }
 
-        public void waitForPeopleTimedOut() => throw new Exception("You should implement this method");
+        public void waitForPeopleTimedOut()
+        {
+            _waitingForPeople = false;
+            _doorState = new ClosingDoor();
+        }
 
         public void closeCabinDoor() => throw new Exception("You should implement this method");
     }
