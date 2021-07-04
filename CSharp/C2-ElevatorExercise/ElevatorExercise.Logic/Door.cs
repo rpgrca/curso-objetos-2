@@ -1,10 +1,17 @@
+using System;
+
 namespace ElevatorExercise.Logic
 {
     public class Door
     {
+        private readonly Cabin _cabin;
         private DoorState _state;
 
-        public Door() => _state = new OpenedDoor();
+        public Door(Cabin cabin)
+        {
+            _cabin = cabin;
+            _state = new OpenedDoor(this);
+        }
 
         public bool IsOpened() => _state.IsOpened();
 
@@ -14,12 +21,26 @@ namespace ElevatorExercise.Logic
 
         public bool IsClosing() => _state.IsClosing();
 
-        public void Close() => _state = new ClosingDoor();
+        public void Close() => _state = new ClosingDoor(this);
 
-        public void Open() => _state = new OpeningDoor();
+        public void Open() => _state.Open();
 
-        public void Closed() => _state = new ClosedDoor();
+        public void OnClosed() => _state = new ClosedDoor(this);
 
-        public void Opened() => _state = new OpenedDoor();
+        public void OnOpened() => _state = new OpenedDoor(this);
+
+        internal void OpenWhenOpening()
+        {
+            // door is opening, do nothing 
+        }
+
+        internal void OpenWhenAlreadyOpened()
+        {
+            // door is already opened, do nothing
+        }
+
+        internal void OpenWhenClosing() => _state = new OpeningDoor(this);
+
+        internal void OpenWhenAlreadyClosed() => _state = new OpeningDoor(this);
     }
 }

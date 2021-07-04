@@ -4,5 +4,6 @@ namespace ElevatorExercise.Logic
     {
         bool IsStopped();
         bool IsMoving();
+        void OpenDoor();
     }
 }

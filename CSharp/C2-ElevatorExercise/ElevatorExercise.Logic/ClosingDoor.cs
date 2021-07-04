@@ -2,6 +2,10 @@ namespace ElevatorExercise.Logic
 {
     public class ClosingDoor : DoorState
     {
+        private readonly Door _door;
+
+        public ClosingDoor(Door door) => _door = door;
+
         public bool IsClosed() => false;
 
         public bool IsClosing() => true;
@@ -9,5 +13,7 @@ namespace ElevatorExercise.Logic
         public bool IsOpened() => false;
 
         public bool IsOpening() => false;
+
+        public void Open() => _door.OpenWhenClosing();
     }
 }

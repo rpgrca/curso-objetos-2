@@ -1,28 +1,25 @@
-using System;
-
 namespace ElevatorExercise.Logic
 {
     public class Cabin
     {
-        private CabinState _cabinState;
+        private CabinState _state;
         private readonly Door _door;
+        private readonly ElevatorController _elevatorController;
 
-        public Cabin()
+        public Cabin(ElevatorController elevatorController)
         {
-            _door = new Door();
+            _elevatorController = elevatorController;
+            _door = new Door(this);
             Stop();
         }
 
-        internal bool IsStopped() => _cabinState.IsStopped();
+        internal bool IsStopped() => _state.IsStopped();
 
-        internal bool IsMoving() => _cabinState.IsMoving();
+        internal bool IsMoving() => _state.IsMoving();
 
-        public void Stop()
-        {
-            _cabinState = new StoppedCabin();
-        }
+        public void Stop() => _state = new StoppedCabin(this);
 
-        public void Move() => _cabinState = new MovingCabin();
+        public void Move() => _state = new MovingCabin(this);
 
         public bool IsDoorOpened() => _door.IsOpened();
 
@@ -36,39 +33,44 @@ namespace ElevatorExercise.Logic
 
         public void CloseDoor() => _door.Close();
 
-        public void OpenDoor()
-        {
-            if (! IsMoving())
-            {
-                if (!IsDoorOpened() && !IsDoorOpening())
-                {
-                    _door.Open();
-                }
-            }
-        }
+        public void OpenDoor() => _state.OpenDoor();
 
-        public void DoorClosed()
+        public void OnClosedDoor()
         {
             if (_door.IsClosed())
             {
                 throw new ElevatorEmergency("Sensor de puerta desincronizado");
             }
 
-            _door.Closed();
+            _door.OnClosed();
         }
 
-        public void DoorOpened() => _door.Opened();
+        public void DoorOpened() => _door.OnOpened();
 
         public void OnArriving()
         {
+            _elevatorController.ReachedFloorCorrectly();
             Stop();
             OpenDoor();
         }
 
         public void OnDeparting()
         {
-            DoorClosed();
+            OnClosedDoor();
             Move();
         }
+
+        public void OnDoorClosed()
+        {
+            _elevatorController.OnDoorClosed();
+            OnDeparting();
+        }
+
+        internal void OpenDoorWhenCabinIsMoving()
+        {
+            // Cannot open the door while the cabin is moving
+        }
+
+        internal void OpenDoorWhileCabinIsStopped() => _door.Open();
     }
 }

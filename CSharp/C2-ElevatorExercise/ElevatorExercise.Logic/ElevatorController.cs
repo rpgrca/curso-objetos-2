@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
+using System;
 
 namespace ElevatorExercise.Logic
 {
@@ -12,7 +13,7 @@ namespace ElevatorExercise.Logic
 
         public ElevatorController()
         {
-            _cabin = new Cabin();
+            _cabin = new Cabin(this);
             _floorQueue = new List<int>();
             _waitingForPeople = true;
         }
@@ -60,7 +61,6 @@ namespace ElevatorExercise.Logic
             if (_floorQueue.Count > 0 && aFloorNumber == _floorQueue[0])
             {
                 _cabinFloorNumber = aFloorNumber;
-                _floorQueue.RemoveAt(0);
             }
             else
             {
@@ -72,12 +72,7 @@ namespace ElevatorExercise.Logic
 
         public void cabinDoorClosed()
         {
-            if (_floorQueue.Count == 0)
-            {
-                throw new ElevatorEmergency("Sensor de puerta desincronizado");
-            }
-
-            _cabin.OnDeparting();
+            _cabin.OnDoorClosed();
         }
 
         public void openCabinDoor() => _cabin.OpenDoor();
@@ -97,5 +92,15 @@ namespace ElevatorExercise.Logic
                 _cabin.CloseDoor();
             }
         }
+
+        internal void OnDoorClosed()
+        {
+            if (_floorQueue.Count == 0)
+            {
+                throw new ElevatorEmergency("Sensor de puerta desincronizado");
+            }
+        }
+
+        internal void ReachedFloorCorrectly() => _floorQueue.RemoveAt(0);
     }
 }

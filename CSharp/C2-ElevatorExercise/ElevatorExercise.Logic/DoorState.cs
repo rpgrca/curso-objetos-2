@@ -9,5 +9,6 @@ namespace ElevatorExercise.Logic
         bool IsOpened();
 
         bool IsOpening();
+        void Open();
     }
 }
