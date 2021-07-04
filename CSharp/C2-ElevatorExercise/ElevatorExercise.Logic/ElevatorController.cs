@@ -38,10 +38,7 @@ namespace ElevatorExercise.Logic
 
         public bool isCabinMoving() => _cabin.IsMoving();
 
-        public bool isCabinWaitingForPeople()
-        {
-            return _waitingForPeople;
-        }
+        public bool isCabinWaitingForPeople() => _waitingForPeople;
 
         //Events
         public void goUpPushedFromFloor(int aFloorNumber)
@@ -81,24 +78,13 @@ namespace ElevatorExercise.Logic
                 throw new ElevatorEmergency("Sensor de puerta desincronizado");
             }
 
-            if (_cabin.IsDoorClosed())
-            {
-                throw new ElevatorEmergency("Sensor de puerta desincronizado");
-            }
-
             _cabin.DoorClosed();
             _cabin.Move();
         }
 
         public void openCabinDoor()
         {
-            if (! _cabin.IsMoving())
-            {
-                if (!_cabin.IsDoorOpened() && !_cabin.IsDoorOpening())
-                {
-                    _cabin.OpenDoor();
-                }
-            }
+            _cabin.OpenDoor();
         }
 
         public void cabinDoorOpened()
