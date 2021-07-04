@@ -35,15 +35,7 @@ namespace ElevatorExercise.Logic
 
         public void OpenDoor() => _state.OpenDoor();
 
-        public void OnClosedDoor()
-        {
-            if (_door.IsClosed())
-            {
-                throw new ElevatorEmergency("Sensor de puerta desincronizado");
-            }
-
-            _door.OnClosed();
-        }
+        public void OnClosedDoor() => _door.OnClosed();
 
         public void DoorOpened() => _door.OnOpened();
 
