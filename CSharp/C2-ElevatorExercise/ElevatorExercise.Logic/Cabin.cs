@@ -26,6 +26,8 @@ namespace ElevatorExercise.Logic
 
         public bool IsDoorOpened() => _door.IsOpened();
 
+        public bool IsIdle() => _door.IsOpened();
+
         public bool IsDoorOpening() => _door.IsOpening();
 
         public bool IsDoorClosed() => _door.IsClosed();
@@ -56,5 +58,17 @@ namespace ElevatorExercise.Logic
         }
 
         public void DoorOpened() => _door.Opened();
+
+        public void OnArriving()
+        {
+            Stop();
+            OpenDoor();
+        }
+
+        public void OnDeparting()
+        {
+            DoorClosed();
+            Move();
+        }
     }
 }

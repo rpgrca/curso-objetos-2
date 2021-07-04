@@ -18,7 +18,7 @@ namespace ElevatorExercise.Logic
         }
 
         //Elevator state
-        public bool isIdle() => _cabin.IsDoorOpened() && _floorQueue.Count == 0;
+        public bool isIdle() => _floorQueue.Count == 0 && _cabin.IsIdle();
 
         public bool isWorking() => ! isIdle();
 
@@ -67,8 +67,7 @@ namespace ElevatorExercise.Logic
                 throw new ElevatorEmergency("Sensor de cabina desincronizado");
             }
 
-            _cabin.Stop();
-            _cabin.OpenDoor();
+            _cabin.OnArriving();
         }
 
         public void cabinDoorClosed()
@@ -78,19 +77,12 @@ namespace ElevatorExercise.Logic
                 throw new ElevatorEmergency("Sensor de puerta desincronizado");
             }
 
-            _cabin.DoorClosed();
-            _cabin.Move();
+            _cabin.OnDeparting();
         }
 
-        public void openCabinDoor()
-        {
-            _cabin.OpenDoor();
-        }
+        public void openCabinDoor() => _cabin.OpenDoor();
 
-        public void cabinDoorOpened()
-        {
-            _cabin.DoorOpened();
-        }
+        public void cabinDoorOpened() => _cabin.DoorOpened();
 
         public void waitForPeopleTimedOut()
         {
