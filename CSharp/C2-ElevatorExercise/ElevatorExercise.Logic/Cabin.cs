@@ -51,7 +51,7 @@ namespace ElevatorExercise.Logic
             _cabinFloorNumber = aFloorNumber;
             if (_elevatorController.MustStopOnFloor(aFloorNumber))
             {
-                _elevatorController.ReachedFloor(aFloorNumber);
+                _elevatorController.ReachedTargetFloor();
                 Stop();
                 OpenDoor();
             }
@@ -65,7 +65,6 @@ namespace ElevatorExercise.Logic
 
         public void OnDoorClosed()
         {
-            _elevatorController.OnDoorClosed();
             OnDeparting();
         }
 

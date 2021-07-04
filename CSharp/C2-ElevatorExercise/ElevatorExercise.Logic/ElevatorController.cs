@@ -1,52 +1,7 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using System;
+﻿using System.Collections.Generic;
 
 namespace ElevatorExercise.Logic
 {
-    public interface ElevatorState
-    {
-        bool IsIdle();
-        bool IsWorking();
-        void goUpPushedFromFloor(int aFloorNumber);
-        void DoorOpened();
-        void CloseDoor();
-    }
-
-    public class WorkingElevator : ElevatorState
-    {
-        private readonly ElevatorController _elevator;
-
-        public WorkingElevator(ElevatorController elevator) => _elevator = elevator;
-
-        public bool IsIdle() => false;
-
-        public bool IsWorking() => true;
-
-        public void goUpPushedFromFloor(int aFloorNumber) => _elevator.goUpPushedFromFloorWhileWorking(aFloorNumber);
-
-        public void DoorOpened() => _elevator.OpenedDoorWhenWorking();
-
-        public void CloseDoor() => _elevator.CloseDoorWhenWorking();
-    }
-
-    public class IdleElevator : ElevatorState
-    {
-        private readonly ElevatorController _elevator;
-
-        public IdleElevator(ElevatorController elevator) => _elevator = elevator;
-
-        public bool IsIdle() => true;
-
-        public bool IsWorking() => false;
-
-        public void goUpPushedFromFloor(int aFloorNumber) => _elevator.goUpPushedFromFloorWhileIdle(aFloorNumber);
-
-        public void DoorOpened() => _elevator.OpenedDoorWhenIdle();
-
-        public void CloseDoor() => _elevator.CloseDoorWhenIdle();
-    }
-
     public class ElevatorController
     {
         private ElevatorState _state;
@@ -64,7 +19,7 @@ namespace ElevatorExercise.Logic
         }
 
         //Elevator state
-        public bool isIdle() => _state.IsIdle(); //_floorQueue.Count == 0 && _cabin.IsIdle();
+        public bool isIdle() => _state.IsIdle();
 
         public bool isWorking() => _state.IsWorking();
 
@@ -89,10 +44,7 @@ namespace ElevatorExercise.Logic
         //Events
         public void goUpPushedFromFloor(int aFloorNumber) => _state.goUpPushedFromFloor(aFloorNumber);
 
-        public void cabinOnFloor(int aFloorNumber)
-        {
-            _cabin.OnArrivingAt(aFloorNumber);
-        }
+        public void cabinOnFloor(int aFloorNumber) => _cabin.OnArrivingAt(aFloorNumber);
 
         public void cabinDoorClosed() => _cabin.OnDoorClosed();
 
@@ -108,31 +60,15 @@ namespace ElevatorExercise.Logic
 
         public void closeCabinDoor() => _state.CloseDoor();
 
-        internal void OnDoorClosed()
+        internal void ReachedTargetFloor()
         {
-            if (_floorQueue.Count == 0)
-            {
-                throw new ElevatorEmergency("Sensor de puerta desincronizado");
-            }
+            _floorQueue.RemoveAt(0);
+            _waitingForPeople = true;
         }
 
-        internal void ReachedFloor(int aFloorNumber)
-        {
-            if (_floorQueue.Count == 0 || aFloorNumber > _floorQueue[0])
-            {
-                throw new ElevatorEmergency("Sensor de cabina desincronizado");
-            }
+        internal void goUpPushedFromFloorWhileWorking(int aFloorNumber) => QueueFloor(aFloorNumber);
 
-            if (_floorQueue[0] == aFloorNumber)
-            {
-                _floorQueue.RemoveAt(0);
-                _waitingForPeople = true;
-            }
-        }
-
-        internal void goUpPushedFromFloorWhileWorking(int aFloorNumber) => QueueFloors(aFloorNumber);
-
-        private void QueueFloors(int aFloorNumber)
+        private void QueueFloor(int aFloorNumber)
         {
             _floorQueue.Add(aFloorNumber);
             _floorQueue.Sort();
@@ -142,7 +78,7 @@ namespace ElevatorExercise.Logic
         {
             _state = new WorkingElevator(this);
 
-            QueueFloors(aFloorNumber);
+            QueueFloor(aFloorNumber);
             _waitingForPeople = false;
             _cabin.CloseDoor();
         }
