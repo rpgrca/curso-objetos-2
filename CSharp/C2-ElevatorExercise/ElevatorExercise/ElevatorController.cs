@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Linq;
+using System;
 using System.Collections.Generic;
 
 namespace ElevatorExercise
@@ -48,7 +49,14 @@ namespace ElevatorExercise
         //Events
         public void goUpPushedFromFloor(int aFloorNumber)
         {
-            _floorQueue.Add(aFloorNumber);
+            if (_floorQueue.Count > 0)
+            {
+                _floorQueue.AddRange(Enumerable.Range(_floorQueue.Last(), aFloorNumber));
+            }
+            else
+            {
+                _floorQueue.AddRange(Enumerable.Range(1, aFloorNumber));
+            }
             _doorState = new ClosingDoor();
         }
 

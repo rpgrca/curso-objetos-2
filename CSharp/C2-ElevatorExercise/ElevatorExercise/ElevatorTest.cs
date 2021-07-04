@@ -287,15 +287,9 @@ namespace ElevatorExercise
             elevatorController.goUpPushedFromFloor(1);
             elevatorController.cabinDoorClosed();
             elevatorController.cabinOnFloor(1);
-            try
-            {
-                elevatorController.cabinOnFloor(0);
-                Assert.True(false);
-            }
-            catch (ElevatorEmergency elevatorEmergency)
-            {
-                Assert.True(elevatorEmergency.Message == "Sensor de cabina desincronizado");
-            }
+
+            var exception = Assert.Throws<ElevatorEmergency>(() => elevatorController.cabinOnFloor(0));
+            Assert.Equal("Sensor de cabina desincronizado", exception.Message);
         }
 
         [Fact]
