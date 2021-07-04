@@ -83,6 +83,11 @@ namespace ElevatorExercise
                 throw new ElevatorEmergency("Sensor de puerta desincronizado");
             }
 
+            if (_doorState.IsClosed())
+            {
+                throw new ElevatorEmergency("Sensor de puerta desincronizado");
+            }
+
             _doorState = new ClosedDoor();
             _cabinState = new MovingCabin();
         }
