@@ -6,7 +6,7 @@ namespace ElevatorExercise.Logic
 
         public OpenedDoor(Door door) => _door = door;
 
-         public bool IsClosed() => false;
+        public bool IsClosed() => false;
 
         public bool IsClosing() => false;
 

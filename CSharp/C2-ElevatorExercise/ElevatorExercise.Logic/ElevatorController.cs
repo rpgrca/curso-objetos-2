@@ -90,12 +90,6 @@ namespace ElevatorExercise.Logic
             _cabin.CloseDoor();
         }
 
-        internal void OpenedDoorWhenWorking()
-        {
-            _state = new IdleElevator(this);
-            _cabin.DoorOpened();
-        }
-
         internal void CloseDoorWhenWorking() => _cabin.CloseDoor();
 
         internal void CloseDoorWhenIdle()

@@ -12,8 +12,6 @@ namespace ElevatorExercise.Logic
 
         public void goUpPushedFromFloor(int aFloorNumber) => _elevator.goUpPushedFromFloorWhileWorking(aFloorNumber);
 
-        public void DoorOpened() => _elevator.OpenedDoorWhenWorking();
-
         public void CloseDoor() => _elevator.CloseDoorWhenWorking();
     }
 }
