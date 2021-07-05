@@ -4,10 +4,9 @@ namespace ElevatorExercise.Logic
 {
     public class ElevatorController
     {
-        private ElevatorState _state;
-
         private readonly Cabin _cabin;
         private readonly List<int> _floorQueue;
+        private ElevatorState _state;
         private bool _waitingForPeople;
 
         public ElevatorController()
@@ -50,7 +49,19 @@ namespace ElevatorExercise.Logic
 
         public void openCabinDoor() => _cabin.OpenDoor();
 
-        public void cabinDoorOpened() => _state.DoorOpened();
+        public void cabinDoorOpened()
+        {
+            _cabin.DoorOpened();
+
+            if (_floorQueue.Count > 0)
+            {
+                _waitingForPeople = true;
+            }
+            else
+            {
+                _state = new IdleElevator(this);
+            }
+        }
 
         public void waitForPeopleTimedOut()
         {
@@ -60,11 +71,7 @@ namespace ElevatorExercise.Logic
 
         public void closeCabinDoor() => _state.CloseDoor();
 
-        internal void ReachedTargetFloor()
-        {
-            _floorQueue.RemoveAt(0);
-            _waitingForPeople = true;
-        }
+        internal void ReachedTargetFloor() => _floorQueue.RemoveAt(0);
 
         internal void goUpPushedFromFloorWhileWorking(int aFloorNumber) => QueueFloor(aFloorNumber);
 
@@ -85,22 +92,11 @@ namespace ElevatorExercise.Logic
 
         internal void OpenedDoorWhenWorking()
         {
-            if (_floorQueue.Count == 0)
-            {
-                _state = new IdleElevator(this);
-            }
-
+            _state = new IdleElevator(this);
             _cabin.DoorOpened();
         }
 
-        internal void CloseDoorWhenWorking()
-        {
-            if (_floorQueue.Count > 0)
-            {
-                _waitingForPeople = false;
-                _cabin.CloseDoor();
-            }
-        }
+        internal void CloseDoorWhenWorking() => _cabin.CloseDoor();
 
         internal void CloseDoorWhenIdle()
         {

@@ -1,19 +1,16 @@
-using System;
-
 namespace ElevatorExercise.Logic
 {
     public class Cabin
     {
-        private CabinState _state;
         private readonly Door _door;
         private readonly ElevatorController _elevatorController;
+        private CabinState _state;
         private int _cabinFloorNumber;
 
         public Cabin(ElevatorController elevatorController)
         {
             _elevatorController = elevatorController;
             _door = new Door(this);
-            _cabinFloorNumber = 0;
             Stop();
         }
 
@@ -63,10 +60,7 @@ namespace ElevatorExercise.Logic
             Move();
         }
 
-        public void OnDoorClosed()
-        {
-            OnDeparting();
-        }
+        public void OnDoorClosed() => OnDeparting();
 
         internal void OpenDoorWhenCabinIsMoving()
         {

@@ -10,8 +10,8 @@ namespace ElevatorExercise.Logic
 
         public bool IsMoving() => true;
 
-        public void OpenDoor() => _cabin.OpenDoorWhenCabinIsMoving();
-
         public void CloseDoor() => _cabin.CloseDoorWhileCabinIsMoving();
+
+        public void OpenDoor() => _cabin.OpenDoorWhenCabinIsMoving();
     }
 }
