@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ElevatorConsole_Exercise.Logic
+﻿namespace ElevatorConsole_Exercise.Logic
 {
     public interface CabinDoorStateVisitor
     {

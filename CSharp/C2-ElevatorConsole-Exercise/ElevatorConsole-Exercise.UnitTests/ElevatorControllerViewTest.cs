@@ -1,8 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
-using Xunit;
+﻿using Xunit;
 using ElevatorConsole_Exercise.Logic;
 
 namespace ElevatorConsole_Exercise.UnitTests
