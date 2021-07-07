@@ -3,8 +3,9 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
+using ElevatorConsole_Exercise.Logic;
 
-namespace ElevatorConsole_Exercise
+namespace ElevatorConsole_Exercise.UnitTests
 {
     public class ElevatorControllerViewTest
     {

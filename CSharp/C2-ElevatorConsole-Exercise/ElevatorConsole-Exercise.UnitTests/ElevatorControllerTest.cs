@@ -1,7 +1,8 @@
 ﻿using System;
 using Xunit;
+using ElevatorConsole_Exercise.Logic;
 
-namespace ElevatorConsole_Exercise
+namespace ElevatorConsole_Exercise.UnitTests
 {
     public class ElevatorControllerTest
     {

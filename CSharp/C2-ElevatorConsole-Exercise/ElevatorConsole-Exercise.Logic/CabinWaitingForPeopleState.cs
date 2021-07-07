@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ElevatorConsole_Exercise
+namespace ElevatorConsole_Exercise.Logic
 {
-    class CabinWaitingForPeopleState: CabinState 
+    public class CabinWaitingForPeopleState: CabinState 
     {
         private ElevatorController elevatorController;
 

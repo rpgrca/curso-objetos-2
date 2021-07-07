@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ElevatorConsole_Exercise
+namespace ElevatorConsole_Exercise.Logic
 {
-    class ElevatorControllerStatusView: CabinStateVisitor, CabinDoorStateVisitor
+    public class ElevatorControllerStatusView: CabinStateVisitor, CabinDoorStateVisitor
     {
 	    private string m_cabinFieldModel;
 	    private string m_cabinDoorFieldModel;

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace ElevatorConsole_Exercise
+namespace ElevatorConsole_Exercise.Logic
 {
-    class ElevatorControllerConsole : CabinStateVisitor, CabinDoorStateVisitor
+    public class ElevatorControllerConsole : CabinStateVisitor, CabinDoorStateVisitor
     {
 	    private readonly List<string> _console;
 

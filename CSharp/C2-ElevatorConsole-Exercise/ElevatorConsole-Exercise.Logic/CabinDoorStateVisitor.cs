@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ElevatorConsole_Exercise
+namespace ElevatorConsole_Exercise.Logic
 {
-    interface CabinDoorStateVisitor
+    public interface CabinDoorStateVisitor
     {
         void visitCabinDoorClosing(CabinDoorClosingState cabindDoorClosingState);
         void visitCabinDoorClosed(CabinDoorClosedState cabinDoorClosedState);
