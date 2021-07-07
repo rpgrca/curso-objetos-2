@@ -4,44 +4,32 @@
     {
         private readonly ElevatorController _elevatorController;
 
-        public ElevatorControllerIsWorkingState(ElevatorController elevatorController) {
+        public ElevatorControllerIsWorkingState(ElevatorController elevatorController) =>
             _elevatorController = elevatorController;
-        }
 
-        public void goUpPushedFromFloor(int aFloorNumber) {
+        public void goUpPushedFromFloor(int aFloorNumber) =>
             _elevatorController.goUpPushedFromFloorWhenWorking(aFloorNumber);
-        }
 
-        public bool isIdle() {
-            return false;
-        }
+        public bool isIdle() => false;
 
-        public bool isWorking() {
-            return true;
-        }
+        public bool isWorking() => true;
 
-        public void cabindDoorClosed() {
+        public void cabindDoorClosed() =>
             _elevatorController.cabinDoorClosedWhenWorking();
-        }
 
-        public void cabinOnFloor(int aFloorNumber) {
+        public void cabinOnFloor(int aFloorNumber) =>
             _elevatorController.cabinOnFloorWhenWorking(aFloorNumber);
-        }
 
-        public void cabinDoorOpened() {
+        public void cabinDoorOpened() =>
             _elevatorController.cabinDoorOpenendWhenWorking();
-        }
 
-        public void openCabinDoor() {
+        public void openCabinDoor() =>
             _elevatorController.openCabinDoorWhenWorking();
-        }
 
-        public void waitForPeopleTimedOut() {
+        public void waitForPeopleTimedOut() =>
             _elevatorController.waitForPeopleTimedOutWhenWorking();
-        }
 
-        public void closeCabinDoor() {
+        public void closeCabinDoor() =>
             _elevatorController.closeCabinDoorWhenWorking();
-        }
     }
 }

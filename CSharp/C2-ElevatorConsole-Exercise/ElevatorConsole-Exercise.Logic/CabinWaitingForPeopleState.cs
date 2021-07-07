@@ -6,44 +6,27 @@ namespace ElevatorConsole_Exercise.Logic
     {
         private readonly ElevatorController _elevatorController;
 
-        public CabinWaitingForPeopleState(ElevatorController elevatorController) {
+        public CabinWaitingForPeopleState(ElevatorController elevatorController) =>
             _elevatorController = elevatorController;
-        }
 
-        public void cabinDoorClosedWhenWorking() {
-            throw new Exception();
-        }
+        public void cabinDoorClosedWhenWorking() => throw new Exception();
 
-        public void cabinDoorOpenedWhenWorking() {
-            throw new Exception();
-        }
+        public void cabinDoorOpenedWhenWorking() => throw new Exception();
 
-        public bool isMoving() {
-            throw new Exception();
-        }
+        public bool isMoving() => throw new Exception();
 
-        public bool isStopped() {
-            return false;
-        }
+        public bool isStopped() => false;
 
-        public void openCabinDoorWhenWorking() {
-            throw new Exception();
-        }
+        public void openCabinDoorWhenWorking() => throw new Exception();
 
-        public bool isWaitingForPeople() {
-            return true;
-        }
+        public bool isWaitingForPeople() => true;
 
-        public void waitForPeopleTimedOutWhenWorking() {
+        public void waitForPeopleTimedOutWhenWorking() =>
             _elevatorController.waitForPeopleTimedOutWhenWorkingAndCabinWaitingForPeople();
-        }
 
-        public void closeCabinDoorWhenWorking() {
+        public void closeCabinDoorWhenWorking() =>
             _elevatorController.closeCabinDoorWhenWorkingAndCabinWaitingForPeople();
-        }
 
-        public void accept(CabinStateVisitor visitor) {
-            visitor.visitCabinWaitingPeople(this);
-        }
+        public void accept(CabinStateVisitor visitor) => visitor.visitCabinWaitingPeople(this);
     }
 }

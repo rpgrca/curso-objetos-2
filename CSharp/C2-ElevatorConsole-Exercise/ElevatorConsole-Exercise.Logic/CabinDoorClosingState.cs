@@ -6,40 +6,25 @@ namespace ElevatorConsole_Exercise.Logic
     {
         private readonly ElevatorController _elevatorController;
 
-        public CabinDoorClosingState(ElevatorController elevatorController) {
+        public CabinDoorClosingState(ElevatorController elevatorController) =>
             _elevatorController = elevatorController;
-        }
 
-        public bool isOpened() {
-            return false;
-        }
+        public bool isOpened() => false;
 
-        public bool isOpening() {
-            return false;
-        }
+        public bool isOpening() => false;
 
-        public bool isClosing() {
-            return true;
-        }
+        public bool isClosing() => true;
 
-        public bool isClosed() {
-            return false;
-        }
+        public bool isClosed() => false;
 
-        public void cabinDoorClosedWhenWorkingAndCabinStopped() {
+        public void cabinDoorClosedWhenWorkingAndCabinStopped() =>
             _elevatorController.cabinDoorClosedWhenWorkingAndCabinStoppedAndClosing();
-        }
 
-        public void openCabinDoorWhenWorkingAndCabinStopped() {
+        public void openCabinDoorWhenWorkingAndCabinStopped() =>
             _elevatorController.openCabinDoorWhenWorkingAndCabinStoppedAndDoorClosing();
-        }
 
-        public void closeCabinDoorWhenWorkingAndCabinStopped() {
-            throw new Exception();
-        }
+        public void closeCabinDoorWhenWorkingAndCabinStopped() => throw new Exception();
 
-        public void accept(CabinDoorStateVisitor visitor) {
-            visitor.visitCabinDoorClosing(this);
-        }
+        public void accept(CabinDoorStateVisitor visitor) => visitor.visitCabinDoorClosing(this);
     }
 }
