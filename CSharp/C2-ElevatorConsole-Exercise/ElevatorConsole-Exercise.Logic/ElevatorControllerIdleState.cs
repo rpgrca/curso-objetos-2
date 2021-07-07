@@ -4,10 +4,10 @@ namespace ElevatorConsole_Exercise.Logic
 {
     class ElevatorControllerIdleState: ElevatorControllerState
     {
-        private ElevatorController elevatorController;
+        private readonly ElevatorController _elevatorController;
 
         public ElevatorControllerIdleState(ElevatorController elevatorController) {
-            this.elevatorController = elevatorController;
+            _elevatorController = elevatorController;
         }
 
         public bool isIdle() {
@@ -15,7 +15,7 @@ namespace ElevatorConsole_Exercise.Logic
         }
 
         public void goUpPushedFromFloor(int aFloorNumber) {
-            elevatorController.goUpPushedFromFloorWhenIdle(aFloorNumber);
+            _elevatorController.goUpPushedFromFloorWhenIdle(aFloorNumber);
         }
 
         public bool isWorking() {
@@ -23,11 +23,11 @@ namespace ElevatorConsole_Exercise.Logic
         }
 
         public void cabindDoorClosed() {
-            elevatorController.cabinDoorClosedWhenIdle();
+            _elevatorController.cabinDoorClosedWhenIdle();
         }
 
         public void cabinOnFloor(int aFloorNumber) {
-            elevatorController.cabinOnFloorWhenIdle(aFloorNumber);
+            _elevatorController.cabinOnFloorWhenIdle(aFloorNumber);
         }
 
         public void cabinDoorOpened() {
@@ -35,11 +35,11 @@ namespace ElevatorConsole_Exercise.Logic
         }
 
         public void openCabinDoor() {
-            elevatorController.openCabinDoorWhenIdle();
+            _elevatorController.openCabinDoorWhenIdle();
         }
 
         public void closeCabinDoor() {
-            elevatorController.closeCabinDoorWhenIdle();
+            _elevatorController.closeCabinDoorWhenIdle();
         }
 
         public void waitForPeopleTimedOut() {

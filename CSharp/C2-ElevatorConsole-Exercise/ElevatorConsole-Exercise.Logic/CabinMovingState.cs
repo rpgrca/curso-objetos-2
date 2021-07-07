@@ -4,14 +4,14 @@ namespace ElevatorConsole_Exercise.Logic
 {
     public class CabinMovingState: CabinState
     {
-        private ElevatorController elevatorController;
+        private readonly ElevatorController _elevatorController;
 
         public CabinMovingState(ElevatorController elevatorController) {
-            this.elevatorController = elevatorController;
+            _elevatorController = elevatorController;
         }
 
         public void cabinDoorClosedWhenWorking() {
-            elevatorController.cabinDoorClosedWhenWorkingAndCabinMoving();
+            _elevatorController.cabinDoorClosedWhenWorkingAndCabinMoving();
         }
 
         public bool isMoving() {
@@ -27,7 +27,7 @@ namespace ElevatorConsole_Exercise.Logic
         }
 
         public void openCabinDoorWhenWorking() {
-            elevatorController.openCabinDoorWhenWorkingAndCabinMoving();
+            _elevatorController.openCabinDoorWhenWorkingAndCabinMoving();
         }
 
         public bool isWaitingForPeople() {
@@ -35,7 +35,7 @@ namespace ElevatorConsole_Exercise.Logic
         }
 
         public void closeCabinDoorWhenWorking() {
-            elevatorController.closeCabinDoorWhenWorkingAndCabinMoving();
+            _elevatorController.closeCabinDoorWhenWorkingAndCabinMoving();
         }
 
         public void waitForPeopleTimedOutWhenWorking() {

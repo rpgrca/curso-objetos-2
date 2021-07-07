@@ -2,15 +2,14 @@
 {
     class ElevatorControllerIsWorkingState: ElevatorControllerState
     {
-        private ElevatorController elevatorController;
+        private readonly ElevatorController _elevatorController;
 
-        public ElevatorControllerIsWorkingState(
-                ElevatorController elevatorController) {
-            this.elevatorController = elevatorController;
+        public ElevatorControllerIsWorkingState(ElevatorController elevatorController) {
+            _elevatorController = elevatorController;
         }
 
         public void goUpPushedFromFloor(int aFloorNumber) {
-            elevatorController.goUpPushedFromFloorWhenWorking(aFloorNumber);
+            _elevatorController.goUpPushedFromFloorWhenWorking(aFloorNumber);
         }
 
         public bool isIdle() {
@@ -22,27 +21,27 @@
         }
 
         public void cabindDoorClosed() {
-            elevatorController.cabinDoorClosedWhenWorking();
+            _elevatorController.cabinDoorClosedWhenWorking();
         }
 
         public void cabinOnFloor(int aFloorNumber) {
-            elevatorController.cabinOnFloorWhenWorking(aFloorNumber);
+            _elevatorController.cabinOnFloorWhenWorking(aFloorNumber);
         }
 
         public void cabinDoorOpened() {
-            elevatorController.cabinDoorOpenendWhenWorking();
+            _elevatorController.cabinDoorOpenendWhenWorking();
         }
 
         public void openCabinDoor() {
-            elevatorController.openCabinDoorWhenWorking();
+            _elevatorController.openCabinDoorWhenWorking();
         }
 
         public void waitForPeopleTimedOut() {
-            elevatorController.waitForPeopleTimedOutWhenWorking();
+            _elevatorController.waitForPeopleTimedOutWhenWorking();
         }
 
         public void closeCabinDoor() {
-            elevatorController.closeCabinDoorWhenWorking();
+            _elevatorController.closeCabinDoorWhenWorking();
         }
     }
 }

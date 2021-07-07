@@ -2,7 +2,7 @@
 
 namespace ElevatorConsole_Exercise.Logic
 {
-    public class ElevatorEmergency:Exception
+    public class ElevatorEmergency : Exception
     {
     }
 }

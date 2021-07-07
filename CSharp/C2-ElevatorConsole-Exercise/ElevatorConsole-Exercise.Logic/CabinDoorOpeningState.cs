@@ -2,13 +2,14 @@
 {
     public class CabinDoorOpeningState: CabinDoorState
     {
-	    private ElevatorController elevatorController;
+	    private readonly ElevatorController _elevatorController;
+
 	    public CabinDoorOpeningState(ElevatorController elevatorController) {
-		    this.elevatorController = elevatorController;
+		    _elevatorController = elevatorController;
 	    }
 
 	    public void cabinDoorClosedWhenWorkingAndCabinStopped() {
-		    elevatorController.cabinDoorClosedWhenWorkingAndCabinStoppedAndCabinDoorOpening();
+		    _elevatorController.cabinDoorClosedWhenWorkingAndCabinStoppedAndCabinDoorOpening();
 	    }
 
 	    public bool isClosed() {
@@ -28,11 +29,11 @@
 	    }
 
 	    public void openCabinDoorWhenWorkingAndCabinStopped() {
-		    elevatorController.openCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening();
+		    _elevatorController.openCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening();
 	    }
 
 	    public void closeCabinDoorWhenWorkingAndCabinStopped() {
-		    elevatorController.closeCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening();
+		    _elevatorController.closeCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening();
 	    }
 
 	    public void accept(CabinDoorStateVisitor visitor) {

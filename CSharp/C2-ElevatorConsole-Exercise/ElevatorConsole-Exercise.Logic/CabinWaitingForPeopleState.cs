@@ -2,12 +2,12 @@
 
 namespace ElevatorConsole_Exercise.Logic
 {
-    public class CabinWaitingForPeopleState: CabinState 
+    public class CabinWaitingForPeopleState: CabinState
     {
-        private ElevatorController elevatorController;
+        private readonly ElevatorController _elevatorController;
 
         public CabinWaitingForPeopleState(ElevatorController elevatorController) {
-            this.elevatorController = elevatorController;
+            _elevatorController = elevatorController;
         }
 
         public void cabinDoorClosedWhenWorking() {
@@ -35,11 +35,11 @@ namespace ElevatorConsole_Exercise.Logic
         }
 
         public void waitForPeopleTimedOutWhenWorking() {
-            elevatorController.waitForPeopleTimedOutWhenWorkingAndCabinWaitingForPeople();
+            _elevatorController.waitForPeopleTimedOutWhenWorkingAndCabinWaitingForPeople();
         }
 
         public void closeCabinDoorWhenWorking() {
-            elevatorController.closeCabinDoorWhenWorkingAndCabinWaitingForPeople();
+            _elevatorController.closeCabinDoorWhenWorkingAndCabinWaitingForPeople();
         }
 
         public void accept(CabinStateVisitor visitor) {

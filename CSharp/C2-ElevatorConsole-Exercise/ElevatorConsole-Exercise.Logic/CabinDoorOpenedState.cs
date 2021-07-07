@@ -4,10 +4,10 @@ namespace ElevatorConsole_Exercise.Logic
 {
     public class CabinDoorOpenedState: CabinDoorState
     {
-        private ElevatorController elevatorController;
+        private readonly ElevatorController _elevatorController;
 
         public CabinDoorOpenedState(ElevatorController elevatorController) {
-            this.elevatorController = elevatorController;
+            _elevatorController = elevatorController;
         }
 
         public bool isOpened() {
