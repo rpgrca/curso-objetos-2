@@ -6,53 +6,44 @@ namespace ElevatorConsole_Exercise.Logic
     {
         private ElevatorController elevatorController;
 
-	    public CabinWaitingForPeopleState(ElevatorController elevatorController) {
-		    this.elevatorController = elevatorController;
-	    }
+        public CabinWaitingForPeopleState(ElevatorController elevatorController) {
+            this.elevatorController = elevatorController;
+        }
 
-	    
-	    public void cabinDoorClosedWhenWorking() {
-		    throw new Exception();
-	    }
+        public void cabinDoorClosedWhenWorking() {
+            throw new Exception();
+        }
 
-	    
-	    public void cabinDoorOpenedWhenWorking() {
-		    throw new Exception();
-	    }
+        public void cabinDoorOpenedWhenWorking() {
+            throw new Exception();
+        }
 
-	    
-	    public bool isMoving() {
-		    throw new Exception();
-	    }
+        public bool isMoving() {
+            throw new Exception();
+        }
 
-	    
-	    public bool isStopped() {
-		    return false;
-	    }
+        public bool isStopped() {
+            return false;
+        }
 
-	    
-	    public void openCabinDoorWhenWorking() {
-		    throw new Exception();
-	    }
+        public void openCabinDoorWhenWorking() {
+            throw new Exception();
+        }
 
-	    
-	    public bool isWaitingForPeople() {
-		    return true;
-	    }
+        public bool isWaitingForPeople() {
+            return true;
+        }
 
-	    
-	    public void waitForPeopleTimedOutWhenWorking() {
-		    elevatorController.waitForPeopleTimedOutWhenWorkingAndCabinWaitingForPeople();
-	    }
+        public void waitForPeopleTimedOutWhenWorking() {
+            elevatorController.waitForPeopleTimedOutWhenWorkingAndCabinWaitingForPeople();
+        }
 
-	    
-	    public void closeCabinDoorWhenWorking() {
-		    elevatorController.closeCabinDoorWhenWorkingAndCabinWaitingForPeople();
-	    }
+        public void closeCabinDoorWhenWorking() {
+            elevatorController.closeCabinDoorWhenWorkingAndCabinWaitingForPeople();
+        }
 
-	    
-	    public void accept(CabinStateVisitor visitor) {
-		    visitor.visitCabinWaitingPeople(this);
-	    }
+        public void accept(CabinStateVisitor visitor) {
+            visitor.visitCabinWaitingPeople(this);
+        }
     }
 }

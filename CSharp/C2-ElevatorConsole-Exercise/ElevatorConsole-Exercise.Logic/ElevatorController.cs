@@ -166,7 +166,6 @@ namespace ElevatorConsole_Exercise.Logic
             floorsToGo.Add(aFloorNumber);
             controllerIsWorking();
             cabinDoorIsClosing();
-            
         }
 
         public void cabinDoorClosedWhenWorking()

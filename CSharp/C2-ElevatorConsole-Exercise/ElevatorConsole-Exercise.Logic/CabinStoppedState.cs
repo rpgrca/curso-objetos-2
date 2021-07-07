@@ -4,56 +4,46 @@ namespace ElevatorConsole_Exercise.Logic
 {
     public class CabinStoppedState: CabinState
     {
+        private ElevatorController elevatorController;
 
-	    private ElevatorController elevatorController;
-	
-	    public CabinStoppedState(ElevatorController elevatorController) {
-		    this.elevatorController = elevatorController; 
-	    }
+        public CabinStoppedState(ElevatorController elevatorController) {
+            this.elevatorController = elevatorController; 
+        }
 
-	    
-	    public bool isStopped() {
-		    return true;
-	    }
+        public bool isStopped() {
+            return true;
+        }
 
-	    
-	    public bool isMoving() {
-		    return false;
-	    }
+        public bool isMoving() {
+            return false;
+        }
 
-	    
-	    public void cabinDoorClosedWhenWorking() {
-		    elevatorController.cabinDoorClosedWhenWorkingAndCabinStopped();
-	    }
+        public void cabinDoorClosedWhenWorking() {
+            elevatorController.cabinDoorClosedWhenWorkingAndCabinStopped();
+        }
 
-	    
-	    public void cabinDoorOpenedWhenWorking() {
-		    elevatorController.cabinDoorOpenedWhenWorkingAndCabinStopped();
-	    }
+        public void cabinDoorOpenedWhenWorking() {
+            elevatorController.cabinDoorOpenedWhenWorkingAndCabinStopped();
+        }
 
-	    
-	    public void openCabinDoorWhenWorking() {
-		    elevatorController.openCabinDoorWhenWorkingAndCabinStopped();
-	    }
+        public void openCabinDoorWhenWorking() {
+            elevatorController.openCabinDoorWhenWorkingAndCabinStopped();
+        }
 
-	    
-	    public bool isWaitingForPeople() {
-		    return false;
-	    }
+        public bool isWaitingForPeople() {
+            return false;
+        }
 
-	    
-	    public void closeCabinDoorWhenWorking() {
-		    elevatorController.closeCabinDoorWhenWorkingAndCabinStopped();
-	    }
+        public void closeCabinDoorWhenWorking() {
+            elevatorController.closeCabinDoorWhenWorkingAndCabinStopped();
+        }
 
-	    
-	    public void waitForPeopleTimedOutWhenWorking() {
-		    throw new Exception();
-	    }
+        public void waitForPeopleTimedOutWhenWorking() {
+            throw new Exception();
+        }
 
-	    
-	    public void accept(CabinStateVisitor visitor) {
-		    visitor.visitCabinStopped(this);
-	    }
+        public void accept(CabinStateVisitor visitor) {
+            visitor.visitCabinStopped(this);
+        }
     }
 }

@@ -18,7 +18,6 @@ namespace ElevatorConsole_Exercise.UnitTests
             reader.MoveNext();
             Assert.Equal("Puerta Cerrandose", reader.Current);
             Assert.False(reader.MoveNext());
-
         }
 
         [Fact]
@@ -39,7 +38,6 @@ namespace ElevatorConsole_Exercise.UnitTests
             reader.MoveNext();
             Assert.Equal("Cabina Moviendose", reader.Current);
             Assert.False(reader.MoveNext());
-
         }
 
         [Fact]

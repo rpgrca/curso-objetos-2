@@ -5,54 +5,45 @@ namespace ElevatorConsole_Exercise.Logic
     public class CabinMovingState: CabinState
     {
         private ElevatorController elevatorController;
-	
-	    public CabinMovingState(ElevatorController elevatorController) {
-		    this.elevatorController = elevatorController;
-	    }
 
-	    
-	    public void cabinDoorClosedWhenWorking() {
-		    elevatorController.cabinDoorClosedWhenWorkingAndCabinMoving();
-	    }
+        public CabinMovingState(ElevatorController elevatorController) {
+            this.elevatorController = elevatorController;
+        }
 
-	    
-	    public bool isMoving() {
-		    return true;
-	    }
+        public void cabinDoorClosedWhenWorking() {
+            elevatorController.cabinDoorClosedWhenWorkingAndCabinMoving();
+        }
 
-	    
-	    public bool isStopped() {
-		    return false;
-	    }
+        public bool isMoving() {
+            return true;
+        }
 
-	    
-	    public void cabinDoorOpenedWhenWorking() {
-		    throw new Exception();
-	    }
+        public bool isStopped() {
+            return false;
+        }
 
-	    
-	    public void openCabinDoorWhenWorking() {
-		    elevatorController.openCabinDoorWhenWorkingAndCabinMoving();
-	    }
+        public void cabinDoorOpenedWhenWorking() {
+            throw new Exception();
+        }
 
-	    
-	    public bool isWaitingForPeople() {
-		    return false;
-	    }
+        public void openCabinDoorWhenWorking() {
+            elevatorController.openCabinDoorWhenWorkingAndCabinMoving();
+        }
 
-	    
-	    public void closeCabinDoorWhenWorking() {
-		    elevatorController.closeCabinDoorWhenWorkingAndCabinMoving();
-	    }
+        public bool isWaitingForPeople() {
+            return false;
+        }
 
-	    
-	    public void waitForPeopleTimedOutWhenWorking() {
-		    throw new Exception();
-	    }
+        public void closeCabinDoorWhenWorking() {
+            elevatorController.closeCabinDoorWhenWorkingAndCabinMoving();
+        }
 
-	    
-	    public void accept(CabinStateVisitor visitor) {
-		    visitor.visitCabinMoving(this);
-	    }
+        public void waitForPeopleTimedOutWhenWorking() {
+            throw new Exception();
+        }
+
+        public void accept(CabinStateVisitor visitor) {
+            visitor.visitCabinMoving(this);
+        }
     }
 }
