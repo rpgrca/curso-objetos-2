@@ -24,30 +24,33 @@ namespace ElevatorConsole_Exercise.Logic
 
         //Elevator state
         private void controllerIsIdle() =>
-            _state = new ElevatorControllerIdleState(this);
+            changeStateTo(new ElevatorControllerIdleState(this));
+
+        private void changeStateTo(ElevatorControllerState newState) =>
+            _state = newState;
 
         private void controllerIsWorking() =>
-            _state = new ElevatorControllerIsWorkingState(this);
+            changeStateTo(new ElevatorControllerIsWorkingState(this));
 
         public bool isIdle() => _state.isIdle();
 
         public bool isWorking() => _state.isWorking();
 
         //Door state
-        private void cabinDoorIsClosed()
+        private void cabinDoorIsClosed() =>
+            changeDoorStateTo(new CabinDoorClosedState(this));
+
+        private void changeDoorStateTo(CabinDoorState newCabinState)
         {
-            _cabinDoorState = new CabinDoorClosedState(this);
+            _cabinDoorState = newCabinState;
             _cabinDoorStateObservers.ForEach(p => _cabinDoorState.accept(p));
         }
 
         private void cabinDoorIsOpened() =>
-            _cabinDoorState = new CabinDoorOpenedState(this);
+            changeDoorStateTo(new CabinDoorOpenedState(this));
 
-        private void cabinDoorIsClosing()
-        {
-            _cabinDoorState = new CabinDoorClosingState(this);
-            _cabinDoorStateObservers.ForEach(p => _cabinDoorState.accept(p));
-        }
+        private void cabinDoorIsClosing() =>
+            changeDoorStateTo(new CabinDoorClosingState(this));
 
         private void cabinDoorIsOpening()
         {
@@ -64,20 +67,20 @@ namespace ElevatorConsole_Exercise.Logic
         public bool isCabinDoorClosing() => _cabinDoorState.isClosing();
 
         //Cabin state
-        private void cabinIsStopped()
+        private void cabinIsStopped() =>
+            changeCabinStateTo(new CabinStoppedState(this));
+
+        private void changeCabinStateTo(CabinState newCabinState)
         {
-            _cabinState = new CabinStoppedState(this);
+            _cabinState = newCabinState;
             _cabinStateObservers.ForEach(p => _cabinState.accept(p));
         }
 
-        private void cabinMoving()
-        {
-            _cabinState = new CabinMovingState(this);
-            _cabinStateObservers.ForEach(p => _cabinState.accept(p));
-        }
+        private void cabinMoving() =>
+            changeCabinStateTo(new CabinMovingState(this));
 
         private void cabinIsWaitingForPeople() =>
-            _cabinState = new CabinWaitingForPeopleState(this);
+            changeCabinStateTo(new CabinWaitingForPeopleState(this));
 
         public int cabinFloorNumber() => _currentCabinFloorNumber;
 
