@@ -2,8 +2,8 @@
 {
     public class ElevatorControllerStatusView: CabinStateVisitor, CabinDoorStateVisitor
     {
-        private string m_cabinFieldModel;
-        private string m_cabinDoorFieldModel;
+        private string _cabinFieldModel;
+        private string _cabinDoorFieldModel;
 
         public ElevatorControllerStatusView(ElevatorController elevatorController) {
             elevatorController.addCabinObserver(this);
@@ -17,28 +17,28 @@
             cabinState.accept(this);
 
         public void visitCabinDoorClosing(CabinDoorClosingState cabinDoorClosingState) =>
-            m_cabinDoorFieldModel = "Closing";
+            _cabinDoorFieldModel = "Closing";
 
         public void visitCabinDoorClosed(CabinDoorClosedState cabinDoorClosedState) =>
-            m_cabinDoorFieldModel = "Closed";
+            _cabinDoorFieldModel = "Closed";
 
         public void visitCabinDoorOpened(CabinDoorOpenedState cabinDoorOpenedState) =>
-            m_cabinDoorFieldModel = "Open";
+            _cabinDoorFieldModel = "Open";
 
         public void visitCabinDoorOpening(CabinDoorOpeningState cabinDoorOpeningState) =>
-            m_cabinDoorFieldModel = "Opening";
+            _cabinDoorFieldModel = "Opening";
 
         public void visitCabinMoving(CabinMovingState cabinMovingState) =>
-            m_cabinFieldModel = "Moving";
+            _cabinFieldModel = "Moving";
 
         public void visitCabinStopped(CabinStoppedState cabinStoppedState) =>
-            m_cabinFieldModel = "Stopped";
+            _cabinFieldModel = "Stopped";
 
         public void visitCabinWaitingPeople(CabinWaitingForPeopleState cabinWaitingForPeopleState) =>
-            m_cabinFieldModel = "Waiting People";
+            _cabinFieldModel = "Waiting People";
 
-        public string cabinFieldModel() => m_cabinFieldModel;
+        public string cabinFieldModel() => _cabinFieldModel;
 
-        public string cabinDoorFieldModel() => m_cabinDoorFieldModel;
+        public string cabinDoorFieldModel() => _cabinDoorFieldModel;
     }
 }
