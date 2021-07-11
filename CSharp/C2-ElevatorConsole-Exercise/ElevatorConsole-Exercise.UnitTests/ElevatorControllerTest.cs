@@ -470,8 +470,8 @@ namespace ElevatorConsole_Exercise.UnitTests
             elevatorController.CabinOnFloor(1);
             elevatorController.CabinDoorOpened();
 
-            Assert.True(elevatorController.IsWorking());
-            Assert.False(elevatorController.IsIdle());
+            Assert.False(elevatorController.IsCabinMoving());
+            Assert.True(elevatorController.IsCabinStopped());
         }
 
         [Fact]

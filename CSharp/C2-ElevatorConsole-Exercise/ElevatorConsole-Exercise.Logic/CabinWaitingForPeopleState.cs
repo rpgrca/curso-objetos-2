@@ -15,7 +15,7 @@ namespace ElevatorConsole_Exercise.Logic
 
         public bool IsMoving() => false;
 
-        public bool IsStopped() => false;
+        public bool IsStopped() => true;
 
         public void OpenCabinDoorWhenWorking() => throw new Exception();
 
