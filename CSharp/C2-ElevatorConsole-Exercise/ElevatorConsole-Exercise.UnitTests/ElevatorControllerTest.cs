@@ -249,6 +249,7 @@ namespace ElevatorConsole_Exercise.UnitTests
             elevatorController.CabinDoorClosed();
 
             Assert.True(elevatorController.IsWorking());
+            Assert.False(elevatorController.IsCabinWaitingForPeople());
             Assert.True(elevatorController.IsCabinMoving());
             Assert.True(elevatorController.IsCabinDoorClosed());
 
@@ -561,6 +562,26 @@ namespace ElevatorConsole_Exercise.UnitTests
 
             elevatorController.GoUpPushedFromFloor(1);
             var exception = Assert.Throws<Exception>(() => elevatorController.CloseCabinDoor());
+        }
+
+        [Fact]
+        public void TestHasToEnterEmergencyWhenOpenedDoorSensorTriggersWhenDoorAlreadyClosed()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            var exception = Assert.Throws<Exception>(() => elevatorController.CabinDoorOpened());
+        }
+
+        [Fact]
+        public void TestHasToEnterEmergencyWhenWaitForPeopleTimesOutWhenDoorAlreadyClosed()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            var exception = Assert.Throws<Exception>(() => elevatorController.WaitForPeopleTimedOut());
         }
     }
 }
