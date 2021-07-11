@@ -1,6 +1,6 @@
 ﻿namespace ElevatorConsole_Exercise.Logic
 {
-    interface ElevatorControllerState
+    internal interface ElevatorControllerState
     {
         bool isIdle();
         void goUpPushedFromFloor(int aFloorNumber);

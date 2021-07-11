@@ -2,7 +2,7 @@
 
 namespace ElevatorConsole_Exercise.Logic
 {
-    class ElevatorControllerIdleState: ElevatorControllerState
+    internal class ElevatorControllerIdleState: ElevatorControllerState
     {
         private readonly ElevatorController _elevatorController;
 

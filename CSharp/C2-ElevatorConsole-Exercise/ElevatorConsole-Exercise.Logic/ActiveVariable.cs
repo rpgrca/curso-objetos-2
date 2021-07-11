@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace ElevatorConsole_Exercise.Logic
 {
-    public class ActiveVariable<TState>
+    public class ActiveVariable<T>
     {
-        private readonly List<Observer<TState>> _observers = new();
-        public TState State { get; private set; }
+        private readonly List<Observer<T>> _observers = new();
+        public T State { get; private set; }
 
-        public void AddObserver(Observer<TState> observer) =>
+        public void AddObserver(Observer<T> observer) =>
             _observers.Add(observer);
 
-        public void Set(TState newState)
+        public void Set(T newState)
         {
             State = newState;
             _observers.ForEach(p =>

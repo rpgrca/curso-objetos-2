@@ -4,10 +4,9 @@ namespace ElevatorConsole_Exercise.Logic
 {
     public class CabinDoorClosedState: CabinDoorState
     {
-        private readonly ElevatorController _elevatorController;
-
-        public CabinDoorClosedState(ElevatorController elevatorController) =>
-            _elevatorController = elevatorController;
+        public CabinDoorClosedState(ElevatorController _)
+        {
+        }
 
         public void cabinDoorClosedWhenWorkingAndCabinStopped() => throw new Exception();
 
