@@ -458,5 +458,76 @@ namespace ElevatorConsole_Exercise.UnitTests
             Assert.True(elevatorController.IsCabinStopped());
             Assert.True(elevatorController.IsCabinDoorClosing());
         }
+
+        [Fact]
+        public void TestCabinWaitingForPeople()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinOnFloor(1);
+            elevatorController.CabinDoorOpened();
+
+            Assert.True(elevatorController.IsWorking());
+            Assert.False(elevatorController.IsIdle());
+        }
+
+        [Fact]
+        public void TestCabinHasToEnterEmergencyIfSensorClosesWhileWaitingForPeople()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinOnFloor(1);
+            elevatorController.CabinDoorOpened();
+
+            var exception = Assert.Throws<Exception>(() => elevatorController.CabinDoorClosed());
+        }
+
+        [Fact]
+        public void TestCabinHasToEnterEmergencyIfSensorOpensWhileWaitingForPeople()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinOnFloor(1);
+            elevatorController.CabinDoorOpened();
+
+            var exception = Assert.Throws<Exception>(() => elevatorController.CabinDoorOpened());
+        }
+
+        [Fact]
+        public void TestCabinHasToEnterEmergencyIfOpeningDoorWhileWaitingForPeople()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinOnFloor(1);
+            elevatorController.CabinDoorOpened();
+
+            var exception = Assert.Throws<Exception>(() => elevatorController.OpenCabinDoor());
+        }
+
+        [Fact]
+        public void TestCabinHasToEnterEmergencyStateWhenOpeningDoorWhenAlreadyClosedAndWorking()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinOnFloor(1);
+            elevatorController.CabinDoorOpened();
+
+            var exception = Assert.Throws<Exception>(() => elevatorController.OpenCabinDoor());
+        }
     }
 }
