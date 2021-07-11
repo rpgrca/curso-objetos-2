@@ -12,12 +12,6 @@ namespace ElevatorConsole_Exercise.Logic
             elevatorController.addCabinDoorObserver(this);
         }
 
-        protected void cabinDoorStateChangedTo(CabinDoorState cabinDoorState) =>
-            cabinDoorState.accept(this);
-
-        protected void cabinStateChangedTo(CabinState cabinState) =>
-            cabinState.accept(this);
-
         public IEnumerator<string> consoleReader() => _console.GetEnumerator();
 
         public void visitCabinMoving(CabinMovingState cabinMovingState) =>

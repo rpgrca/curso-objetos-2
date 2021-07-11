@@ -10,12 +10,6 @@
             elevatorController.addCabinDoorObserver(this);
         }
 
-        protected void cabinDoorStateChangedTo(CabinDoorState cabinDoorState) =>
-            cabinDoorState.accept(this);
-
-        protected void cabinStateChangedTo(CabinState cabinState) =>
-            cabinState.accept(this);
-
         public void visitCabinDoorClosing(CabinDoorClosingState cabinDoorClosingState) =>
             _cabinDoorFieldModel = "Closing";
 

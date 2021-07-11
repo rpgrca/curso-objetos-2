@@ -29,6 +29,6 @@ namespace ElevatorConsole_Exercise.Logic
 
         public void waitForPeopleTimedOutWhenWorking() => throw new Exception();
 
-        public void accept(CabinStateVisitor visitor) => visitor.visitCabinStopped(this);
+        public void Accept(CabinStateVisitor visitor) => visitor.visitCabinStopped(this);
     }
 }

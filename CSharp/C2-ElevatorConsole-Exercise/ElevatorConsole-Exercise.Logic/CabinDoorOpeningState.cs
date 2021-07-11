@@ -24,6 +24,6 @@
         public void closeCabinDoorWhenWorkingAndCabinStopped() =>
             _elevatorController.closeCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening();
 
-        public void accept(CabinDoorStateVisitor visitor) => visitor.visitCabinDoorOpening(this);
+        public void Accept(CabinDoorStateVisitor visitor) => visitor.visitCabinDoorOpening(this);
     }
 }

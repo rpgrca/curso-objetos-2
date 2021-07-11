@@ -27,6 +27,6 @@ namespace ElevatorConsole_Exercise.Logic
         public void closeCabinDoorWhenWorking() =>
             _elevatorController.closeCabinDoorWhenWorkingAndCabinWaitingForPeople();
 
-        public void accept(CabinStateVisitor visitor) => visitor.visitCabinWaitingPeople(this);
+        public void Accept(CabinStateVisitor visitor) => visitor.visitCabinWaitingPeople(this);
     }
 }

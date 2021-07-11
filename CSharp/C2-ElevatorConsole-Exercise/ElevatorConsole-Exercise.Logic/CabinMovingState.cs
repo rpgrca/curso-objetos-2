@@ -28,6 +28,6 @@ namespace ElevatorConsole_Exercise.Logic
 
         public void waitForPeopleTimedOutWhenWorking() => throw new Exception();
 
-        public void accept(CabinStateVisitor visitor) => visitor.visitCabinMoving(this);
+        public void Accept(CabinStateVisitor visitor) => visitor.visitCabinMoving(this);
     }
 }

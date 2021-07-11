@@ -1,6 +1,6 @@
 ﻿namespace ElevatorConsole_Exercise.Logic
 {
-    public interface CabinState
+    public interface CabinState : Visitor<CabinStateVisitor>
     {
         bool isStopped();
         bool isMoving();
@@ -10,6 +10,5 @@
         bool isWaitingForPeople();
         void waitForPeopleTimedOutWhenWorking();
         void closeCabinDoorWhenWorking();
-        void accept(CabinStateVisitor visitor);
     }
 }
