@@ -7,291 +7,291 @@ namespace ElevatorConsole_Exercise.UnitTests
     public class ElevatorControllerTest
     {
         [Fact]
-        public void testElevatorStartsIdleWithDoorOpenOnFloorZero()
+        public void TestElevatorStartsIdleWithDoorOpenOnFloorZero()
         {
             var elevatorController = new ElevatorController();
 
-            Assert.True(elevatorController.isIdle());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorOpened());
-            Assert.Equal(0, elevatorController.cabinFloorNumber());
+            Assert.True(elevatorController.IsIdle());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorOpened());
+            Assert.Equal(0, elevatorController.CabinFloorNumber());
         }
 
         [Fact]
-        public void testCabinDoorStartsClosingWhenElevatorGetsCalled()
+        public void TestCabinDoorStartsClosingWhenElevatorGetsCalled()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(1);
+            elevatorController.GoUpPushedFromFloor(1);
 
-            Assert.False(elevatorController.isIdle());
-            Assert.True(elevatorController.isWorking());
+            Assert.False(elevatorController.IsIdle());
+            Assert.True(elevatorController.IsWorking());
 
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.False(elevatorController.isCabinMoving());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.False(elevatorController.IsCabinMoving());
 
-            Assert.False(elevatorController.isCabinDoorOpened());
-            Assert.False(elevatorController.isCabinDoorOpening());
-            Assert.True(elevatorController.isCabinDoorClosing());
-            Assert.False(elevatorController.isCabinDoorClosed());
+            Assert.False(elevatorController.IsCabinDoorOpened());
+            Assert.False(elevatorController.IsCabinDoorOpening());
+            Assert.True(elevatorController.IsCabinDoorClosing());
+            Assert.False(elevatorController.IsCabinDoorClosed());
         }
 
         [Fact]
-        public void testCabinStartsMovingWhenDoorGetsClosed()
+        public void TestCabinStartsMovingWhenDoorGetsClosed()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
 
-            Assert.False(elevatorController.isIdle());
-            Assert.True(elevatorController.isWorking());
+            Assert.False(elevatorController.IsIdle());
+            Assert.True(elevatorController.IsWorking());
 
-            Assert.False(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinMoving());
+            Assert.False(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinMoving());
 
-            Assert.False(elevatorController.isCabinDoorOpened());
-            Assert.False(elevatorController.isCabinDoorOpening());
-            Assert.False(elevatorController.isCabinDoorClosing());
-            Assert.True(elevatorController.isCabinDoorClosed());
+            Assert.False(elevatorController.IsCabinDoorOpened());
+            Assert.False(elevatorController.IsCabinDoorOpening());
+            Assert.False(elevatorController.IsCabinDoorClosing());
+            Assert.True(elevatorController.IsCabinDoorClosed());
         }
 
         [Fact]
-        public void testCabinStopsAndStartsOpeningDoorWhenGetsToDestination()
+        public void TestCabinStopsAndStartsOpeningDoorWhenGetsToDestination()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
 
-            Assert.False(elevatorController.isIdle());
-            Assert.True(elevatorController.isWorking());
+            Assert.False(elevatorController.IsIdle());
+            Assert.True(elevatorController.IsWorking());
 
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.False(elevatorController.isCabinMoving());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.False(elevatorController.IsCabinMoving());
 
-            Assert.False(elevatorController.isCabinDoorOpened());
-            Assert.True(elevatorController.isCabinDoorOpening());
-            Assert.False(elevatorController.isCabinDoorClosing());
-            Assert.False(elevatorController.isCabinDoorClosed());
+            Assert.False(elevatorController.IsCabinDoorOpened());
+            Assert.True(elevatorController.IsCabinDoorOpening());
+            Assert.False(elevatorController.IsCabinDoorClosing());
+            Assert.False(elevatorController.IsCabinDoorClosed());
 
-            Assert.Equal(1, elevatorController.cabinFloorNumber());
+            Assert.Equal(1, elevatorController.CabinFloorNumber());
         }
 
         [Fact]
-        public void testElevatorGetsIdleWhenDoorGetOpened()
+        public void TestElevatorGetsIdleWhenDoorGetOpened()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(1);
-            elevatorController.cabinDoorOpened();
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
+            elevatorController.CabinDoorOpened();
 
-            Assert.True(elevatorController.isIdle());
-            Assert.False(elevatorController.isWorking());
+            Assert.True(elevatorController.IsIdle());
+            Assert.False(elevatorController.IsWorking());
 
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.False(elevatorController.isCabinMoving());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.False(elevatorController.IsCabinMoving());
 
-            Assert.True(elevatorController.isCabinDoorOpened());
-            Assert.False(elevatorController.isCabinDoorOpening());
-            Assert.False(elevatorController.isCabinDoorClosing());
-            Assert.False(elevatorController.isCabinDoorClosed());
+            Assert.True(elevatorController.IsCabinDoorOpened());
+            Assert.False(elevatorController.IsCabinDoorOpening());
+            Assert.False(elevatorController.IsCabinDoorClosing());
+            Assert.False(elevatorController.IsCabinDoorClosed());
 
-            Assert.Equal(1, elevatorController.cabinFloorNumber());
+            Assert.Equal(1, elevatorController.CabinFloorNumber());
         }
 
         // STOP HERE!
 
         [Fact]
-        public void testDoorKeepsOpenedWhenOpeningIsRequested()
+        public void TestDoorKeepsOpenedWhenOpeningIsRequested()
         {
             var elevatorController = new ElevatorController();
 
-            Assert.True(elevatorController.isCabinDoorOpened());
+            Assert.True(elevatorController.IsCabinDoorOpened());
 
-            elevatorController.openCabinDoor();
+            elevatorController.OpenCabinDoor();
 
-            Assert.True(elevatorController.isCabinDoorOpened());
+            Assert.True(elevatorController.IsCabinDoorOpened());
         }
 
         [Fact]
-        public void testDoorMustBeOpenedWhenCabinIsStoppedAndClosingDoors()
+        public void TestDoorMustBeOpenedWhenCabinIsStoppedAndClosingDoors()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(1);
+            elevatorController.GoUpPushedFromFloor(1);
 
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorClosing());
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorClosing());
 
-            elevatorController.openCabinDoor();
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorOpening());
+            elevatorController.OpenCabinDoor();
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorOpening());
         }
 
         [Fact]
-        public void testCanNotOpenDoorWhenCabinIsMoving()
+        public void TestCanNotOpenDoorWhenCabinIsMoving()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
 
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinMoving());
-            Assert.True(elevatorController.isCabinDoorClosed());
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinMoving());
+            Assert.True(elevatorController.IsCabinDoorClosed());
 
-            elevatorController.openCabinDoor();
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinMoving());
-            Assert.True(elevatorController.isCabinDoorClosed());
+            elevatorController.OpenCabinDoor();
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinMoving());
+            Assert.True(elevatorController.IsCabinDoorClosed());
         }
 
         [Fact]
-        public void testDoorKeepsOpeneingWhenItIsOpeneing()
+        public void TestDoorKeepsOpeneingWhenItIsOpeneing()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
 
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorOpening());
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorOpening());
 
-            elevatorController.openCabinDoor();
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorOpening());
-        }
-
-        // STOP HERE!!
-
-        [Fact]
-        public void testRequestToGoUpAreEnqueueWhenRequestedWhenCabinIsMoving()
-        {
-            var elevatorController = new ElevatorController();
-
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(1);
-            elevatorController.goUpPushedFromFloor(2);
-            elevatorController.cabinDoorOpened();
-
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinWaitingForPeople());
-            Assert.True(elevatorController.isCabinDoorOpened());
-        }
-
-        [Fact]
-        public void testCabinDoorStartClosingAfterWaitingForPeople()
-        {
-            var elevatorController = new ElevatorController();
-
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(1);
-            elevatorController.goUpPushedFromFloor(2);
-            elevatorController.cabinDoorOpened();
-            elevatorController.waitForPeopleTimedOut();
-
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorClosing());
-        }
-
-        [Fact]
-        public void testStopsWaitingForPeopleIfCloseDoorIsPressed()
-        {
-            var elevatorController = new ElevatorController();
-
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(1);
-            elevatorController.goUpPushedFromFloor(2);
-            elevatorController.cabinDoorOpened();
-
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinWaitingForPeople());
-            Assert.True(elevatorController.isCabinDoorOpened());
-
-            elevatorController.closeCabinDoor();
-
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorClosing());
-        }
-
-        [Fact]
-        public void testCloseDoorDoesNothingIfIdle()
-        {
-            var elevatorController = new ElevatorController();
-
-            elevatorController.closeCabinDoor();
-
-            Assert.True(elevatorController.isIdle());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorOpened());
-        }
-
-        [Fact]
-        public void testCloseDoorDoesNothingWhenCabinIsMoving()
-        {
-            var elevatorController = new ElevatorController();
-
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinMoving());
-            Assert.True(elevatorController.isCabinDoorClosed());
-
-            elevatorController.closeCabinDoor();
-
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinMoving());
-            Assert.True(elevatorController.isCabinDoorClosed());
-        }
-
-        [Fact]
-        public void testCloseDoorDoesNothingWhenOpeningTheDoorToWaitForPeople()
-        {
-            var elevatorController = new ElevatorController();
-
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(1);
-
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorOpening());
-
-            elevatorController.closeCabinDoor();
-
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorOpening());
+            elevatorController.OpenCabinDoor();
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorOpening());
         }
 
         // STOP HERE!!
 
         [Fact]
-        public void testElevatorHasToEnterEmergencyIfStoppedAndOtherFloorSensorTurnsOn()
+        public void TestRequestToGoUpAreEnqueueWhenRequestedWhenCabinIsMoving()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorOpened();
+
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinWaitingForPeople());
+            Assert.True(elevatorController.IsCabinDoorOpened());
+        }
+
+        [Fact]
+        public void TestCabinDoorStartClosingAfterWaitingForPeople()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorOpened();
+            elevatorController.WaitForPeopleTimedOut();
+
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorClosing());
+        }
+
+        [Fact]
+        public void TestStopsWaitingForPeopleIfCloseDoorIsPressed()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorOpened();
+
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinWaitingForPeople());
+            Assert.True(elevatorController.IsCabinDoorOpened());
+
+            elevatorController.CloseCabinDoor();
+
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorClosing());
+        }
+
+        [Fact]
+        public void TestCloseDoorDoesNothingIfIdle()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.CloseCabinDoor();
+
+            Assert.True(elevatorController.IsIdle());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorOpened());
+        }
+
+        [Fact]
+        public void TestCloseDoorDoesNothingWhenCabinIsMoving()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinMoving());
+            Assert.True(elevatorController.IsCabinDoorClosed());
+
+            elevatorController.CloseCabinDoor();
+
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinMoving());
+            Assert.True(elevatorController.IsCabinDoorClosed());
+        }
+
+        [Fact]
+        public void TestCloseDoorDoesNothingWhenOpeningTheDoorToWaitForPeople()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
+
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorOpening());
+
+            elevatorController.CloseCabinDoor();
+
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorOpening());
+        }
+
+        // STOP HERE!!
+
+        [Fact]
+        public void TestElevatorHasToEnterEmergencyIfStoppedAndOtherFloorSensorTurnsOn()
+        {
+            var elevatorController = new ElevatorController();
+
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
             try
             {
-                elevatorController.cabinOnFloor(0);
+                elevatorController.CabinOnFloor(0);
                 Assert.True(false);
             }
             catch (Exception elevatorEmergency)
@@ -301,16 +301,16 @@ namespace ElevatorConsole_Exercise.UnitTests
         }
 
         [Fact]
-        public void testElevatorHasToEnterEmergencyIfFalling()
+        public void TestElevatorHasToEnterEmergencyIfFalling()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(2);
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
             try
             {
-                elevatorController.cabinOnFloor(0);
+                elevatorController.CabinOnFloor(0);
                 Assert.True(false);
             }
             catch (Exception elevatorEmergency)
@@ -320,15 +320,15 @@ namespace ElevatorConsole_Exercise.UnitTests
         }
 
         [Fact]
-        public void testElevatorHasToEnterEmergencyIfJumpsFloors()
+        public void TestElevatorHasToEnterEmergencyIfJumpsFloors()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(3);
-            elevatorController.cabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(3);
+            elevatorController.CabinDoorClosed();
             try
             {
-                elevatorController.cabinOnFloor(3);
+                elevatorController.CabinOnFloor(3);
                 Assert.True(false);
             }
             catch (Exception elevatorEmergency)
@@ -338,13 +338,13 @@ namespace ElevatorConsole_Exercise.UnitTests
         }
 
         [Fact]
-        public void testElevatorHasToEnterEmergencyIfDoorClosesAutomatically()
+        public void TestElevatorHasToEnterEmergencyIfDoorClosesAutomatically()
         {
             var elevatorController = new ElevatorController();
 
             try
             {
-                elevatorController.cabinDoorClosed();
+                elevatorController.CabinDoorClosed();
                 Assert.True(false);
             }
             catch (Exception elevatorEmergency)
@@ -354,15 +354,15 @@ namespace ElevatorConsole_Exercise.UnitTests
         }
 
         [Fact]
-        public void testElevatorHasToEnterEmergencyIfDoorClosedSensorTurnsOnWhenClosed()
+        public void TestElevatorHasToEnterEmergencyIfDoorClosedSensorTurnsOnWhenClosed()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
             try
             {
-                elevatorController.cabinDoorClosed();
+                elevatorController.CabinDoorClosed();
                 Assert.True(false);
             }
             catch (Exception elevatorEmergency)
@@ -372,16 +372,16 @@ namespace ElevatorConsole_Exercise.UnitTests
         }
 
         [Fact]
-        public void testElevatorHasToEnterEmergencyIfDoorClosesWhenOpening()
+        public void TestElevatorHasToEnterEmergencyIfDoorClosesWhenOpening()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
             try
             {
-                elevatorController.cabinDoorClosed();
+                elevatorController.CabinDoorClosed();
                 Assert.True(false);
             }
             catch (Exception elevatorEmergency)
@@ -394,69 +394,69 @@ namespace ElevatorConsole_Exercise.UnitTests
         // More tests here to verify bad sensor function
 
         [Fact]
-        public void testCabinHasToStopOnTheFloorsOnItsWay()
+        public void TestCabinHasToStopOnTheFloorsOnItsWay()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.goUpPushedFromFloor(2);
-            elevatorController.cabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinOnFloor(1);
 
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorOpening());
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorOpening());
         }
 
         [Fact]
-        public void testElevatorCompletesAllTheRequests()
+        public void TestElevatorCompletesAllTheRequests()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.goUpPushedFromFloor(2);
-            elevatorController.cabinOnFloor(1);
-            elevatorController.cabinDoorOpened();
-            elevatorController.waitForPeopleTimedOut();
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(2);
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinOnFloor(1);
+            elevatorController.CabinDoorOpened();
+            elevatorController.WaitForPeopleTimedOut();
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(2);
 
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorOpening());
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorOpening());
         }
 
         [Fact]
-        public void testCabinHasToStopOnFloorsOnItsWayNoMatterHowTheyWellCalled()
+        public void TestCabinHasToStopOnFloorsOnItsWayNoMatterHowTheyWellCalled()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(2);
-            elevatorController.cabinDoorClosed();
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinOnFloor(1);
 
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorOpening());
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorOpening());
         }
 
         [Fact]
-        public void testCabinHasToStopAndWaitForPeopleOnFloorsOnItsWayNoMatterHowTheyWellCalled()
+        public void TestCabinHasToStopAndWaitForPeopleOnFloorsOnItsWayNoMatterHowTheyWellCalled()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.goUpPushedFromFloor(2);
-            elevatorController.cabinDoorClosed();
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinOnFloor(1);
-            elevatorController.cabinDoorOpened();
-            elevatorController.waitForPeopleTimedOut();
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinOnFloor(1);
+            elevatorController.CabinDoorOpened();
+            elevatorController.WaitForPeopleTimedOut();
 
-            Assert.True(elevatorController.isWorking());
-            Assert.True(elevatorController.isCabinStopped());
-            Assert.True(elevatorController.isCabinDoorClosing());
+            Assert.True(elevatorController.IsWorking());
+            Assert.True(elevatorController.IsCabinStopped());
+            Assert.True(elevatorController.IsCabinDoorClosing());
         }
     }
 }

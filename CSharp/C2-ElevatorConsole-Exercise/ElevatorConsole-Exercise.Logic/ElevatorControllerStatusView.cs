@@ -8,37 +8,37 @@
 
         public ElevatorControllerStatusView(ElevatorController elevatorController)
         {
-            elevatorController.addCabinObserver(this);
-            elevatorController.addCabinDoorObserver(this);
+            elevatorController.AddCabinObserver(this);
+            elevatorController.AddCabinDoorObserver(this);
         }
 
-        public void visitCabinDoorClosing(CabinDoorClosingState cabinDoorClosingState) =>
+        public void VisitCabinDoorClosing(CabinDoorClosingState cabinDoorClosingState) =>
             _cabinDoorFieldModel = "Closing";
 
-        public void visitCabinDoorClosed(CabinDoorClosedState cabinDoorClosedState) =>
+        public void VisitCabinDoorClosed(CabinDoorClosedState cabinDoorClosedState) =>
             _cabinDoorFieldModel = "Closed";
 
-        public void visitCabinDoorOpened(CabinDoorOpenedState cabinDoorOpenedState) =>
+        public void VisitCabinDoorOpened(CabinDoorOpenedState cabinDoorOpenedState) =>
             _cabinDoorFieldModel = "Open";
 
-        public void visitCabinDoorOpening(CabinDoorOpeningState cabinDoorOpeningState) =>
+        public void VisitCabinDoorOpening(CabinDoorOpeningState cabinDoorOpeningState) =>
             _cabinDoorFieldModel = "Opening";
 
-        public void visitCabinMoving(CabinMovingState cabinMovingState) =>
+        public void VisitCabinMoving(CabinMovingState cabinMovingState) =>
             _cabinFieldModel = "Moving";
 
-        public void visitCabinStopped(CabinStoppedState cabinStoppedState) =>
+        public void VisitCabinStopped(CabinStoppedState cabinStoppedState) =>
             _cabinFieldModel = "Stopped";
 
-        public void visitCabinWaitingPeople(CabinWaitingForPeopleState cabinWaitingForPeopleState) =>
+        public void VisitCabinWaitingPeople(CabinWaitingForPeopleState cabinWaitingForPeopleState) =>
             _cabinFieldModel = "Waiting People";
 
-        public string cabinFieldModel() => _cabinFieldModel;
+        public string CabinFieldModel() => _cabinFieldModel;
 
-        public string cabinDoorFieldModel() => _cabinDoorFieldModel;
+        public string CabinDoorFieldModel() => _cabinDoorFieldModel;
 
-        public void Changed(CabinState visitor) => visitor.accept(this);
+        public void Changed(CabinState visitor) => visitor.Accept(this);
 
-        public void Changed(CabinDoorState visitor) => visitor.accept(this);
+        public void Changed(CabinDoorState visitor) => visitor.Accept(this);
     }
 }

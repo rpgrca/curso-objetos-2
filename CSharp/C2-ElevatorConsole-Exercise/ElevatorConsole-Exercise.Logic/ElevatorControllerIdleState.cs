@@ -9,24 +9,24 @@ namespace ElevatorConsole_Exercise.Logic
         public ElevatorControllerIdleState(ElevatorController elevatorController) =>
             _elevatorController = elevatorController;
 
-        public bool isIdle() => true;
+        public bool IsIdle() => true;
 
-        public void goUpPushedFromFloor(int aFloorNumber) =>
-            _elevatorController.goUpPushedFromFloorWhenIdle(aFloorNumber);
+        public void GoUpPushedFromFloor(int aFloorNumber) =>
+            _elevatorController.GoUpPushedFromFloorWhenIdle(aFloorNumber);
 
-        public bool isWorking() => false;
+        public bool IsWorking() => false;
 
-        public void cabindDoorClosed() => _elevatorController.cabinDoorClosedWhenIdle();
+        public void CabindDoorClosed() => _elevatorController.CabinDoorClosedWhenIdle();
 
-        public void cabinOnFloor(int aFloorNumber) =>
-            _elevatorController.cabinOnFloorWhenIdle(aFloorNumber);
+        public void CabinOnFloor(int aFloorNumber) =>
+            _elevatorController.CabinOnFloorWhenIdle(aFloorNumber);
 
-        public void cabinDoorOpened() => throw new Exception();
+        public void CabinDoorOpened() => throw new Exception();
 
-        public void openCabinDoor() => _elevatorController.openCabinDoorWhenIdle();
+        public void OpenCabinDoor() => _elevatorController.OpenCabinDoorWhenIdle();
 
-        public void closeCabinDoor() => _elevatorController.closeCabinDoorWhenIdle();
+        public void CloseCabinDoor() => _elevatorController.CloseCabinDoorWhenIdle();
 
-        public void waitForPeopleTimedOut() => throw new Exception();
+        public void WaitForPeopleTimedOut() => throw new Exception();
     }
 }

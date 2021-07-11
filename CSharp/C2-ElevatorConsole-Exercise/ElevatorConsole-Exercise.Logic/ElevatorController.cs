@@ -20,101 +20,101 @@ namespace ElevatorConsole_Exercise.Logic
             _doorState = new();
             _floorsToGo = new();
 
-            controllerIsIdle();
-            cabinIsStopped();
-            cabinDoorIsOpened();
+            ControllerIsIdle();
+            CabinIsStopped();
+            CabinDoorIsOpened();
         }
 
         //Elevator state
-        private void controllerIsIdle() =>
-            changeStateTo(new ElevatorControllerIdleState(this));
+        private void ControllerIsIdle() =>
+            ChangeStateTo(new ElevatorControllerIdleState(this));
 
-        private void changeStateTo(ElevatorControllerState newState) =>
+        private void ChangeStateTo(ElevatorControllerState newState) =>
             _state = newState;
 
-        private void controllerIsWorking() =>
-            changeStateTo(new ElevatorControllerIsWorkingState(this));
+        private void ControllerIsWorking() =>
+            ChangeStateTo(new ElevatorControllerIsWorkingState(this));
 
-        public bool isIdle() => _state.isIdle();
+        public bool IsIdle() => _state.IsIdle();
 
-        public bool isWorking() => _state.isWorking();
+        public bool IsWorking() => _state.IsWorking();
 
         //Door state
-        private void cabinDoorIsClosed() =>
+        private void CabinDoorIsClosed() =>
             _doorState.Set(new CabinDoorClosedState(this));
 
-        private void cabinDoorIsOpened() =>
+        private void CabinDoorIsOpened() =>
             _doorState.Set(new CabinDoorOpenedState(this));
 
-        private void cabinDoorIsClosing() =>
+        private void CabinDoorIsClosing() =>
             _doorState.Set(new CabinDoorClosingState(this));
 
-        private void cabinDoorIsOpening() =>
+        private void CabinDoorIsOpening() =>
             _doorState.Set(new CabinDoorOpeningState(this));
 
-        public bool isCabinDoorOpened() => _doorState.State.isOpened();
+        public bool IsCabinDoorOpened() => _doorState.State.IsOpened();
 
-        public bool isCabinDoorOpening() => _doorState.State.isOpening();
+        public bool IsCabinDoorOpening() => _doorState.State.IsOpening();
 
-        public bool isCabinDoorClosed() => _doorState.State.isClosed();
+        public bool IsCabinDoorClosed() => _doorState.State.IsClosed();
 
-        public bool isCabinDoorClosing() => _doorState.State.isClosing();
+        public bool IsCabinDoorClosing() => _doorState.State.IsClosing();
 
         //Cabin state
-        private void cabinIsStopped() =>
+        private void CabinIsStopped() =>
             _cabinState.Set(new CabinStoppedState(this));
 
-        private void cabinMoving() =>
+        private void CabinMoving() =>
             _cabinState.Set(new CabinMovingState(this));
 
-        private void cabinIsWaitingForPeople() =>
+        private void CabinIsWaitingForPeople() =>
             _cabinState.Set(new CabinWaitingForPeopleState(this));
 
-        public int cabinFloorNumber() => _currentCabinFloorNumber;
+        public int CabinFloorNumber() => _currentCabinFloorNumber;
 
-        public bool isCabinStopped() => _cabinState.State.isStopped();
+        public bool IsCabinStopped() => _cabinState.State.IsStopped();
 
-        public bool isCabinMoving() => _cabinState.State.isMoving();
+        public bool IsCabinMoving() => _cabinState.State.IsMoving();
 
-        public bool isCabinWaitingForPeople() => _cabinState.State.isWaitingForPeople();
+        public bool IsCabinWaitingForPeople() => _cabinState.State.IsWaitingForPeople();
 
         //Events
-        public void goUpPushedFromFloor(int aFloorNumber) =>
-            _state.goUpPushedFromFloor(aFloorNumber);
+        public void GoUpPushedFromFloor(int aFloorNumber) =>
+            _state.GoUpPushedFromFloor(aFloorNumber);
 
-        public void cabinOnFloor(int aFloorNumber) =>
-            _state.cabinOnFloor(aFloorNumber);
+        public void CabinOnFloor(int aFloorNumber) =>
+            _state.CabinOnFloor(aFloorNumber);
 
-        public void cabinDoorClosed() => _state.cabindDoorClosed();
+        public void CabinDoorClosed() => _state.CabindDoorClosed();
 
-        public void openCabinDoor() => _state.openCabinDoor();
+        public void OpenCabinDoor() => _state.OpenCabinDoor();
 
-        public void cabinDoorOpened() => _state.cabinDoorOpened();
+        public void CabinDoorOpened() => _state.CabinDoorOpened();
 
-        public void waitForPeopleTimedOut() => _state.waitForPeopleTimedOut();
+        public void WaitForPeopleTimedOut() => _state.WaitForPeopleTimedOut();
 
-        public void closeCabinDoor() => _state.closeCabinDoor();
+        public void CloseCabinDoor() => _state.CloseCabinDoor();
 
-        public void goUpPushedFromFloorWhenIdle(int aFloorNumber)
+        public void GoUpPushedFromFloorWhenIdle(int aFloorNumber)
         {
             _floorsToGo.Add(aFloorNumber);
-            controllerIsWorking();
-            cabinDoorIsClosing();
+            ControllerIsWorking();
+            CabinDoorIsClosing();
         }
 
-        public void cabinDoorClosedWhenWorking() =>
-            _cabinState.State.cabinDoorClosedWhenWorking();
+        public void CabinDoorClosedWhenWorking() =>
+            _cabinState.State.CabinDoorClosedWhenWorking();
 
-        public void cabinDoorClosedWhenWorkingAndCabinStopped() =>
-            _doorState.State.cabinDoorClosedWhenWorkingAndCabinStopped();
+        public void CabinDoorClosedWhenWorkingAndCabinStopped() =>
+            _doorState.State.CabinDoorClosedWhenWorkingAndCabinStopped();
 
-        public void cabinDoorClosedWhenWorkingAndCabinStoppedAndClosing()
+        public void CabinDoorClosedWhenWorkingAndCabinStoppedAndClosing()
         {
-            cabinDoorIsClosed();
-            cabinMoving();
+            CabinDoorIsClosed();
+            CabinMoving();
         }
 
-        public void cabinOnFloorWhenWorking(int aFloorNumber)
+        public void CabinOnFloorWhenWorking(int aFloorNumber)
         {
             if (aFloorNumber < _currentCabinFloorNumber) throw new Exception("Sensor de cabina desincronizado");
             if (_currentCabinFloorNumber + 1 != aFloorNumber) throw new Exception("Sensor de cabina desincronizado");
@@ -123,112 +123,112 @@ namespace ElevatorConsole_Exercise.Logic
             if (_floorsToGo.ElementAt(0) == aFloorNumber)
             {
                 _floorsToGo.Remove(_floorsToGo.ElementAt(0));
-                cabinIsStopped();
-                cabinDoorIsOpening();
+                CabinIsStopped();
+                CabinDoorIsOpening();
             }
         }
 
-        public void cabinOnFloorWhenIdle(int aFloorNumber) =>
+        public void CabinOnFloorWhenIdle(int _) =>
             throw new Exception("Sensor de cabina desincronizado");
 
-        public void cabinDoorOpenendWhenWorking() =>
-            _cabinState.State.cabinDoorOpenedWhenWorking();
+        public void CabinDoorOpenendWhenWorking() =>
+            _cabinState.State.CabinDoorOpenedWhenWorking();
 
-        public void cabinDoorOpenedWhenWorkingAndCabinStopped()
+        public void CabinDoorOpenedWhenWorkingAndCabinStopped()
         {
-            cabinDoorIsOpened();
-            if (hasFloorToGo())
+            CabinDoorIsOpened();
+            if (HasFloorToGo())
             {
-                cabinIsWaitingForPeople();
+                CabinIsWaitingForPeople();
             }
             else
             {
-                controllerStateIsIdle();
+                ControllerStateIsIdle();
             }
         }
 
-        private void controllerStateIsIdle() =>
+        private void ControllerStateIsIdle() =>
             _state = new ElevatorControllerIdleState(this);
 
-        private bool hasFloorToGo() => _floorsToGo.Count > 0;
+        private bool HasFloorToGo() => _floorsToGo.Count > 0;
 
-        public void openCabinDoorWhenIdle()
+        public void OpenCabinDoorWhenIdle()
         {
             //No hago nada porque me pidieron abrir la puerta cuando no estoy haciendo nada
             //y en ese caso ya está abierta
         }
 
-        public void openCabinDoorWhenWorking() =>
-            _cabinState.State.openCabinDoorWhenWorking();
+        public void OpenCabinDoorWhenWorking() =>
+            _cabinState.State.OpenCabinDoorWhenWorking();
 
-        public void openCabinDoorWhenWorkingAndCabinStopped() =>
-            _doorState.State.openCabinDoorWhenWorkingAndCabinStopped();
+        public void OpenCabinDoorWhenWorkingAndCabinStopped() =>
+            _doorState.State.OpenCabinDoorWhenWorkingAndCabinStopped();
 
-        public void openCabinDoorWhenWorkingAndCabinStoppedAndDoorClosing() =>
-            cabinDoorIsOpening();
+        public void OpenCabinDoorWhenWorkingAndCabinStoppedAndDoorClosing() =>
+            CabinDoorIsOpening();
 
-        public void openCabinDoorWhenWorkingAndCabinMoving()
+        public void OpenCabinDoorWhenWorkingAndCabinMoving()
         {
             //No puedo abrir la puerta porque la cabina se está moviendo!
         }
 
-        public void openCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening()
+        public void OpenCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening()
         {
             //Ya se está abriendo!! no tengo que hacer nada
         }
 
-        public void goUpPushedFromFloorWhenWorking(int aFloorNumber) =>
+        public void GoUpPushedFromFloorWhenWorking(int aFloorNumber) =>
             _floorsToGo.Add(aFloorNumber);
 
-        public void waitForPeopleTimedOutWhenWorking() =>
-            _cabinState.State.waitForPeopleTimedOutWhenWorking();
+        public void WaitForPeopleTimedOutWhenWorking() =>
+            _cabinState.State.WaitForPeopleTimedOutWhenWorking();
 
-        public void waitForPeopleTimedOutWhenWorkingAndCabinWaitingForPeople()
+        public void WaitForPeopleTimedOutWhenWorkingAndCabinWaitingForPeople()
         {
-            cabinIsStopped();
-            cabinDoorIsClosing();
+            CabinIsStopped();
+            CabinDoorIsClosing();
         }
 
-        public void closeCabinDoorWhenWorking() =>
-            _cabinState.State.closeCabinDoorWhenWorking();
+        public void CloseCabinDoorWhenWorking() =>
+            _cabinState.State.CloseCabinDoorWhenWorking();
 
-        public void closeCabinDoorWhenWorkingAndCabinWaitingForPeople() =>
-            waitForPeopleTimedOutWhenWorkingAndCabinWaitingForPeople();
+        public void CloseCabinDoorWhenWorkingAndCabinWaitingForPeople() =>
+            WaitForPeopleTimedOutWhenWorkingAndCabinWaitingForPeople();
 
-        public void closeCabinDoorWhenIdle()
+        public void CloseCabinDoorWhenIdle()
         {
             //No estoy haciendo nada y me piden cerrar la puerta, por lo tanto no la 
             //cierro porque no tengo que mover la cabina puesto que estoy idle
         }
 
-        public void closeCabinDoorWhenWorkingAndCabinMoving()
+        public void CloseCabinDoorWhenWorkingAndCabinMoving()
         {
             //Si la cabina se está moviendo, la puerta ya está cerrada, por lo tanto
             //no tengo que volver a cerrarla
         }
 
-        public void closeCabinDoorWhenWorkingAndCabinStopped() =>
-            _doorState.State.closeCabinDoorWhenWorkingAndCabinStopped();
+        public void CloseCabinDoorWhenWorkingAndCabinStopped() =>
+            _doorState.State.CloseCabinDoorWhenWorkingAndCabinStopped();
 
-        public void closeCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening()
+        public void CloseCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening()
         {
             //Estoy abriendo la puerta para que suba gente y me piden cerrarla. 
             //No la cierro hasta no abrir completamente la puerta
         }
 
-        public void cabinDoorClosedWhenIdle() =>
+        public void CabinDoorClosedWhenIdle() =>
             throw new Exception("Sensor de puerta desincronizado");
 
-        public void cabinDoorClosedWhenWorkingAndCabinMoving() =>
+        public void CabinDoorClosedWhenWorkingAndCabinMoving() =>
             throw new Exception("Sensor de puerta desincronizado");
 
-        public void cabinDoorClosedWhenWorkingAndCabinStoppedAndCabinDoorOpening() =>
+        public void CabinDoorClosedWhenWorkingAndCabinStoppedAndCabinDoorOpening() =>
             throw new Exception("Sensor de puerta desincronizado");
 
-        public void addCabinObserver(Observer<CabinState> observer) =>
+        public void AddCabinObserver(Observer<CabinState> observer) =>
             _cabinState.AddObserver(observer);
 
-        public void addCabinDoorObserver(Observer<CabinDoorState> observer) =>
+        public void AddCabinDoorObserver(Observer<CabinDoorState> observer) =>
             _doorState.AddObserver(observer);
     }
 }

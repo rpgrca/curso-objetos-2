@@ -7,23 +7,23 @@
         public CabinDoorOpeningState(ElevatorController elevatorController) =>
             _elevatorController = elevatorController;
 
-        public void cabinDoorClosedWhenWorkingAndCabinStopped() =>
-            _elevatorController.cabinDoorClosedWhenWorkingAndCabinStoppedAndCabinDoorOpening();
+        public void CabinDoorClosedWhenWorkingAndCabinStopped() =>
+            _elevatorController.CabinDoorClosedWhenWorkingAndCabinStoppedAndCabinDoorOpening();
 
-        public bool isClosed() => false;
+        public bool IsClosed() => false;
 
-        public bool isClosing() => false;
+        public bool IsClosing() => false;
 
-        public bool isOpened() => false;
+        public bool IsOpened() => false;
 
-        public bool isOpening() => true;
+        public bool IsOpening() => true;
 
-        public void openCabinDoorWhenWorkingAndCabinStopped() =>
-            _elevatorController.openCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening();
+        public void OpenCabinDoorWhenWorkingAndCabinStopped() =>
+            _elevatorController.OpenCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening();
 
-        public void closeCabinDoorWhenWorkingAndCabinStopped() =>
-            _elevatorController.closeCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening();
+        public void CloseCabinDoorWhenWorkingAndCabinStopped() =>
+            _elevatorController.CloseCabinDoorWhenWorkingAndCabinStoppedAndCabinDoorOpening();
 
-        public void accept(CabinDoorStateVisitor visitor) => visitor.visitCabinDoorOpening(this);
+        public void Accept(CabinDoorStateVisitor visitor) => visitor.VisitCabinDoorOpening(this);
     }
 }

@@ -6,14 +6,14 @@ namespace ElevatorConsole_Exercise.UnitTests
     public class ElevatorControllerViewTest
     {
         [Fact]
-        public void test01ElevatorControllerConsoleTracksDoorClosingState()
+        public void Test01ElevatorControllerConsoleTracksDoorClosingState()
         {
             var elevatorController = new ElevatorController();
             var elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
 
-            elevatorController.goUpPushedFromFloor(1);
+            elevatorController.GoUpPushedFromFloor(1);
 
-            var reader = elevatorControllerConsole.consoleReader();
+            var reader = elevatorControllerConsole.ConsoleReader();
 
             reader.MoveNext();
             Assert.Equal("Puerta Cerrandose", reader.Current);
@@ -21,15 +21,15 @@ namespace ElevatorConsole_Exercise.UnitTests
         }
 
         [Fact]
-        public void test02ElevatorControllerConsoleTracksCabinState()
+        public void Test02ElevatorControllerConsoleTracksCabinState()
         {
             var elevatorController = new ElevatorController();
             var elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
 
-            var reader = elevatorControllerConsole.consoleReader();
+            var reader = elevatorControllerConsole.ConsoleReader();
 
             reader.MoveNext();
             Assert.Equal("Puerta Cerrandose", reader.Current);
@@ -41,16 +41,16 @@ namespace ElevatorConsole_Exercise.UnitTests
         }
 
         [Fact]
-        public void test03ElevatorControllerConsoleTracksCabinAndDoorStateChanges()
+        public void Test03ElevatorControllerConsoleTracksCabinAndDoorStateChanges()
         {
             var elevatorController = new ElevatorController();
             var elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
 
-            var reader = elevatorControllerConsole.consoleReader();
+            var reader = elevatorControllerConsole.ConsoleReader();
 
             reader.MoveNext();
             Assert.Equal("Puerta Cerrandose", reader.Current);
@@ -66,17 +66,17 @@ namespace ElevatorConsole_Exercise.UnitTests
         }
 
         [Fact]
-        public void test04ElevatorControllerCanHaveMoreThanOneView()
+        public void Test04ElevatorControllerCanHaveMoreThanOneView()
         {
             var elevatorController = new ElevatorController();
             var elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
             var elevatorControllerStatusView = new ElevatorControllerStatusView(elevatorController);
 
-            elevatorController.goUpPushedFromFloor(1);
-            elevatorController.cabinDoorClosed();
-            elevatorController.cabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
 
-            var reader = elevatorControllerConsole.consoleReader();
+            var reader = elevatorControllerConsole.ConsoleReader();
 
             reader.MoveNext();
             Assert.Equal("Puerta Cerrandose", reader.Current);
@@ -90,8 +90,8 @@ namespace ElevatorConsole_Exercise.UnitTests
             Assert.Equal("Puerta Abriendose", reader.Current);
             Assert.False(reader.MoveNext());
 
-            Assert.Equal("Stopped", elevatorControllerStatusView.cabinFieldModel());
-            Assert.Equal("Opening", elevatorControllerStatusView.cabinDoorFieldModel());
+            Assert.Equal("Stopped", elevatorControllerStatusView.CabinFieldModel());
+            Assert.Equal("Opening", elevatorControllerStatusView.CabinDoorFieldModel());
         }
     }
 }

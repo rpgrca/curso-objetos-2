@@ -2,8 +2,8 @@
 {
     public interface CabinStateVisitor
     {
-        void visitCabinMoving(CabinMovingState cabinMovingState);
-        void visitCabinStopped(CabinStoppedState cabinStoppedState);
-        void visitCabinWaitingPeople(CabinWaitingForPeopleState cabinWaitingForPeopleState);
+        void VisitCabinMoving(CabinMovingState cabinMovingState);
+        void VisitCabinStopped(CabinStoppedState cabinStoppedState);
+        void VisitCabinWaitingPeople(CabinWaitingForPeopleState cabinWaitingForPeopleState);
     }
 }

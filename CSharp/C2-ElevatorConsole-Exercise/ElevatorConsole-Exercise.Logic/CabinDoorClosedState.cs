@@ -8,20 +8,20 @@ namespace ElevatorConsole_Exercise.Logic
         {
         }
 
-        public void cabinDoorClosedWhenWorkingAndCabinStopped() => throw new Exception();
+        public void CabinDoorClosedWhenWorkingAndCabinStopped() => throw new Exception();
 
-        public bool isClosed() => true;
+        public bool IsClosed() => true;
 
-        public bool isClosing() => false;
+        public bool IsClosing() => false;
 
-        public bool isOpened() => false;
+        public bool IsOpened() => false;
 
-        public bool isOpening() => false;
+        public bool IsOpening() => false;
 
-        public void closeCabinDoorWhenWorkingAndCabinStopped() => throw new Exception();
+        public void CloseCabinDoorWhenWorkingAndCabinStopped() => throw new Exception();
 
-        public void openCabinDoorWhenWorkingAndCabinStopped() => throw new Exception();
+        public void OpenCabinDoorWhenWorkingAndCabinStopped() => throw new Exception();
 
-        public void accept(CabinDoorStateVisitor visitor) => visitor.visitCabinDoorClosed(this);
+        public void Accept(CabinDoorStateVisitor visitor) => visitor.VisitCabinDoorClosed(this);
     }
 }

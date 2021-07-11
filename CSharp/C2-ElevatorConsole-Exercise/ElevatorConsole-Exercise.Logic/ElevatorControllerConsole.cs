@@ -10,35 +10,35 @@ namespace ElevatorConsole_Exercise.Logic
         public ElevatorControllerConsole(ElevatorController elevatorController)
         {
             _console = new List<string>();
-            elevatorController.addCabinObserver(this);
-            elevatorController.addCabinDoorObserver(this);
+            elevatorController.AddCabinObserver(this);
+            elevatorController.AddCabinDoorObserver(this);
         }
 
-        public IEnumerator<string> consoleReader() => _console.GetEnumerator();
+        public IEnumerator<string> ConsoleReader() => _console.GetEnumerator();
 
-        public void visitCabinMoving(CabinMovingState cabinMovingState) =>
+        public void VisitCabinMoving(CabinMovingState cabinMovingState) =>
             _console.Add("Cabina Moviendose");
 
-        public void visitCabinStopped(CabinStoppedState cabinStoppedState) =>
+        public void VisitCabinStopped(CabinStoppedState cabinStoppedState) =>
             _console.Add("Cabina Detenida");
 
-        public void visitCabinWaitingPeople(CabinWaitingForPeopleState cabinWaitingForPeopleState) =>
+        public void VisitCabinWaitingPeople(CabinWaitingForPeopleState cabinWaitingForPeopleState) =>
             _console.Add("Cabina Esperando Gente");
 
-        public void visitCabinDoorClosing(CabinDoorClosingState cabinDoorClosingState) =>
+        public void VisitCabinDoorClosing(CabinDoorClosingState cabinDoorClosingState) =>
             _console.Add("Puerta Cerrandose");
 
-        public void visitCabinDoorClosed(CabinDoorClosedState cabinDoorClosedState) =>
+        public void VisitCabinDoorClosed(CabinDoorClosedState cabinDoorClosedState) =>
             _console.Add("Puerta Cerrada");
 
-        public void visitCabinDoorOpened(CabinDoorOpenedState cabinDoorOpenedState) =>
+        public void VisitCabinDoorOpened(CabinDoorOpenedState cabinDoorOpenedState) =>
             _console.Add("Puerta Abierta");
 
-        public void visitCabinDoorOpening(CabinDoorOpeningState cabinDoorOpeningState) =>
+        public void VisitCabinDoorOpening(CabinDoorOpeningState cabinDoorOpeningState) =>
             _console.Add("Puerta Abriendose");
 
-        public void Changed(CabinDoorState visitor) => visitor.accept(this);
+        public void Changed(CabinDoorState visitor) => visitor.Accept(this);
 
-        public void Changed(CabinState visitor) => visitor.accept(this);
+        public void Changed(CabinState visitor) => visitor.Accept(this);
     }
 }
