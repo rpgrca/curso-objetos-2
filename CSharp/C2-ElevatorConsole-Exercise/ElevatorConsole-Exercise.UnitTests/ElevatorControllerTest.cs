@@ -291,15 +291,9 @@ namespace ElevatorConsole_Exercise.UnitTests
             elevatorController.GoUpPushedFromFloor(1);
             elevatorController.CabinDoorClosed();
             elevatorController.CabinOnFloor(1);
-            try
-            {
-                elevatorController.CabinOnFloor(0);
-                Assert.True(false);
-            }
-            catch (Exception elevatorEmergency)
-            {
-                Assert.True(elevatorEmergency.Message == "Sensor de cabina desincronizado");
-            }
+
+            var elevatorEmergency = Assert.Throws<Exception>(() => elevatorController.CabinOnFloor(0));
+            Assert.True(elevatorEmergency.Message == "Sensor de cabina desincronizado");
         }
 
         [Fact]
@@ -310,16 +304,9 @@ namespace ElevatorConsole_Exercise.UnitTests
             elevatorController.GoUpPushedFromFloor(2);
             elevatorController.CabinDoorClosed();
             elevatorController.CabinOnFloor(1);
-            try
-            {
-                elevatorController.CabinOnFloor(0);
-                Assert.True(false);
-            }
-            catch (Exception elevatorEmergency)
-            {
-                Assert.True(elevatorEmergency.Message == "Sensor de cabina desincronizado");
-            }
-        }
+
+            var elevatorEmergency = Assert.Throws<Exception>(() => elevatorController.CabinOnFloor(0));
+       }
 
         [Fact]
         public void TestElevatorHasToEnterEmergencyIfJumpsFloors()
@@ -328,15 +315,9 @@ namespace ElevatorConsole_Exercise.UnitTests
 
             elevatorController.GoUpPushedFromFloor(3);
             elevatorController.CabinDoorClosed();
-            try
-            {
-                elevatorController.CabinOnFloor(3);
-                Assert.True(false);
-            }
-            catch (Exception elevatorEmergency)
-            {
-                Assert.True(elevatorEmergency.Message == "Sensor de cabina desincronizado");
-            }
+
+            var elevatorEmergency = Assert.Throws<Exception>(() => elevatorController.CabinOnFloor(3));
+            Assert.True(elevatorEmergency.Message == "Sensor de cabina desincronizado");
         }
 
         [Fact]
@@ -344,15 +325,8 @@ namespace ElevatorConsole_Exercise.UnitTests
         {
             var elevatorController = new ElevatorController();
 
-            try
-            {
-                elevatorController.CabinDoorClosed();
-                Assert.True(false);
-            }
-            catch (Exception elevatorEmergency)
-            {
-                Assert.True(elevatorEmergency.Message == "Sensor de puerta desincronizado");
-            }
+            var elevatorEmergency = Assert.Throws<Exception>(() => elevatorController.CabinDoorClosed());
+            Assert.True(elevatorEmergency.Message == "Sensor de puerta desincronizado");
         }
 
         [Fact]
@@ -362,15 +336,9 @@ namespace ElevatorConsole_Exercise.UnitTests
 
             elevatorController.GoUpPushedFromFloor(1);
             elevatorController.CabinDoorClosed();
-            try
-            {
-                elevatorController.CabinDoorClosed();
-                Assert.True(false);
-            }
-            catch (Exception elevatorEmergency)
-            {
-                Assert.True(elevatorEmergency.Message == "Sensor de puerta desincronizado");
-            }
+
+            var elevatorEmergency = Assert.Throws<Exception>(() => elevatorController.CabinDoorClosed());
+            Assert.True(elevatorEmergency.Message == "Sensor de puerta desincronizado");
         }
 
         [Fact]
