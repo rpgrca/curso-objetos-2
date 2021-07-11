@@ -2,11 +2,13 @@
 
 namespace ElevatorConsole_Exercise.Logic
 {
-    public class ElevatorControllerConsole : CabinStateVisitor, CabinDoorStateVisitor
+    public class ElevatorControllerConsole : CabinStateVisitor, CabinDoorStateVisitor,
+        Observer<CabinDoorState>, Observer<CabinState>
     {
         private readonly List<string> _console;
 
-        public ElevatorControllerConsole(ElevatorController elevatorController) {
+        public ElevatorControllerConsole(ElevatorController elevatorController)
+        {
             _console = new List<string>();
             elevatorController.addCabinObserver(this);
             elevatorController.addCabinDoorObserver(this);
@@ -34,5 +36,9 @@ namespace ElevatorConsole_Exercise.Logic
 
         public void visitCabinDoorOpening(CabinDoorOpeningState cabinDoorOpeningState) =>
             _console.Add("Puerta Abriendose");
+
+        public void Changed(CabinDoorState visitor) => visitor.accept(this);
+
+        public void Changed(CabinState visitor) => visitor.accept(this);
     }
 }

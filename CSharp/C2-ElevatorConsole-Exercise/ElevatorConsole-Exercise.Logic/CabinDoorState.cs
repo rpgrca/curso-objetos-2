@@ -1,6 +1,6 @@
 ﻿namespace ElevatorConsole_Exercise.Logic
 {
-    public interface CabinDoorState : Visitor<CabinDoorStateVisitor>
+    public interface CabinDoorState
     {
         bool isOpened();
         bool isOpening();
@@ -9,5 +9,6 @@
         void cabinDoorClosedWhenWorkingAndCabinStopped();
         void openCabinDoorWhenWorkingAndCabinStopped();
         void closeCabinDoorWhenWorkingAndCabinStopped();
+        void accept(CabinDoorStateVisitor visitor);
     }
 }

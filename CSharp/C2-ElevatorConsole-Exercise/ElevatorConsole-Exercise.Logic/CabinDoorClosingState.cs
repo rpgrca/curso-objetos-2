@@ -25,7 +25,7 @@ namespace ElevatorConsole_Exercise.Logic
 
         public void closeCabinDoorWhenWorkingAndCabinStopped() => throw new Exception();
 
-        public void Accept(CabinDoorStateVisitor visitor) =>
+        public void accept(CabinDoorStateVisitor visitor) =>
             visitor.visitCabinDoorClosing(this);
     }
 }

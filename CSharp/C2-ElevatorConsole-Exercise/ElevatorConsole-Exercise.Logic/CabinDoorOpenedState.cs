@@ -23,6 +23,6 @@ namespace ElevatorConsole_Exercise.Logic
 
         public void openCabinDoorWhenWorkingAndCabinStopped() => throw new Exception();
 
-        public void Accept(CabinDoorStateVisitor visitor) => visitor.visitCabinDoorOpened(this);
+        public void accept(CabinDoorStateVisitor visitor) => visitor.visitCabinDoorOpened(this);
     }
 }
