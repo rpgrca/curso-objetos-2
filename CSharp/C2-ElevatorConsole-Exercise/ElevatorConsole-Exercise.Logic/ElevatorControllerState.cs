@@ -1,15 +1,15 @@
 ﻿namespace ElevatorConsole_Exercise.Logic
 {
-    interface ElevatorControllerState
+    internal interface ElevatorControllerState
     {
-        bool isIdle();
-        void goUpPushedFromFloor(int aFloorNumber);
-        bool isWorking();
-        void cabindDoorClosed();
-        void cabinOnFloor(int aFloorNumber);
-        void cabinDoorOpened();
-        void openCabinDoor();
-        void waitForPeopleTimedOut();
-        void closeCabinDoor();
+        bool IsIdle();
+        void GoUpPushedFromFloor(int aFloorNumber);
+        bool IsWorking();
+        void CabindDoorClosed();
+        void CabinOnFloor(int aFloorNumber);
+        void CabinDoorOpened();
+        void OpenCabinDoor();
+        void WaitForPeopleTimedOut();
+        void CloseCabinDoor();
     }
 }

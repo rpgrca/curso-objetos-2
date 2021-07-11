@@ -9,22 +9,23 @@ namespace ElevatorConsole_Exercise.Logic
         public CabinDoorClosingState(ElevatorController elevatorController) =>
             _elevatorController = elevatorController;
 
-        public bool isOpened() => false;
+        public bool IsOpened() => false;
 
-        public bool isOpening() => false;
+        public bool IsOpening() => false;
 
-        public bool isClosing() => true;
+        public bool IsClosing() => true;
 
-        public bool isClosed() => false;
+        public bool IsClosed() => false;
 
-        public void cabinDoorClosedWhenWorkingAndCabinStopped() =>
-            _elevatorController.cabinDoorClosedWhenWorkingAndCabinStoppedAndClosing();
+        public void CabinDoorClosedWhenWorkingAndCabinStopped() =>
+            _elevatorController.CabinDoorClosedWhenWorkingAndCabinStoppedAndClosing();
 
-        public void openCabinDoorWhenWorkingAndCabinStopped() =>
-            _elevatorController.openCabinDoorWhenWorkingAndCabinStoppedAndDoorClosing();
+        public void OpenCabinDoorWhenWorkingAndCabinStopped() =>
+            _elevatorController.OpenCabinDoorWhenWorkingAndCabinStoppedAndDoorClosing();
 
-        public void closeCabinDoorWhenWorkingAndCabinStopped() => throw new Exception();
+        public void CloseCabinDoorWhenWorkingAndCabinStopped() => throw new Exception();
 
-        public void accept(CabinDoorStateVisitor visitor) => visitor.visitCabinDoorClosing(this);
+        public void Accept(CabinDoorStateVisitor visitor) =>
+            visitor.VisitCabinDoorClosing(this);
     }
 }

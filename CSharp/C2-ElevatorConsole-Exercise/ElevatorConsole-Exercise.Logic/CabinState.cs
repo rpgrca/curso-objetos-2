@@ -2,14 +2,14 @@
 {
     public interface CabinState
     {
-        bool isStopped();
-        bool isMoving();
-        void cabinDoorClosedWhenWorking();
-        void cabinDoorOpenedWhenWorking();
-        void openCabinDoorWhenWorking();
-        bool isWaitingForPeople();
-        void waitForPeopleTimedOutWhenWorking();
-        void closeCabinDoorWhenWorking();
-        void accept(CabinStateVisitor visitor);
+        bool IsStopped();
+        bool IsMoving();
+        void CabinDoorClosedWhenWorking();
+        void CabinDoorOpenedWhenWorking();
+        void OpenCabinDoorWhenWorking();
+        bool IsWaitingForPeople();
+        void WaitForPeopleTimedOutWhenWorking();
+        void CloseCabinDoorWhenWorking();
+        void Accept(CabinStateVisitor visitor);
     }
 }

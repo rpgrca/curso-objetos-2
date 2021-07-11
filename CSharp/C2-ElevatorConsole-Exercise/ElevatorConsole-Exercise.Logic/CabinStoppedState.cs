@@ -9,26 +9,26 @@ namespace ElevatorConsole_Exercise.Logic
         public CabinStoppedState(ElevatorController elevatorController) =>
             _elevatorController = elevatorController;
 
-        public bool isStopped() => true;
+        public bool IsStopped() => true;
 
-        public bool isMoving() => false;
+        public bool IsMoving() => false;
 
-        public void cabinDoorClosedWhenWorking() =>
-            _elevatorController.cabinDoorClosedWhenWorkingAndCabinStopped();
+        public void CabinDoorClosedWhenWorking() =>
+            _elevatorController.CabinDoorClosedWhenWorkingAndCabinStopped();
 
-        public void cabinDoorOpenedWhenWorking() =>
-            _elevatorController.cabinDoorOpenedWhenWorkingAndCabinStopped();
+        public void CabinDoorOpenedWhenWorking() =>
+            _elevatorController.CabinDoorOpenedWhenWorkingAndCabinStopped();
 
-        public void openCabinDoorWhenWorking() =>
-            _elevatorController.openCabinDoorWhenWorkingAndCabinStopped();
+        public void OpenCabinDoorWhenWorking() =>
+            _elevatorController.OpenCabinDoorWhenWorkingAndCabinStopped();
 
-        public bool isWaitingForPeople() => false;
+        public bool IsWaitingForPeople() => false;
 
-        public void closeCabinDoorWhenWorking() =>
-            _elevatorController.closeCabinDoorWhenWorkingAndCabinStopped();
+        public void CloseCabinDoorWhenWorking() =>
+            _elevatorController.CloseCabinDoorWhenWorkingAndCabinStopped();
 
-        public void waitForPeopleTimedOutWhenWorking() => throw new Exception();
+        public void WaitForPeopleTimedOutWhenWorking() => throw new Exception();
 
-        public void accept(CabinStateVisitor visitor) => visitor.visitCabinStopped(this);
+        public void Accept(CabinStateVisitor visitor) => visitor.VisitCabinStopped(this);
     }
 }
