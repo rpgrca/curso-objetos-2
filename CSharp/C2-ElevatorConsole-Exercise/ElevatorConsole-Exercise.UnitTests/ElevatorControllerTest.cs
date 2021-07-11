@@ -153,7 +153,7 @@ namespace ElevatorConsole_Exercise.UnitTests
         }
 
         [Fact]
-        public void TestDoorKeepsOpeneingWhenItIsOpeneing()
+        public void TestDoorKeepsOpeningWhenItIsOpening()
         {
             var elevatorController = new ElevatorController();
 
@@ -517,17 +517,28 @@ namespace ElevatorConsole_Exercise.UnitTests
         }
 
         [Fact]
-        public void TestCabinHasToEnterEmergencyStateWhenOpeningDoorWhenAlreadyClosedAndWorking()
+        public void TestCabinHasToEnterEmergencyIfCabinOnFloorIsTriggeredWhileIdle()
         {
             var elevatorController = new ElevatorController();
 
-            elevatorController.GoUpPushedFromFloor(2);
-            elevatorController.CabinDoorClosed();
-            elevatorController.GoUpPushedFromFloor(1);
-            elevatorController.CabinOnFloor(1);
-            elevatorController.CabinDoorOpened();
+            var exception = Assert.Throws<Exception>(() => elevatorController.CabinOnFloor(1));
+            Assert.Equal("Sensor de cabina desincronizado", exception.Message);
+        }
 
-            var exception = Assert.Throws<Exception>(() => elevatorController.OpenCabinDoor());
+        [Fact]
+        public void TestCabinHasToEnterEmergencyIfOpenedDoorSensorIsTriggeredWhileIdle()
+        {
+            var elevatorController = new ElevatorController();
+
+            var exception = Assert.Throws<Exception>(() => elevatorController.CabinDoorOpened());
+        }
+
+        [Fact]
+        public void TestCabinHasToEnterEmergencyIfWaitTimedOutWhileIdle()
+        {
+            var elevatorController = new ElevatorController();
+
+            var exception = Assert.Throws<Exception>(() => elevatorController.WaitForPeopleTimedOut());
         }
     }
 }
