@@ -541,5 +541,16 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
                 p5 => Assert.Equal("Ganancias por 100", p5),
                 p6 => Assert.Equal("Inversiones por 1000", p6));
         }
+
+        [Fact]
+        public void test30PortfolioBalanceIsValueOfManagedAccountBalanceWhenCreatedWithOneAccount()
+        {
+            var account1 = new ReceptiveAccount();
+            var complexPortfolio = Portfolio.CreateWith(account1);
+
+            Deposit.RegisterForOn(100, account1);
+
+            Assert.Equal(100.0, complexPortfolio.Balance());
+        }
     }
 }
