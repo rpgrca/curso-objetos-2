@@ -14,7 +14,7 @@ namespace ElevatorConsole_Exercise.Logic
             elevatorController.AddCabinDoorObserver(this);
         }
 
-        public IEnumerator<string> ConsoleReader() => _console.GetEnumerator();
+        public IEnumerable<string> ConsoleReader() => new List<string>(_console);
 
         public void VisitCabinMoving(CabinMovingState cabinMovingState) =>
             _console.Add("Cabina Moviendose");

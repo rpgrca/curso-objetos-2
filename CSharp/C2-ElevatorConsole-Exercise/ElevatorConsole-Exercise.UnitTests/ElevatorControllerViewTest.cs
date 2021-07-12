@@ -14,10 +14,7 @@ namespace ElevatorConsole_Exercise.UnitTests
             elevatorController.GoUpPushedFromFloor(1);
 
             var reader = elevatorControllerConsole.ConsoleReader();
-
-            reader.MoveNext();
-            Assert.Equal("Puerta Cerrandose", reader.Current);
-            Assert.False(reader.MoveNext());
+            Assert.Single(reader, "Puerta Cerrandose");
         }
 
         [Fact]
@@ -30,14 +27,10 @@ namespace ElevatorConsole_Exercise.UnitTests
             elevatorController.CabinDoorClosed();
 
             var reader = elevatorControllerConsole.ConsoleReader();
-
-            reader.MoveNext();
-            Assert.Equal("Puerta Cerrandose", reader.Current);
-            reader.MoveNext();
-            Assert.Equal("Puerta Cerrada", reader.Current);
-            reader.MoveNext();
-            Assert.Equal("Cabina Moviendose", reader.Current);
-            Assert.False(reader.MoveNext());
+            Assert.Collection(reader,
+                p1 => Assert.Equal("Puerta Cerrandose", p1),
+                p2 => Assert.Equal("Puerta Cerrada", p2),
+                p3 => Assert.Equal("Cabina Moviendose", p3));
         }
 
         [Fact]
@@ -52,17 +45,12 @@ namespace ElevatorConsole_Exercise.UnitTests
 
             var reader = elevatorControllerConsole.ConsoleReader();
 
-            reader.MoveNext();
-            Assert.Equal("Puerta Cerrandose", reader.Current);
-            reader.MoveNext();
-            Assert.Equal("Puerta Cerrada", reader.Current);
-            reader.MoveNext();
-            Assert.Equal("Cabina Moviendose", reader.Current);
-            reader.MoveNext();
-            Assert.Equal("Cabina Detenida", reader.Current);
-            reader.MoveNext();
-            Assert.Equal("Puerta Abriendose", reader.Current);
-            Assert.False(reader.MoveNext());
+            Assert.Collection(reader,
+                p1 => Assert.Equal("Puerta Cerrandose", p1),
+                p2 => Assert.Equal("Puerta Cerrada", p2),
+                p3 => Assert.Equal("Cabina Moviendose", p3),
+                p4 => Assert.Equal("Cabina Detenida", p4),
+                p5 => Assert.Equal("Puerta Abriendose", p5));
         }
 
         [Fact]
@@ -77,21 +65,41 @@ namespace ElevatorConsole_Exercise.UnitTests
             elevatorController.CabinOnFloor(1);
 
             var reader = elevatorControllerConsole.ConsoleReader();
-
-            reader.MoveNext();
-            Assert.Equal("Puerta Cerrandose", reader.Current);
-            reader.MoveNext();
-            Assert.Equal("Puerta Cerrada", reader.Current);
-            reader.MoveNext();
-            Assert.Equal("Cabina Moviendose", reader.Current);
-            reader.MoveNext();
-            Assert.Equal("Cabina Detenida", reader.Current);
-            reader.MoveNext();
-            Assert.Equal("Puerta Abriendose", reader.Current);
-            Assert.False(reader.MoveNext());
+            Assert.Collection(reader,
+                p1 => Assert.Equal("Puerta Cerrandose", p1),
+                p2 => Assert.Equal("Puerta Cerrada", p2),
+                p3 => Assert.Equal("Cabina Moviendose", p3),
+                p4 => Assert.Equal("Cabina Detenida", p4),
+                p5 => Assert.Equal("Puerta Abriendose", p5));
 
             Assert.Equal("Stopped", elevatorControllerStatusView.CabinFieldModel());
             Assert.Equal("Opening", elevatorControllerStatusView.CabinDoorFieldModel());
+        }
+
+        [Fact]
+        public void Test05TestFullLog()
+        {
+            var elevatorController = new ElevatorController();
+            var elevatorControllerConsole = new ElevatorControllerConsole(elevatorController);
+
+            elevatorController.GoUpPushedFromFloor(1);
+            elevatorController.CabinDoorClosed();
+            elevatorController.CabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorOpened();
+            elevatorController.WaitForPeopleTimedOut();
+
+            var reader = elevatorControllerConsole.ConsoleReader();
+            Assert.Collection(reader,
+                p1 => Assert.Equal("Puerta Cerrandose", p1),
+                p2 => Assert.Equal("Puerta Cerrada", p2),
+                p3 => Assert.Equal("Cabina Moviendose", p3),
+                p4 => Assert.Equal("Cabina Detenida", p4),
+                p5 => Assert.Equal("Puerta Abriendose", p5),
+                p6 => Assert.Equal("Puerta Abierta", p6),
+                p7 => Assert.Equal("Cabina Esperando Gente", p7),
+                p8 => Assert.Equal("Cabina Detenida", p8),
+                p9 => Assert.Equal("Puerta Cerrandose", p9));
         }
     }
 }
