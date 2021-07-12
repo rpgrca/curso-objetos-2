@@ -502,6 +502,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             Deposit.RegisterForOn(100, fromAccount);
             Withdraw.RegisterForOn(50, fromAccount);
             Transfer.RegisterFor(100, fromAccount, toAccount);
+            Transfer.RegisterFor(50, toAccount, fromAccount);
             CertificateOfDeposit.RegisterFor(1000, 360, 0.1, fromAccount);
 
             List<string> lines = null;
@@ -513,8 +514,9 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
                 p1 => Assert.Equal("Depósito por 100", p1),
                 p2 => Assert.Equal("Extracción por 50", p2),
                 p3 => Assert.Equal("Transferencia por -100", p3),
-                p4 => Assert.Equal("Plazo fijo por 1000 durante 360 días a una tna de 0.1", p4),
-                p5 => Assert.Equal("Ganancias por 100", p5));
+                p4 => Assert.Equal("Transferencia por 50", p4),
+                p5 => Assert.Equal("Plazo fijo por 1000 durante 360 días a una tna de 0.1", p5),
+                p6 => Assert.Equal("Ganancias por 100", p6));
         }
 
         [Fact]
@@ -526,6 +528,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             Deposit.RegisterForOn(100, fromAccount);
             Withdraw.RegisterForOn(50, fromAccount);
             Transfer.RegisterFor(100, fromAccount, toAccount);
+            Transfer.RegisterFor(50, toAccount, fromAccount);
             CertificateOfDeposit.RegisterFor(1000, 360, 0.1, fromAccount);
 
             List<string> lines = null;
@@ -537,9 +540,10 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
                 p1 => Assert.Equal("Depósito por 100", p1),
                 p2 => Assert.Equal("Extracción por 50", p2),
                 p3 => Assert.Equal("Transferencia por -100", p3),
-                p4 => Assert.Equal("Plazo fijo por 1000 durante 360 días a una tna de 0.1", p4),
-                p5 => Assert.Equal("Ganancias por 100", p5),
-                p6 => Assert.Equal("Inversiones por 1000", p6));
+                p4 => Assert.Equal("Transferencia por 50", p4),
+                p5 => Assert.Equal("Plazo fijo por 1000 durante 360 días a una tna de 0.1", p5),
+                p6 => Assert.Equal("Ganancias por 100", p6),
+                p7 => Assert.Equal("Inversiones por 1000", p7));
         }
 
         [Fact]
