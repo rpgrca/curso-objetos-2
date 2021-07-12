@@ -1,9 +1,7 @@
-﻿using System.Linq.Expressions;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using Xunit;
 using PortfolioTreePrinter_Exercise.Logic;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PortfolioTreePrinter_Exercise.UnitTests
 {
@@ -266,13 +264,15 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Deposit.registerForOn(100, fromAccount);
             Withdraw.registerForOn(50, fromAccount);
             Transfer.registerFor(100, fromAccount, toAccount);
+            Transfer.registerFor(50, toAccount, fromAccount);
 
             var lines = new Summary(fromAccount).Value();
 
             Assert.Collection(lines,
                 p1 => Assert.Equal("Depósito por 100.0", p1),
                 p2 => Assert.Equal("Extracción por 50.0", p2),
-                p3 => Assert.Equal("Transferencia por -100.0", p3)
+                p3 => Assert.Equal("Transferencia por -100.0", p3),
+                p4 => Assert.Equal("Transferencia por 50.0", p4)
             );
         }
 
@@ -300,10 +300,11 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
             Deposit.registerForOn(1000, account);
             Withdraw.registerForOn(50, account);
             Transfer.registerFor(100, account, toAccount);
+            Transfer.registerFor(50, toAccount, account);
             CertificateOfDeposit.registerFor(100, 30, 0.1, account);
 
             Assert.Equal(100.0, new InvestmentNet(account).Value());
-            Assert.Equal(750.0, account.balance);
+            Assert.Equal(800.0, account.balance);
         }
 
         [Fact]
