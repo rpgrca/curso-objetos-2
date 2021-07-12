@@ -18,9 +18,6 @@ namespace Patterns_Portfolio_Exercise_WithAccountImplementation.Logic
                   }
                 : throw new Exception(ACCOUNT_ALREADY_MANAGED);
 
-        public static Portfolio createWith(List<SummarizingAccount> summarizingAccounts) =>
-            throw new Exception();
-
         public double balance() =>
             _accounts.Sum(p => p.balance());
 
