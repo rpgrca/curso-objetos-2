@@ -318,13 +318,15 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
             Deposit.RegisterForOn(100, fromAccount);
             Withdraw.RegisterForOn(50, fromAccount);
             Transfer.RegisterFor(100, fromAccount, toAccount);
+            Transfer.RegisterFor(50, toAccount, fromAccount);
 
             var lines = accountSummaryLines(fromAccount);
 
             Assert.Collection(lines,
                 p1 => Assert.Equal("Depósito por 100", p1),
                 p2 => Assert.Equal("Extracción por 50", p2),
-                p3 => Assert.Equal("Transferencia por -100", p3));
+                p3 => Assert.Equal("Transferencia por -100", p3),
+                p4 => Assert.Equal("Transferencia por 50", p4));
         }
 
         private List<string> accountSummaryLines(ReceptiveAccount fromAccount) =>
