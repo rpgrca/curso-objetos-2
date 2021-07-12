@@ -63,6 +63,8 @@ namespace ElevatorConsole_Exercise.UnitTests
             elevatorController.GoUpPushedFromFloor(1);
             elevatorController.CabinDoorClosed();
             elevatorController.CabinOnFloor(1);
+            elevatorController.GoUpPushedFromFloor(2);
+            elevatorController.CabinDoorOpened();
 
             var reader = elevatorControllerConsole.ConsoleReader();
             Assert.Collection(reader,
@@ -70,10 +72,12 @@ namespace ElevatorConsole_Exercise.UnitTests
                 p2 => Assert.Equal("Puerta Cerrada", p2),
                 p3 => Assert.Equal("Cabina Moviendose", p3),
                 p4 => Assert.Equal("Cabina Detenida", p4),
-                p5 => Assert.Equal("Puerta Abriendose", p5));
+                p5 => Assert.Equal("Puerta Abriendose", p5),
+                p6 => Assert.Equal("Puerta Abierta", p6),
+                p7 => Assert.Equal("Cabina Esperando Gente", p7));
 
-            Assert.Equal("Stopped", elevatorControllerStatusView.CabinFieldModel());
-            Assert.Equal("Opening", elevatorControllerStatusView.CabinDoorFieldModel());
+            Assert.Equal("Waiting People", elevatorControllerStatusView.CabinFieldModel());
+            Assert.Equal("Open", elevatorControllerStatusView.CabinDoorFieldModel());
         }
 
         [Fact]
