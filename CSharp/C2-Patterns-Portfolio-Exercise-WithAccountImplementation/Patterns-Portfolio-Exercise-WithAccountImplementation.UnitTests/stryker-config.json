@@ -1,0 +1,11 @@
+{
+    "stryker-config":
+    {
+        "test-runner": "vstest",
+        "reporters": [ "progress", "cleartext", "html" ],
+        "solution-path": "..\\Patterns-Portfolio-Exercise-WithAccountImplementation.sln",
+        "project-file": "Patterns-Portfolio-Exercise-WithAccountImplementation.UnitTests.csproj",
+        "ignore-methods": ["ConfigureAwait", "Dispose"],
+        "coverage-analysis": "all"
+    }
+}

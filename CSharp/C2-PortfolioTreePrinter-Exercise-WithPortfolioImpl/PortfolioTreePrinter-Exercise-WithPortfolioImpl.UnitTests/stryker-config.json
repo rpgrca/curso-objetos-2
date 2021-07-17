@@ -1,0 +1,11 @@
+{
+    "stryker-config":
+    {
+        "test-runner": "vstest",
+        "reporters": [ "progress", "cleartext", "html" ],
+        "solution-path": "..\\PortfolioTreePrinter-Exercise-WithPortfolioImpl.sln",
+        "project-file": "PortfolioTreePrinter-Exercise-WithPortfolioImpl.UnitTests.csproj",
+        "ignore-methods": ["ConfigureAwait", "Dispose"],
+        "coverage-analysis": "all"
+    }
+}
