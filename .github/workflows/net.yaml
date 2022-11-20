@@ -1,4 +1,4 @@
-name: Build NET5
+name: Build NET
 
 on:
   push:
@@ -12,12 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Setup .NET 5
-      uses: actions/setup-dotnet@v1
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 5.0.100
+        dotnet-version: 7.0.x
 
     - name: Restore packages
       run: |
@@ -37,14 +37,15 @@ jobs:
     - name: Testing solutions
       run: |
            for s in Patterns-Portfolio-Exercise-WithAccountImplementation PortfolioTreePrinter-Exercise PortfolioTreePrinter-Exercise-WithPortfolioImpl ElevatorExercise ElevatorConsole-Exercise; do
-               coverlet CSharp/C2-$s/$s.UnitTests/bin/Debug/net5.0/$s.UnitTests.dll --target "dotnet" --targetargs "test CSharp/C2-$s/$s.UnitTests/$s.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output $s.coverage.xml
+               coverlet CSharp/C2-$s/$s.UnitTests/bin/Debug/net7/$s.UnitTests.dll --target "dotnet" --targetargs "test CSharp/C2-$s/$s.UnitTests/$s.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output $s.coverage.xml
            done
 
     - name: Upload coverage to CodeCov
       run: bash <(curl -s https://codecov.io/bash)
 
     - name: Archive code coverage results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: code-coverage-report
         path: ./*.coverage.xml
+
