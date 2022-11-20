@@ -1,27 +1,27 @@
 version: 2
 updates:
   - package-ecosystem: "nuget"
-    directory: "/CSharp/Patterns-Portfolio-Exercise-WithAccountImplementation/"
+    directory: "/CSharp/C2-Patterns-Portfolio-Exercise-WithAccountImplementation/"
     schedule:
       interval: "weekly"
 
   - package-ecosystem: "nuget"
-    directory: "/CSharp/PortfolioTreePrinter-Exercise"
+    directory: "/CSharp/C2-PortfolioTreePrinter-Exercise"
     schedule:
       interval: "weekly"
 
   - package-ecosystem: "nuget"
-    directory: "/CSharp/PortfolioTreePrinter-Exercise-WithPortfolioImpl"
+    directory: "/CSharp/C2-PortfolioTreePrinter-Exercise-WithPortfolioImpl"
     schedule:
       interval: "weekly"
 
   - package-ecosystem: "nuget"
-    directory: "/CSharp/ElevatorExercise"
+    directory: "/CSharp/C2-ElevatorExercise"
     schedule:
       interval: "weekly"
 
   - package-ecosystem: "nuget"
-    directory: "/CSharp/ElevatorConsole-Exercise"
+    directory: "/CSharp/C2-ElevatorConsole-Exercise"
     schedule:
       interval: "weekly"
 
