@@ -4,29 +4,34 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "thursday"
 
   - package-ecosystem: "nuget"
     directory: "/CSharp/C2-Patterns-Portfolio-Exercise-WithAccountImplementation/"
     schedule:
       interval: "weekly"
+      day: "thursday"
 
   - package-ecosystem: "nuget"
     directory: "/CSharp/C2-PortfolioTreePrinter-Exercise"
     schedule:
       interval: "weekly"
+      day: "thursday"
 
   - package-ecosystem: "nuget"
     directory: "/CSharp/C2-PortfolioTreePrinter-Exercise-WithPortfolioImpl"
     schedule:
       interval: "weekly"
+      day: "thursday"
 
   - package-ecosystem: "nuget"
     directory: "/CSharp/C2-ElevatorExercise"
     schedule:
       interval: "weekly"
+      day: "thursday"
 
   - package-ecosystem: "nuget"
     directory: "/CSharp/C2-ElevatorConsole-Exercise"
     schedule:
       interval: "weekly"
-
+      day: "thursday"
