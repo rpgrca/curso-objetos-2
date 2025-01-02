@@ -144,8 +144,7 @@ namespace PortfolioTreePrinter_Exercise.UnitTests
 
             var deposit1 = Deposit.registerForOn(100, account1);
 
-            Assert.Equal(1, account1.transactions().Count);
-            Assert.True(account1.transactions().Contains(deposit1));
+            Assert.Single(account1.transactions(), deposit1);
         }
 
         [Fact]
