@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7</TargetFramework>
+    <TargetFramework>net8</TargetFramework>
 	  <RootNamespace>Patterns_Portfolio_Exercise_WithAccountImplementation.UnitTests</RootNamespace>
 	  <AssemblyName>Patterns-Portfolio-Exercise-WithAccountImplementation.UnitTests</AssemblyName>
 
