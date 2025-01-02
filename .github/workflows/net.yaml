@@ -10,6 +10,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: [Patterns-Portfolio-Exercise-WithAccountImplementation, PortfolioTreePrinter-Exercise, PortfolioTreePrinter-Exercise-WithPortfolioImpl, ElevatorExercise, ElevatorConsole-Exercise]
+        dotnet-version: [ "9.x" ]
 
     steps:
     - uses: actions/checkout@v4
@@ -17,27 +21,19 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 7.0.x
+        dotnet-version: ${{ matrix.dotnet-version }}
 
     - name: Restore packages
-      run: |
-           for s in `find ./CSharp -type f -name "*.sln" -print`; do
-               dotnet restore $s
-           done
+      run: dotnet restore CSharp/C2-${{ matrix.project }}/${{ matrix.project }}.sln
 
     - name: Install Coverlet
       run: dotnet tool install --global coverlet.console
 
-    - name: Build solutions
-      run: |
-           for s in `find ./CSharp -type f -name "*.sln" -print`; do
-               dotnet build --configuration Debug --no-restore $s
-           done
+    - name: Build ${{ matrix.project }}
+      run: dotnet build --configuration Debug --no-restore CSharp/C2-${{ matrix.project }}/${{ matrix.project }}.sln
 
-    - name: Testing solutions
-      run: |
-           for s in Patterns-Portfolio-Exercise-WithAccountImplementation PortfolioTreePrinter-Exercise PortfolioTreePrinter-Exercise-WithPortfolioImpl ElevatorExercise ElevatorConsole-Exercise; do
-               coverlet CSharp/C2-$s/$s.UnitTests/bin/Debug/net7/$s.UnitTests.dll --target "dotnet" --targetargs "test CSharp/C2-$s/$s.UnitTests/$s.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output $s.coverage.xml
+    - name: Testing ${{ matrix.project }}
+      run: coverlet CSharp/C2-${{ matrix.project }}/${{ matrix.project }}.UnitTests/bin/Debug/net9/${{ matrix.project }}.UnitTests.dll --target "dotnet" --targetargs "test CSharp/C2-${{ matrix.project }}/${{ matrix.project }}.UnitTests/${{ matrix.project }}.UnitTests.csproj --no-build --verbosity quiet" --format OpenCover --output ${{ matrix.project }}.coverage.xml
            done
 
     - name: Upload coverage to CodeCov
