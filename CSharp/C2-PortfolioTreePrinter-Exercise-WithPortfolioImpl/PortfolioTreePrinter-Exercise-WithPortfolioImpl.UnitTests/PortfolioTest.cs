@@ -144,8 +144,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
 
             var deposit1 = Deposit.RegisterForOn(100, account1);
 
-            Assert.Equal(1, account1.Transactions().Count);
-            Assert.True(account1.Transactions().Contains(deposit1));
+            Assert.Single(account1.Transactions(), deposit1);
         }
 
         [Fact]
@@ -178,8 +177,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.UnitTests
 
             var deposit1 = Deposit.RegisterForOn(100, account1);
 
-            Assert.Equal(1, composedPortfolio.TransactionsOf(account1).Count);
-            Assert.True(composedPortfolio.TransactionsOf(account1).Contains(deposit1));
+            Assert.Single(composedPortfolio.TransactionsOf(account1), deposit1);
         }
 
         [Fact]
