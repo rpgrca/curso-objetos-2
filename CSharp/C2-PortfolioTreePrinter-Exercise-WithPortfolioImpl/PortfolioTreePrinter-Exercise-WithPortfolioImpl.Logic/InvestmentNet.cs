@@ -10,7 +10,7 @@
 
         public double Value()
         {
-            System.Threading.Thread.Sleep(1200);
+            //System.Threading.Thread.Sleep(1200);
 
             _value = 0.0;
             _account.Accept(this);

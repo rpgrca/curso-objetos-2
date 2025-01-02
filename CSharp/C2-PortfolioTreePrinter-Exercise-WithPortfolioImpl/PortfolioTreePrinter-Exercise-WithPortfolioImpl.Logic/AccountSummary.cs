@@ -12,7 +12,7 @@ namespace PortfolioTreePrinter_Exercise_WithPortfolioImpl.Logic
 
         public List<string> Lines()
         {
-            System.Threading.Thread.Sleep(1000);
+            //System.Threading.Thread.Sleep(1000);
 
             _lines = new List<string>();
 
